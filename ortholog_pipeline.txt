@@ -1,0 +1,918 @@
+#orthofinder
+
+
+############ INSTALLATIONS ############
+#TRANSDECODER
+
+
+#DEPENDENCIES FOR ORTHOFINDER
+#mcl already install for fastOrtho
+
+#FastMe
+download from here: https://gite.lirmm.fr/atgc/FastME/
+#they way I got this to work was looking in the tarball dir inside the first tarball you download
+#on TACC, copy the:
+cd fastme-2.1.6.1/binaries/
+cp fastme-2.1.5.2-linux64 ~/bin/fastme
+
+
+#FastTree
+#copy executable to bin from here: http://www.microbesonline.org/fasttree/FastTree
+
+
+#get swissprot
+wget 'ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot*sprot.fasta.gz'
+makeblastdb -in uniprot_sprot.fasta -input_type fasta -dbtype prot
+
+
+#################################
+########### PREP DATA ###########
+#################################
+#renaming seqs. Change the sequence names so that they include the species name and are sequencially numbered.
+#This ensures there are no overlaps downstream, and the sequences are easy to identify.
+>nameReplacement
+for file in *.fa
+do echo "replace_deflines.py -fa $file -prefix ${file/.fa/} -o ${file/.fa/}.fasta -clean yes" >> nameReplacement
+done
+
+
+#RE-ISOGROPUING
+#it is not clear how (if at all) transcripts from each transcriptome were grouped into isogroups
+#to make sure this is standardized across them, redo it here
+#This will be done following the Matz lab annotation pipeline
+#from https://github.com/z0on/annotatingTranscriptomes/blob/master/annotating%20trascriptome.txt:
+		# if you have no assembler-derived isogroups, use cd-hit-est to cluster contigs.
+		# to look for 98% or better matches between contigs taking 30% of length of either longer or shorter sequence:
+		cd-hit-est -i transcriptome.fasta -o transcriptome_clust.fasta -c 0.99 -G 0 -aL 0.3 -aS 0.3
+		# adding cluster designations to fasta headers, creating seq2iso table:
+		isogroup_namer.pl transcriptome.fasta transcriptome_clust.fasta.clstr 
+
+
+#run cd-hit for all transcriptomes
+module load cd-hit
+>clust;for file in *.fasta; do echo "cd-hit-est -i $file -o ${file/.fasta/_clust.fa} -c 0.98 -G 0 -aL 0.3 -aS 0.3" >> clust; done
+launcher_creator.py -n clust -j clust -q normal -N 1 -w 48 -t 2:00:00 -a $allo 
+sbatch clust.slurm
+
+
+#now output only the longest contig from each cluster
+>getLongest
+for file in *.fasta; do echo "longest_isotig.py -i $file -cdh ${file/.fasta/}_clust.fa.clstr -o ${file/.fasta/_longest.fa} > ${file/.fasta/}_getLongest.log" >> getLongest; done
+
+
+#keep the get longest logs
+cat *getLongest.log > all_getLongest.log
+
+
+#check you have all the longest only files
+ls *longest.fa | wc -l
+
+
+#THE RESULTS FROM THE STEPS ABOVE ARE STORED IN WORK
+
+
+
+
+
+####################################
+####### GETTING PROTEIN SEQS #######
+####################################
+
+#----- TRANSDECODER -----#
+#grab renamed fastas
+ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/reisogrouping/*longest.fa .
+
+## STEP1: GET LONGEST OPEN READING FRAMES
+#basic command:
+#TransDecoder.LongOrfs -t infile.fasta -m 100
+
+#setup
+>tdec1
+for file in *.fa; do echo "$TRANSDEC/TransDecoder.LongOrfs -t $file -m 100" >> tdec1
+done
+
+launcher_creator.py -n tdec1 -j tdec1 -q normal -N 1 -w 24 -a $allo -e $email -t 1:00:00
+
+
+## STEP 2: BLAST TO SWISSPROT
+#basic command:
+#blastp -query longest_orfs.pep -db /path_to_swiss_prot_db/swissprot -max_target_seqs 1 -outfmt 6 -evalue 1e-5 -num_threads 20 > file_blastp.out 
+
+>spBlast
+for file in *longest.fa
+do echo "blastp -query ${file}.transdecoder_dir/longest_orfs.pep \
+-db /scratch/02260/grovesd/uniprot/uniprot_sprot.fasta \
+-max_target_seqs 1 \
+-outfmt 6 \
+-evalue 1e-5 \
+-num_threads 8 \
+> ${file/.fasta/}_blastSP.out" >> spBlast
+done
+
+launcher_creator.py -n spBlast -j spBlast -q normal -N 7 -w 4 -a $allo -e $email -t 24:00:00
+sbatch spBlast.slurm 
+
+
+## STEP 3: HMM SCANS (can be run simultaneously with blast)
+#basic command:
+#hmmscan --cpu 1 --domtblout ./test.domtblout /scratch/02260/grovesd/pfam_db/Pfam-A.hmm longest_orfs.pep
+
+
+#first set up individual pfam databases for each species
+for file in *.fa
+do echo "${file}..."
+PERSONAL_DB_DIR=${file/_longest.fa}_pfam
+mkdir $PERSONAL_DB_DIR
+cp /work/02260/grovesd/lonestar/pfam_db/* $PERSONAL_DB_DIR
+done
+
+#then run hmmscan
+>scanHmm
+for file in *.fa
+do PERSONAL_DB_DIR=${file/_longest.fa}_pfam
+echo "hmmscan --cpu 8 \
+--domtblout ./${file/_longest.fa/}.domtblout ${PERSONAL_DB_DIR}/Pfam-A.hmm ${file}.transdecoder_dir/longest_orfs.pep > ${file/.fasta/}_hmmscan.log" >> scanHmm
+done
+
+launcher_creator.py -n scanHmm -j scanHmm -q normal -N 7 -w 4 -a $allo -e $email -t 48:00:00
+sbatch scanHmm.slurm 
+
+
+
+## STEP 4: PREDICT PROTEINS FROM LONGEST ORFS AND BLAST/HMMSCAN
+#basic command:
+TransDecoder.Predict -t infile.fasta --retain_pfam_hits file.domtblout --retain_blastp_hits file_blastp.out --single_best_only
+
+
+#setup
+>tdec2
+for file in *longest.fa; do echo "$TRANSDEC/TransDecoder.Predict -t ${file} --retain_pfam_hits ${file/_longest.fa/}.domtblout --retain_blastp_hits ${file}_blastSP.out --single_best_only" >> tdec2
+done
+
+
+launcher_creator.py -n tdec2 -j tdec2 -q normal -N 1 -w 24 -a $allo -e $email -t 2:00:00
+
+#final results are .cds and .pro files
+#these are saved here:
+/work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/
+
+
+
+#####################################
+######### CALLING ORTHOLOGS #########
+#####################################
+
+#FIRST ASSEMBLE THE PROTEIN SEQUENCES
+ls /work/02260/grovesd/lonestar/anthozoan_transcriptomes/PRO_files_8-28-17/*.fas
+ls /work/02260/grovesd/lonestar/anthozoan_transcriptomes/PRO_files_8-28-17/*.fas | wc -l
+	#29 PRO files, including Adig-NCBI
+
+#the blasting takes a long time, so need to do it in pieces for paralellization
+#first use FastOrtho to build a compiled file for blasting:
+module load blast                                               #load module for blast
+export BLASTP=$(which blastp)                                   #path to blastp
+export MAKEBLASTDB=$(which makeblastdb)                         #path to makeblastdb
+export MCL="$WORK/mcl/bin/mcl"                                  #path to MCL executable
+export FASTORTHO="$WORK/FastOrtho/src/FastOrtho"                #path to FastOrtho executable
+export FAAS="."  #path to where your .faa files are stored (don't include final /)
+export EVALUE="1e-10"                                           #the evalue cutoff you want to use
+export NAME="run1"                                              #name for this FastOrtho run
+export OPTIONS="option_file.txt"                                #desired name for options file
+
+build_options.sh $NAME $OPTIONS
+
+#run FastOrtho
+echo "$FASTORTHO --option_file $OPTIONS" > runFastOrtho
+
+#run in idev session until the blast starts, then you have a .faa file with all amino acid seqs
+#can use to build your own blast file using instructions below
+#------------------------------------------------------------------------------------------
+
+#This step is only necessary if you have a lot of species
+#and the blast part of FastOrtho cannot complete quickly enough
+#build a concatenation of all fasta files by running the steps below under 'RUN FASTORTHO'
+#building the contanation file happens fast, then you can feed that into the split blasting steps below
+#then split it using split_fasta.py and blast it against itself:
+
+echo "split_fasta.py -i run1.faa -n 36" > doSplits
+launcher_creator.py -n doSplits -j doSplits -t 0:20:00 -q normal -a $allo -e $email
+sbatch doSplits.slurm
+
+
+#make blast databases for each to blast to
+for i in {1..36}; do echo echo "db${i}.faa..."; cp run1.faa db${i}.faa && makeblastdb -in db${i}.faa -dbtype prot;done
+
+>speedBlast
+for i in {1..36}
+do echo "blastp -db db${i} -query run1_split${i}.fasta -evalue 1e-10 -num_threads 4 -num_alignments 1000 -outfmt 6 -out run1_split${i}.fasta.out">>speedBlast
+done
+
+
+#blast all the split fastas against it
+> doBlast;for file in $(ls *split*.fasta); do 
+echo "blastp -db run1.faa -query $file -evalue 1e-10 -num_threads 4 -num_alignments 1000 -outfmt 6 -out $file.out" >> doBlast
+done
+
+#launch the job with the number of nodes equal to the -n when you split. Let blast do the threading at 48 (-num_threads 48 above)
+launcher_creator.py -n doBlast -j doBlast -q normal -t 48:00:00 -a $allo -e $email -N 6 -w 6
+sbatch doBlast.slurm
+
+#took ~20 hours to run with 6 nodes with -num_threads 48
+#I think it's faster to thread by commands instead of letting blast do it.
+
+
+#filter the compiled blast output for alignment lengths
+#note, the --pmatch_cutoff argument in FastOrtho seems like it should do this, but didn't work for me
+filter_blast_for_orthos.py -i compiled_blast_output.out -l all_lengths.txt -c 0.75 -o reducedCompiled.out
+
+#also remove the AdigNCBI sequences
+grep -v "XP_" reducedCompiled.out | grep -v "YP_" > reducedCompiled2.out
+
+
+###################################
+########## RUN FASTORTHO ##########
+###################################
+#once you have the compiled blast output you can run fastortho for real
+ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/* .
+
+
+### PREPARE OPTIONS FILE
+#fastOrtho can take a lot of options, so its
+#easiest to set this up and feed it into the command
+#you can make a working options file in two ways,
+#you can edit the template options file manually and use that
+#or set the necessary variables in bash then build one with build_options.sh
+
+
+### BUILDING OPTIONS FILE WITH build_options.sh
+#make a working directory for this run and change to it
+
+
+#set up the variables needed to build an options file
+module load blast                                               #load module for blast
+export BLASTP=$(which blastp)                                   #path to blastp
+export MAKEBLASTDB=$(which makeblastdb)                         #path to makeblastdb
+export MCL="$WORK/mcl/bin/mcl"                                  #path to MCL executable
+export FASTORTHO="$WORK/FastOrtho/src/FastOrtho"                #path to FastOrtho executable
+export FAAS="/work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide"  #path to where your .faa files are stored (don't include final /)
+export EVALUE="1e-10"                                           #the evalue cutoff you want to use
+export NAME="run4"                                              #name for this FastOrtho run
+export OPTIONS="option_file.txt"                                #desired name for options file
+
+
+#build options file
+build_options.sh $NAME $OPTIONS
+
+#add the tag for an already available blast results file
+echo "--blast_file $(pwd)/reducedCompiled2.out" >> option_file.txt
+
+#run FastOrtho
+echo "$FASTORTHO --option_file $OPTIONS" > runFastOrtho
+launcher_creator.py -n runFastOrtho -j runFastOrtho -q normal -t 0:30:00 -a $allo -e $email
+sbatch runFastOrtho.slurm
+
+#Runs in 12 minutes
+#final output for this example will be run4.end
+#run summary:
+		gene count = 559704 in 28 taxons
+		 243.00 to run mcl and convert its output
+		 298.00 total duration
+
+
+
+#####################################
+########## FILTER PARALOGS ##########
+#####################################
+
+#FIRST OUTPUT THE PROTEIN SEQUENCES
+ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas .
+ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/nucleotide/*.fas .
+output_seqs_step1.py -orthos run4.end -prot *pep.fas -cut 7
+
+		 total orthogroups found in 106300
+		85737 groups had total taxa below 7 and were skipped
+		20563 total protein groups written to Orthologs_5_20/protein_sequences
+			 
+
+
+
+# ALIGN THEM AND BUILD GENE TREES
+cd Orthologs_5_20/protein_sequences/
+>doAln
+for file in *.fasta
+do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln && FastTree ${file/.fasta/}.aln > ${file/.fasta/}.newick" >> doAln
+done
+
+launcher_creator.py -n doAln -j doAln -q normal -N 5 -w 24 -a $allo -e $email -t 10:00:00
+sbatch doAln.slurm
+
+
+#THEN PRUNE TREES TO GET SINGLE-COPY ORTHOLOGS
+paraPrune.py -trees *.newick -l all_lengths.txt
+
+#output is singleCopyOrthos.txt
+#results summary:
+		Reading in trees...
+			0 tree files were empty, suggest checking these:
+			20563 total trees for analysis
+
+		Gathering single copy trees...
+			20563 total trees checked for paralogs
+			9794 trees were single copy
+			10769 got paralogs
+
+		Looking for single-species clades...
+			12159 single-species clades were collapsed into single sequence
+
+		Gathering additional single copy trees after collapsing single-species nodes...
+			10769 total trees checked for paralogs
+			2982 trees were single copy
+			7787 got paralogs
+			12776 total single copy orthogroups
+
+		Pruning away anemone species and Adig references...
+			11677 leafs from unimportant group pruned away
+			141 repeated species within resulting polytomies were pruned
+
+		Gathering additional single copy trees after pruning anemones and Adig reference...
+			7787 total trees checked for paralogs
+			316 trees were single copy
+			7471 got paralogs
+			13092 total single copy orthogroups
+
+
+########################################
+########## BUILD SPECIES TREE ##########
+########################################
+
+#GET EXTRA-HIGH QUALITY ORTHLOGS FOR BUILDING SPECIES TREE
+output_seqs_step2.py -orthos singleCopyOrthos.txt -prot *.pep.fas -nuc *.cds.fas -rcut 20 -odir treeOrthos
+
+#Results summary:
+		Writing out sequences to treeOrthos/protein_sequences...
+		13092 total orthologs considered
+		11895 failed representation cutoff of >=20 terminal taxa
+		1197 were written
+		All orthologs accounted for.
+
+		Writing out sequences to treeOrthos/cds_sequences...
+		13092 total orthologs considered
+		11895 failed representation cutoff of >=20 terminal taxa
+		1197 were written
+		All orthologs accounted for.
+
+#ALIGN THEM
+cd treeOrthos/protein_sequences
+>doAln
+for file in *.fasta
+do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln" >> doAln
+done
+
+#RUN PAL2NAL
+>reverseTrans; for aln in *.aln; do echo "pal2nal.pl $aln ../cds_sequences/${aln/.aln}.fasta -output paml -nogap > ${aln/.aln/}.codon" >> reverseTrans; done
+launcher_creator.py -n reverseTrans -j reverseTrans -q normal -t 0:10:00 -a $allo -N 1 -w 24
+sbatch reverseTrans.slurm
+
+
+#GET SPECIES LIST FROM CDS FILES
+ls *cds.fas | awk '{split($1, a, "_"); print a[1]}' > speciesList.txt
+
+#CONCATENATE THE CODON SEQUENCES INTO A NEXUS FILE
+concatenate_genes_into_nexus.py -spp speciesList.txt -f *.codon -o seqs.nex
+
+#CONVERT THE NEXUS FILE INTO A PHYLIP FILE
+nex2phy.py -i seqs.nex
+
+#---- RUN RAXML ----#
+#set up variables
+S="seqs.phy"              #the sequence file
+Q="seqs_partitions.txt"   #the sequence partition file (separates the concatenated seqs into genes)
+R="bootStrap"                    #the run name (this must be different for each run)
+N="100"                   #iterations for bootstrapping (10K may be too many if you have a lot of genes, but is nice for 100 - 200 genes)
+
+#make command
+echo "/work/02260/grovesd/lonestar/raxml/standard-RAxML-master/raxmlHPC-PTHREADS-SSE3 -s $S -n $R -m GTRGAMMA -f d -T 24 -q $Q -p 12345 -o Apallida,Nvectensis,Aelegantis" > rapidHillClimb
+echo "/work/02260/grovesd/lonestar/raxml/standard-RAxML-master/raxmlHPC-PTHREADS-SSE3 -s $S -n $R -m GTRGAMMA -f a -p 12345 -x 12345 -N $N -T 24 -q $Q -o Apallida,Nvectensis,Aelegantis" > rapidTreeBoot
+
+#launch
+launcher_creator.py -n rapidTreeBoot -j rapidTreeBoot -q normal -t 24:00:00 -a $allo -e $email -N 1 -w 1
+sbatch rapidTreeBoot.slurm
+
+##########################################
+######## GET ORTHOLOG ANNOTATIONS ########
+##########################################
+#now return to the transdecoder directory
+cp singleCopyOrthos.txt /scratch/02260/grovesd/carly_evo/transdecoder/round3
+cd /scratch/02260/grovesd/carly_evo/transdecoder/round3
+
+#annotations can be found in the *.transdecoder.bed files
+transdecoder_annotations.py -i singleCopyOrthos.txt -abeds *.transdecoder.bed -ignore XP -o singleCopyAnnotations.tsv
+
+
+#gather the GO annotations for these
+#download the idmappings ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping/idmapping_selected.tab.gz
+gather_go_terms.py singleCopyAnnotations.tsv idmapping_selected.tab
+
+#move file singleCopyAnnotations.tsv_GO.tsv to GO_MWU directory
+
+
+
+#####################################
+######## GET CODON SEQUENCES ########
+#####################################
+
+#GET SINGLE-COPY ORTHOS WITH TREE COLLAPSING
+output_seqs_step2.py -orthos singleCopyOrthos.txt -prot *.pep.fas -nuc *.cds.fas -rcut 5 -odir orthologSet1
+
+
+		Writing out sequences to orthologSet1/protein_sequences...
+		13092 total orthologs considered
+		7 failed representation cutoff of >=5 terminal taxa
+		13085 were written
+		All orthologs accounted for.
+
+
+
+#RUN MAFFT AND PAL2NAL
+cd orthologSet1/protein_sequences
+>doAln
+for file in *.fasta
+do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln && \
+pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output paml -nogap > ${file/.fasta/}.codon" >> doAln
+done
+
+launcher_creator.py -n doAln -j doAln -q normal -N 3 -w 24 -a $allo -t 01:00:00 -e $email
+sbatch doAln.slurm
+
+
+
+#ALSO GET FASTA CODON SEQUENCES FOR GENE TREES
+>geneTrees
+for file in *.fasta
+do echo "pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output fasta -nogap > ${file/.fasta/}_codon.fasta && /work/02260/grovesd/lonestar/raxml/standard-RAxML-master/raxmlHPC-PTHREADS-SSE3 -s ${file/.fasta/}_codon.fasta -n ${file/.fasta/} -m GTRGAMMA -f d -T 1 -p 12345" >> geneTrees
+done
+
+launcher_creator.py -n geneTrees -j geneTrees -q normal -N 3 -w 24 -a $allok -t 02:00:00 -e $email
+sbatch geneTrees
+
+#NOW QUALITY CHECK THE GENE TREES BEFORE CONTINUING
+quality_check_trees.py -trees RAxML_bestTree.ORTHOMCL* -groups checkGroups.txt -orthos singleCopyOrthos.txt > treeQC_fullCheckGroups.log
+
+
+#Summary of results
+		Total tree checked = 13079
+		Total passing = 7526 (58.0%)
+		Total failed = 5553 (42.0%)
+		Total failed that could be rescued by pruning a single leaf = 3591 (65.0% of fails)
+		Total passing including rescues = 11117 (85.0%)
+
+		Revising ortholog calls...
+		1962 total trees failed completely
+		1962 orthologs from the failed tree group were removed
+		Of the orthlogs from the rescue group to be revised:
+		Total orthologs to revise = 3591
+		Total orthologs revised = 3591
+		Total taxa to remove = 4713
+		Total removed = 4713
+		Also removed 13752 anemone entries from rescued trees
+			Nice, everything makes sense
+
+
+#this will output a revised set of orthologs, with bad taxa removed
+
+#OUTPUT FINAL SET OF ORTHOLOGS
+#these are single copy (checked and bolstered with paraPrune.py)
+#and also have been double-checked for monophyly of important clades quality_check_trees.py
+
+output_seqs_step2.py -orthos singleCopyOrthos_revised.txt -prot *.pep.fas -nuc *.cds.fas -rcut 5 -odir orthologSetFinal
+
+#results summary
+		Writing out sequences to orthologSetFinal/protein_sequences...
+		11130 total orthologs considered
+		356 failed representation cutoff of >=5 terminal taxa
+		10774 were written
+		All orthologs accounted for.
+
+
+#Now repeat the codon extraction one more time, then continue to PAML analyses
+
+#RUN MAFFT AND PAL2NAL AND RAXML AGAIN
+cd orthologSetFinal/protein_sequences
+>doAln
+for file in *.fasta
+do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln && \
+pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output paml -nogap > ${file/.fasta/}.codon && \
+pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output fasta -nogap > ${file/.fasta/}_codon.fasta && \
+/work/02260/grovesd/lonestar/raxml/standard-RAxML-master/raxmlHPC-PTHREADS-SSE3 -s ${file/.fasta/}_codon.fasta -n ${file/.fasta/} -m GTRGAMMA -f d -T 1 -p 12345" >> doAln
+done
+
+launcher_creator.py -n doAln -j doAln -q normal -N 3 -w 24 -a $allo -t 01:00:00 -e $email
+sbatch doAln.slurm
+
+
+#NOW RE-QUALITY CHECK TO MAKE SURE THINGS LOOK GOOD
+quality_check_trees.py -trees RAxML_bestTree.ORTHOMCL* -groups checkGroups.txt -orthos singleCopyOrthos_revised.txt > treeQC_RECHECK_CheckGroups.log
+
+#Results summary:
+		Total tree checked = 10770
+		Total passing = 10252 (95.0%)
+		Total failed = 518 (5.0%)
+		Total failed that could be rescued by pruning a single leaf = 444 (86.0% of fails)
+		Total passing including rescues = 10696 (99.0%)
+
+		Revising ortholog calls...
+		74 total trees failed completely
+		74 orthologs from the failed tree group were removed
+		Of the orthlogs from the rescue group to be revised:
+		Total orthologs to revise = 444
+		Total orthologs revised = 444
+		Total taxa to remove = 646
+		Total removed = 646
+		Also removed 0 anemone entries from rescued trees
+			Nice, everything makes sense
+
+#5% seems reasonable, continue with these as they are
+
+
+#######################################
+#### RUN ANCESTRAL RECONSTRUCTIONS ####
+#######################################
+
+#from a directory with your *.codon files:
+#set up commands to build control files and execute them, saving the rst results in $AN_RESULTS
+#*!note that CODEML saves the ancestral state data file generically as rst. I tried running each process in a subdirectory,
+#but that got hairy with errors, so instead having to run everything with just one processs.
+
+
+#set up some bash variables
+TREE=RAxML_bestTree.bootStrap
+AN_RESULTS=ancestral_results
+mkdir $AN_RESULTS
+
+
+>getAncestral
+for file in ../codon_sequences/*.codon; do base=$(echo $file | awk '{split($1, a, "../codon_sequences/"); print a[2]}');
+cnt=${base/.codon/.cnt} &&\
+echo "build_paml_ancestralRecon.py -i $file -t $TREE -spp speciesList.txt -controlName $cnt -o ${base/.codon/.mcl} &&\
+ codeml $cnt &&\
+ mv rst ${AN_RESULTS}/${base/.codon/.rst}" >> getAncestral
+done
+
+
+launcher_creator.py -n getAncestral -j getAncestral -q normal -N 1 -w 1 -t 24:00:00 -a $allo -e $email
+
+
+#---- PARSE THE RESULTS FOR THE GROUP YOU WANT ----#
+
+#pick group
+GROUP=all_vertical_transmitters.txt
+### A two-column table with species names and the vertical transmitting clade they come from. Eg:
+cat vertical_transmitter_clades.txt
+Maequitube	Montipora
+Mcapitata	Montipora
+Ahyacinthu	AntiMontipora
+Amillepora	AntiMontipora
+Adigitifer	AntiMontipora
+Acervicorn	AntiMontipora
+Apalmata	AntiMontipora
+Atenuis	AntiMontipora
+Gacrhelia	Galaxia
+Gastreata	AntiGalaxia
+Pastreoide	Porites
+Paustralie	Porites
+Plobata	Porites
+Gcolumna	AntiPorites
+Shystrix	Pocilloporid
+Spistillat	Pocilloporid
+Pdamicorni	Pocilloporid
+Mauretenra	Pocilloporid
+
+
+#extract the convergent sites
+parse_multi_rstV2.py -i *.rst -c vertical_transmitter_clades.txt -o verticalAncestralRes.tsv > ancestralVerticalParse.log
+
+
+##or use this table for a more ballanced comparison
+### A two-column table with species names and the vertical transmitting clade they come from. Eg:
+nano ballanced_vertical_transmitter_clades.txt
+Maequitube	Montipora
+Amillepora	AntiMontipora
+Gacrhelia	Galaxia
+Gastreata	AntiGalaxia
+Plobata	Porites
+Gcolumna	AntiPorites
+
+
+		
+#extract the convergent sites
+parse_multi_rstV2.py -i *.rst -c ballanced_vertical_transmitter_clades.txt -o ballancedVerticalAncestralRes.tsv > ballancedAncestralVerticalParse.log
+
+#This creates a pretty big file. Simplify it with prepareConvergenceInput.R
+
+
+#######################################
+#### BRANCH SITES TESTS USING PAML ####
+#######################################
+
+#OVERVIEW:
+#Here we are running the "Branch-site test for positive selection" (PAML manual)
+#We run the alternative model A and the Null model A
+#Likelihood ratio tests between the two models may identify genes under positive selection in our specified lineage
+#Use one degree of freedom for likelihood ratio test (PAML manual)
+#control file settings for the alternative and null model are shown below:
+#ALTERNATIVE:
+	#model     = 2
+	#NSsites   = 2
+	#fix_omega = 0
+#NULL
+	#model     = 2
+	#NSsites   = 2
+	#fix_omega = 1
+	#omega     = 1
+
+#each of the two models allows W to vary between sites and between branches.
+#Which branches (lineages) can have their own W values is assigned in the tree file
+
+
+#--- SETTING UP THE FOREGROUND CLADES ---#
+
+#for each iteration of the branch-sites tests,
+#run in a separate directory
+
+
+cd branch_sites_dir
+ln -s ../../codon_sequences/*.codon .
+
+
+########## vertical transmitters ##########
+echo Gacrhelia > foreground.txt; LEAFONLY=no; INCLUSIVE=no
+echo -e "Maequitube\nMcapitata" > foreground.txt; LEAFONLY=no; INCLUSIVE=no
+echo -e "Pastreoide\nPaustralie\nPlobata" > foreground.txt; LEAFONLY=no; INCLUSIVE=no
+echo -e "Shystrix\nSpistillat\nPdamicorni\nMauretenra" > foreground.txt; LEAFONLY=no; INCLUSIVE=no
+echo -e "Gacrhelia\nMaequitube\nMcapitata\nPastreoide\nPaustralie\nPlobata\nShystrix\nSpistillat\nPdamicorni\nMauretenra" > foreground.txt; LEAFONLY=yes; INCLUSIVE=yes
+###########################################
+
+########## anti-vertical transmitters ##########
+echo Gastreata > foreground.txt; LEAFONLY=no; INCLUSIVE=no   #anti_Gacrhelia
+echo Gcolumna > foreground.txt; LEAFONLY=no; INCLUSIVE=no    #anti_porites
+echo "Acervicorn
+Adigitifer
+Ahyacinthu
+Amillepora
+Apalmata
+Atenuis" > foreground.txt; LEAFONLY=no; INCLUSIVE=no         #anti_montipora
+echo "Pdaedalea
+Pcarnosus
+Ofaveolata
+Pstrigosa
+Mcavernosa
+Fscutaria" > foreground.txt; LEAFONLY=no; INCLUSIVE=no        #anti_pocillopora
+
+###########################################
+
+########## single-species sets ##########
+echo Plobata > foreground.txt; LEAFONLY=no; INCLUSIVE=no                            #porites
+echo -e "Amillepora" > foreground.txt; LEAFONLY=no; INCLUSIVE=no                    #anti_montipora
+
+
+#-----------------------------------------#
+
+#SET APPROPRIATE FILE VARIABLES
+CLADE=foreground.txt
+TREE=RAxML_bestTree.bootStrap
+ln -s ../../codon_sequences/*.codon .
+cp ../speciesList.txt .
+cp ../RAxML_bestTree.bootStrap .
+
+#BUILD THE PAML CONTROL FILES FOR RUNNING THE NULL MODEL
+>buildControlsNULL;for file in *.codon; do echo "build_paml_control_positive.py -minForeground 1 -minBackground 2 -inc $INCLUSIVE -leafOnly $LEAFONLY -i $file -t $TREE -spp speciesList.txt -runMode 0 -model 2 -NSsites 2 -fix_omega 1 -omega 1 -controlName ${file/.codon/_NULL.cnt} -clade $CLADE -o ${file/.codon/_NULL.codeml}" >>buildControlsNULL; done &
+
+#BUILD THE PAML CONTROL FILES FOR RUNNING THE ALTERNATIVE MODEL
+#note the tree files will overwrite, but that's ok
+>buildControlsALT;for file in *.codon; do echo "build_paml_control_positive.py -minForeground 1 -minBackground 2 -inc $INCLUSIVE -leafOnly $LEAFONLY -i $file -t $TREE -spp speciesList.txt -runMode 0 -model 2 -NSsites 2 -fix_omega 0 -controlName ${file/.codon/_ALT.cnt} -clade $CLADE -o ${file/.codon/_ALT.codeml}" >> buildControlsALT; done &
+
+#CHECK THEY'RE READY
+cat buildControlsALT | wc -l
+cat buildControlsNULL | wc -l
+
+
+#COMBINE FOR SINGLE JOB
+cat buildControlsNULL buildControlsALT > buildControls
+
+#CHECK IT WILL RUN
+head buildControls
+
+#LAUNCH THE JOB
+launcher_creator.py -n buildControls -j buildControls -q normal -N 5 -w 24 -a $allo -t 05:00:00
+sbatch buildControls.slurm
+
+
+#CHECK ALL THE CONTROL FILES WERE MADE
+ls *ALT.cnt | wc -l
+ls *NULL.cnt | wc -l
+
+
+#MAKE A LOG OF ALL THE TREES FOR MANUAL INSPECTIONS
+print_tree.py -i *.tree > ortholog_trees.txt &
+
+
+#note here that the minimum foreground and background taxa are both set at two by default in build_paml_control_positive.py
+#if these criteria are not met, a control file is still output, but with _FAIL appended to it
+#this way you can keep count of how many failed due to taxon representation
+ls *ALT.cnt_FAIL | wc -l
+#this should return a number of files such that the sum of failed and created files is equal to the number of *.codon files
+
+#SET UP THE NULL MODEL
+> runNullModel; for file in *NULL.cnt; do echo codeml $file >> runNullModel; done &
+
+#SET UP THE ALT MODEL
+> runAltModel; for file in *ALT.cnt; do echo codeml $file >> runAltModel; done &
+
+
+#CHECK THAT THEY RUN
+head runAltModel
+
+#CHECK ONE OF THE TREES TO MAKE SURE THAT '#' PLACED CORRECTLY
+
+#START JOB
+cat runNullModel runAltModel > runCodeml
+launcher_creator.py -n runCodeml -j runCodeml -q normal -t 24:00:00 -N 5 -w 36 -a $allo -e $email
+sbatch runCodeml.slurm
+
+
+#ASSEMBLE LIKELIHOODS FOR NULL MODELS
+>nullResults;for file in *NULL.codeml; do dat=$(grep lnL $file); echo "${file/_NULL.codeml/}   $dat" >> nullResults;  done &
+
+#ASSEMBLE LIKELIHOODS FOR NULL MODELS
+>altResults;for file in *ALT.codeml; do dat=$(grep lnL $file); echo "${file/_ALT.codeml/}   $dat" >> altResults;  done &
+
+#PARSE THE DATA INTO TABLES
+parse_codeml_branch_sites.py -i nullResults -o nullLikelihoods_branchSites.txt
+parse_codeml_branch_sites.py -i altResults -o altLikelihoods_branchSites.txt
+
+
+#EXTRACT FLAGGED SITES
+extract_sig_bs_positions.py -i *_ALT.codeml -o sigBsSites.tsv
+
+
+#ANALYZE THE RESULTS WITH LRT_for_branch_sites_models.R
+
+
+
+
+####### SPECIAL INSTRUCTIONS FOR MULTICLADE BRANCH SITES ######
+#multiclade build_commands python scripts were written afterward
+#so have to run these separately
+
+#for verticals
+Gacrhelia	Galaxia
+Maequitube	Montipora
+Mcapitata	Montipora
+Pastreoide	Porites
+Paustralie	Porites
+Plobata	Porites
+Shystrix	Pocilloporid
+Spistillat	Pocilloporid
+Pdamicorni	Pocilloporid
+Mauretenra	Pocilloporid
+
+#for anti-verticals
+Gastreata	aniGalaxia
+Acervicorn	antiMontipora
+Adigitifer	antiMontipora
+Ahyacinthu	antiMontipora
+Amillepora	antiMontipora
+Apalmata	antiMontipora
+Atenuis	antiMontipora
+Gcolumna	antiPorites
+Pdaedalea	antiPocilloporid
+Pcarnosus	antiPocilloporid
+Ofaveolata	antiPocilloporid
+Pstrigosa	antiPocilloporid
+Mcavernosa	antiPocilloporid
+Fscutaria	antiPocilloporid
+
+#save text file as foreground.txt as before
+
+#set variables and copy over necessary files
+CLADE=foreground.txt
+TREE=RAxML_bestTree.bootStrap
+ln -s ../../codon_sequences/*.codon .
+cp ../speciesList.txt .
+cp ../RAxML_bestTree.bootStrap .
+
+
+#BUILD THE PAML CONTROL FILES FOR RUNNING THE NULL MODEL
+>buildControlsNULL;for file in *.codon; do echo "build_paml_control_multiclade.py -minForeground 1 -minBackground 2 -i $file -t $TREE -spp speciesList.txt -runMode 0 -model 2 -NSsites 2 -fix_omega 1 -omega 1 -controlName ${file/.codon/_NULL.cnt} -clade $CLADE -o ${file/.codon/_NULL.codeml}" >>buildControlsNULL; done &
+
+#BUILD THE PAML CONTROL FILES FOR RUNNING THE ALTERNATIVE MODEL
+#note the tree files will overwrite, but that's ok
+>buildControlsALT;for file in *.codon; do echo "build_paml_control_multiclade.py -minForeground 1 -minBackground 2 -i $file -t $TREE -spp speciesList.txt -runMode 0 -model 2 -NSsites 2 -fix_omega 0 -controlName ${file/.codon/_ALT.cnt} -clade $CLADE -o ${file/.codon/_ALT.codeml}" >> buildControlsALT; done &
+
+#CHECK THEY'RE READY
+cat buildControlsALT | wc -l
+cat buildControlsNULL | wc -l
+
+cat buildControlsALT buildControlsNULL > buildControls
+
+#LAUNCH THE JOB
+launcher_creator.py -n buildControls -j buildControls -q normal -N 5 -w 24 -a $allo -t 05:00:00
+sbatch buildControls.slurm
+
+
+#THEN RUN CODEML AND ASSEMBLE FILES AS ABOVE
+
+
+
+
+########################################
+####### OUTPUT GENES OF INTEREST #######
+########################################
+
+#when you have a gene set of interest recorded:
+
+geneset.txt 
+
+#go to codon sequences
+cd codon_sequences/
+
+#make a directory for the selection
+SELECTION="selection_relaxed"
+mkdir $SELECTION
+
+
+#set path where rst files are
+ANC_REC_PATH=/scratch/02260/grovesd/carly_evo/fastOrthoFromTransdec/pro_files/run4_FINAL/orthologSetFinal/ancestral_recon/ancestral_results
+
+
+#get the ancestral reconstruction files for them
+>copySelectGenes
+while read g
+do echo "cp ${ANC_REC_PATH}/${g}.rst ./${SELECTION}" >>copySelectGenes
+echo "cp ../protein_sequences/${g}.aln ./${SELECTION}">>copySelectGenes
+echo "cp ${g}.codon ./${SELECTION}">>copySelectGenes
+done<geneset.txt
+
+sh copySelectGenes
+
+
+#extract the protein alignments from the rst files (to be sure the positions will match)
+>extactSeqs
+while read g
+do echo "extract_extant_and_recon_seqs.py -i ./${SELECTION}/${g}.rst" >> extactSeqs
+done<geneset.txt
+
+sh extactSeqs
+
+
+#and output as a job
+>makeAligns
+while read line
+do echo "codon_to_fasta.py $line.codon > ${SELECTION}/${line}.fasta && translate_fasta.py ${SELECTION}/${line}.fasta && cp RAxML_bestTree.${line} ${SELECTION}" >> makeAligns
+done < geneset.txt
+
+
+#######################################
+###### PAIRWISE DN/DS USING PAML ######
+#######################################
+
+
+#GET YOUR BEST TREE FROM RAxML
+#Here the tree does not need to have node labels or terminal branch labels (see Tree_file_notes.txt)
+#The tree is actually irrelevant here, I just kept it so this would be consistent with the next steps
+cp ../../tree_building/RAxML_bipartitions.T1 ./speciesTree.txt
+TREE="RAxML_bestTree.T1"
+
+#IF YOU DIDN'T GRAB THE SPECIES LIST FROM BEFORE, COPY IT OVER INTO YOUR WORKING DIRECTORY
+cp ../../tree_building/speciesList.txt .
+
+
+#GRAB THE CODON FILES
+ln -s ../ortholog_seqs/all/*.codon .
+ls *.codon | wc -l
+	#13583 files made with the relaxed parameters
+
+
+
+##BUILD A PAML CONTROL FILE FOR EACH GENE
+>buildControls;for file in *.codon; do echo "build_paml_control.py -i $file -t $TREE -spp speciesList.txt -runMode -2" >> buildControls; done
+launcher_creator.py -n buildControls -j buildControls -w 48 -N 1 -t 1:00:00 -q normal -a $allo
+sbatch buildControls.slurm
+
+
+#MAKE SURE YOU HAVE ALL YOUR CONTROL FILES
+ls *cnt | wc -l
+	
+
+
+#RUN CODEML
+>runCodeml; for file in *.cnt; do echo "/home1/02260/grovesd/bin/paml4.8/bin/codeml $file" >> runCodeml; done
+launcher_creator.py -n runCodeml -j runCodeml -q normal -t 1:00:00 -a $allo -q normal -N 1 -w 48
+sbatch runCodeml.slurm
+
+
+##NOW PARSE THE CODEML OUTPUTS
+>parse; while read line; do echo "parse_codeml_pairwise_outputV2.py -f *.codeml -spp1 $line -sppList speciesList.txt -o pair-wise_dNdS_${line}.txt -orthos fastOrtho_filtered.tsv" >> parse; done < speciesList.txt
+launcher_creator.py -n parse -j parse -q normal -w 24 -N 1 -t 1:00:00 -e $email -a $allo
+sbatch parse.slurm
+
