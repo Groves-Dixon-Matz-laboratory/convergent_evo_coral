@@ -1,0 +1,1 @@
+/work/02260/grovesd/lonestar/raxml/standard-RAxML-master/raxmlHPC-PTHREADS-SSE3 -s seqs.phy -n bootStrap -m GTRGAMMA -f a -p 12345 -x 12345 -N 100 -T 24 -q seqs_partitions.txt -o Apallida,Nvectensis,Aelegantis
