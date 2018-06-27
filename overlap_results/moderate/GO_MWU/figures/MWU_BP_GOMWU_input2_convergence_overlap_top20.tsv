@@ -1,0 +1,21 @@
+delta.rank	pval	level	nseqs	term	name	p.adj
+1	0	1	4	20	GO:0000018	regulation of DNA recombination	1
+2	0	1	3	29	GO:0000041	transition metal ion transport	1
+3	0	1	3	19	GO:0000045	autophagic vacuole assembly	1
+4	0	1	2	16	GO:0000070;GO:0000819	sister chromatid segregation	1
+5	0	1	2	40	GO:0000075	cell cycle checkpoint	1
+6	0	1	5	26	GO:0000077;GO:0031570	DNA integrity checkpoint	1
+7	0	1	7	39	GO:0000079	regulation of cyclin-dependent protein serine/threonine kinase activity	1
+8	0	1	6	40	GO:0000082;GO:0044843	G1/S transition of mitotic cell cycle	1
+9	0	1	5	45	GO:0000086;GO:0044839	cell cycle G2/M phase transition	1
+10	0	1	6	17	GO:0000096	sulfur amino acid metabolic process	1
+11	0	1	2	235	GO:0000122	negative regulation of transcription from RNA polymerase II promoter	1
+12	0	1	2	18	GO:0000132;GO:0051294	establishment of spindle orientation	1
+13	0	1	2	100	GO:0000165;GO:0023014	signal transduction by phosphorylation	1
+14	0	1	2	18	GO:0000184	nuclear-transcribed mRNA catabolic process, nonsense-mediated decay	1
+15	0	1	8	23	GO:0000186	activation of MAPKK activity	1
+16	0	1	6	83	GO:0000187	activation of MAPK activity	1
+17	0	1	2	117	GO:0000209	protein polyubiquitination	1
+18	0	1	2	131	GO:0000226	microtubule cytoskeleton organization	1
+19	0	1	3	48	GO:0000278	mitotic cell cycle	1
+20	0	1	4	59	GO:0000281;GO:0000910	cytokinesis	1

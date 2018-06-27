@@ -18,11 +18,18 @@
 
 
 # Edit these to match your data file names: 
-setwd("~/gitreps/coral_reproductive_evolution/results/overlap/moderate/GO_MWU")
-input="final_GO_input.csv" # two columns of comma-separated values: gene id, continuous measure of significance. To perform standard GO enrichment analysis based on Fisher's exact test, use binary measure (0 or 1, i.e., either sgnificant or not).
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")
+
+#select input file
+input="GOMWU_input1_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+input="GOMWU_input1_plain_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+input="GOMWU_input2_convergence_overlap.csv";
+input="GOMWU_input3_bs_convergence_overlap.csv";
+input="GOMWU_input4_final.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+
 goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.
 goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml
-goDivision="MF" # either MF, or BP, or CC
+goDivision="CC"     # either MF, or BP, or CC
 source("gomwu.functions.R")
 
 
@@ -30,7 +37,7 @@ source("gomwu.functions.R")
 gomwuStats(input, goDatabase, goAnnotations, goDivision,
 	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already
 	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes
-	smallest=5,   # a GO category should contain at least this many genes to be considered
+	smallest=15,   # a GO category should contain at least this many genes to be considered
 	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.
 	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. 
 #	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)
@@ -42,7 +49,7 @@ gomwuStats(input, goDatabase, goAnnotations, goDivision,
 # Plotting results
 quartz()
 gomwuPlot(input,goAnnotations,goDivision,
-	absValue=-log(0.05,10),  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").
 	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.
 	level2=0.05, # FDR cutoff to print in regular (not italic) font.
 	level3=0.01, # FDR cutoff to print in large bold font.
@@ -56,8 +63,49 @@ gomwuPlot(input,goAnnotations,goDivision,
 
 
 
-#look at results file
+#LOOK AT RESULTS TABLE
 resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")
 res=read.table(resName, header = T)
 res=res[order(res$pval),]
 head(res, n=20)
+
+#OUTPUT TOP 20 REGARDLESS OF FDR
+tabOut = paste('figures', sub(".csv", "_top20.tsv", resName), sep="/")
+write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")
+
+#VIEW DENSITY OF THE NUMBER OF SEQUENCES
+plot(density(res$nseqs))
+
+#PULL OUT THE SIGNIFICANT GO TERMS
+#also unmerge GO names
+sigGos0 = res[res$p.adj<0.1, c('term', 'name')]
+sigGos0$name = as.character(sigGos0$name)
+#split up merged GO terms
+term=c()
+name=c()
+for (i in 1:nrow(sigGos0)){
+	row = sigGos0[i,]
+	go = unlist(strsplit(as.character(row$term), ';'))
+	n = rep(row$name, length(go))
+	term=append(term, go)
+	names=append(name, n)
+}
+sigGos = data.frame(term, names)
+sigGos
+
+
+#LOOK AT INDIVIDUAL GENES FROM GO TERMS
+gFile = paste(goDivision, input, sep="_")
+gdat = read.table(gFile, header = T, stringsAsFactors=F)
+goGenes = gdat[gdat$term %in% sigGos$term & gdat$value >= ABS.VALUE,]
+goGenes
+
+#merge with gene names
+adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotations.tsv", header = T)[,c(1,2)]
+colnames(adat) = c('seq', 'swissProt_hits')
+m=merge(goGenes, adat, by = 'seq')
+m
+
+
+
+

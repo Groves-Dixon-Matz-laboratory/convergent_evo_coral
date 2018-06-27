@@ -1,0 +1,11 @@
+Example branch-site test files.
+One of these was made for each ortholog's codon sequence alignment.
+
+control files:
+	*.cnt
+
+Codeml output files:
+	*.codeml
+		
+Tree file:
+	*.tree

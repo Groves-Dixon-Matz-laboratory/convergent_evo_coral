@@ -1,0 +1,21 @@
+delta.rank	pval	level	nseqs	term	name	p.adj
+1	0	1	4	26	GO:0000049	tRNA binding	1
+2	0	1	5	69	GO:0000287	magnesium ion binding	1
+3	0	1	2	153	GO:0000977;GO:0000976;GO:0001012	transcription regulatory region sequence-specific DNA binding	1
+4	0	1	2	85	GO:0000978;GO:0000987;GO:0001159	core promoter proximal region sequence-specific DNA binding	1
+5	0	1	3	173	GO:0000981	sequence-specific DNA binding RNA polymerase II transcription factor activity	1
+6	0	1	2	102	GO:0000982;GO:0001228;GO:0001077	RNA polymerase II transcription regulatory region sequence-specific DNA binding transcription factor activity involved in positive regulation of transcription	1
+7	0	1	2	37	GO:0001046;GO:0001047	core promoter binding	1
+8	0	1	2	59	GO:0001076	RNA polymerase II transcription factor binding transcription factor activity	1
+9	0	1	5	24	GO:0001078	RNA polymerase II core promoter proximal region sequence-specific DNA binding transcription factor activity involved in negative regulation of transcription	1
+10	0	1	2	28	GO:0001085	RNA polymerase II transcription factor binding	1
+11	0	1	2	29	GO:0001104	RNA polymerase II transcription cofactor activity	1
+12	0	1	2	18	GO:0001190	RNA polymerase II transcription factor binding transcription factor activity involved in positive regulation of transcription	1
+13	0	1	2	46	GO:0001227	RNA polymerase II transcription regulatory region sequence-specific DNA binding transcription factor activity involved in negative regulation of transcription	1
+14	0	1	2	47	GO:0001540	beta-amyloid binding	1
+15	0	1	5	16	GO:0001591	dopamine neurotransmitter receptor activity, coupled via Gi/Go	1
+16	0	1	3	20	GO:0001602;GO:0001601	pancreatic polypeptide receptor activity	1
+17	0	1	2	26	GO:0001609;GO:0035586	purinergic receptor activity	1
+18	0	1	2	17	GO:0001618	virus receptor activity	1
+19	0	1	4	92	GO:0001664	G-protein coupled receptor binding	1
+20	0	1	5	50	GO:0001786	phosphatidylserine binding	1
