@@ -1,431 +1,207 @@
-#split up merged GO terms#
-term=c()#
-name=c()#
-for (i in 1:nrow(sigGos0)){#
-	row = sigGos0[i,]#
-	go = unlist(strsplit(as.character(row$term), ';'))#
-	n = rep(row$name, length(go))#
-	term=append(term, go)#
-	names=append(name, n)#
-}#
-sigGos = data.frame(term, names)#
-sigGos
-goGenes = gdat[gdat$term %in% sigGos$term,]#
-head(goGenes)
-goGenes
-ABS.VALUE
-goGenes = gdat[gdat$term %in% sigGos$term & gdat$value >= ABS.VALUE,]
-goGenes
-adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotations.tsv", header = T)[,c(1,2)]
-colnames(adat) = c('contig', 'swissProt_hits')
-head(adat)
-goGenes
-colnames(adat) = c('seq', 'swissProt_hits')
+input="GOMWU_input1_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+# Edit these to match your data file names: #
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")#
+#
+#select input file#
+input="GOMWU_input1_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical#
+input="GOMWU_input1_plain_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical#
+input="GOMWU_input2_convergence_overlap.csv";#
+input="GOMWU_input3_bs_convergence_overlap.csv";#
+input="GOMWU_input4_final.csv"; ABS.VALUE=0.99  #si
+goDivision="BP"     # either MF, or BP, or CC
+goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="BP"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)#
+#
+#OUTPUT TOP 20 REGARDLESS OF FDR#
+tabOut = paste('figures', sub(".csv", "_top20.tsv", resName), sep="/")#
+write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")#
+#
+#VIEW DENSITY OF THE NUMBER OF SEQUENCES#
+plot(density(res$nseqs))#
+#
+#PULL OUT THE SIGNIFICANT GO TERMS#
+#also unmerge GO names#
+sigGos = res[res$p.adj<0.1, c('term', 'name')]#
+sigGos$name = as.character(sigGos$name)#
+#LOOK AT INDIVIDUAL GENES FROM GO TERMS#
+gFile = paste(goDivision, input, sep="_")#
+gdat = read.table(gFile, header = T, stringsAsFactors=F)#
 goGenes = gdat[gdat$term %in% sigGos$term & gdat$value >= ABS.VALUE,]#
-goGenes
-m=merge(goGenes, adat, by = 'seq')
-head(m)
-m
-nrow(goGenes)
-nrow(m)
-adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotations.tsv", header = T)[,c(1,2)]#
-colnames(adat) = c('seq', 'swissProt_hits')
-head(adat)
-nrow(adat)
-library("biomaRt")#
-hsembl = useMart("ensembl", dataset="hsapiens_gene_ensembl") #get the human dataset
-hnames = getBM(attributes = c('ensembl_gene_id', 'external_gene_name','description'), filters = c('external_gene_name'), values = geneSet, mart = hsembl)
-geneSet = c("ZC12C_HUMAN")
-hnames = getBM(attributes = c('ensembl_gene_id', 'external_gene_name','description'), filters = c('external_gene_name'), values = geneSet, mart = hsembl)
-hnames
-? useMart
-listMarts()
-?getBM
-listFilters()
-listFilters(hsembl)
-geneSet = c("ZC12C")
-hnames = getBM(attributes = c('ensembl_gene_id', 'external_gene_name','description'), filters = c('external_gene_name'), values = geneSet, mart = hsembl)
-hnames
-hnames = getBM(attributes = c('external_gene_name','description'), filters = c('external_gene_name'), values = geneSet, mart = hsembl)#
-hnames
-f=listFilters(hsembl)
-head(f)
-f[grep('sp',f$name)]
-f[grep('sp',f$name),]
-listMarts()
-hnames = getBM(attributes = c('external_gene_name','description'), filters = c('uniprotswissprot'), values = geneSet, mart = hsembl)
-hnames
-goGenes
-head(adat)
-geneSet = c("Q9C0D7")
-hnames = getBM(attributes = c('external_gene_name','description'), filters = c('uniprotswissprot'), values = geneSet, mart = hsembl)#
-hnames
-head(adat)
-i=1
-annots = strsplit(as.character(row$swissProt_hits), ';')
-annots
-row=adat[i,]
-annots = strsplit(as.character(row$swissProt_hits), ';')
-annots
-sp = sapply(annots, function(x) strsplit(x, "|")[[1]][1])
-sp
-sp = sapply(annots, function(x) strsplit(x, "|")[[1]])
-sp
-annots
-annots = unlist(strsplit(as.character(row$swissProt_hits), ';'))
-annots
-sp = sapply(annots, function(x) strsplit(x, "|")[[1]])
-sp
-?strsplit
-sp = sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]])
-sp
-sp = sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][1])
-sp
-sp = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][1]))
-sp
-head(row)
-id = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][2]))
-id
-swissProt = c()#
-ortho = c()#
-name = c()#
-for (i in 1:nrow(adat)){#
-	row=adat[i,]#
-	annots = unlist(strsplit(as.character(row$swissProt_hits), ';'))#
-	sp = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][1]))#
-	id = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][2]))#
-	seqs = rep(row$seq, length(sp))#
-	ortho = append(ortho, seqs)#
-	swissProt = append(swissProt, seqs)#
-	name = append(name, id)#
-}
-adf = data.frame(ortho, swissProt, name)
-head(adf)
-db = sapply(adf$name, function(x) strsplit(x, "_")[[1]][2])
-db = sapply(as.character(adf$name), function(x) strsplit(x, "_")[[1]][2])
-head(db)
-length(db)
-nrow(adf)
-adf$db=db
-head(adf)
-length(unique(db))
-ortho
-seqs
-as.character(row$seq)
-swissProt = c()#
-ortho = c()#
-name = c()#
-for (i in 1:nrow(adat)){#
-	row=adat[i,]#
-	annots = unlist(strsplit(as.character(row$swissProt_hits), ';'))#
-	sp = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][1]))#
-	id = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][2]))#
-	seqs = rep(as.character(row$seq), length(sp))#
-	ortho = append(ortho, seqs)#
-	swissProt = append(swissProt, seqs)#
-	name = append(name, id)#
-}#
-adf = data.frame(ortho, swissProt, name)#
-db = sapply(as.character(adf$name), function(x) strsplit(x, "_")[[1]][2])#
-adf$db=db#
-head(adf)
-head(adf)
-swissProt = c()#
-ortho = c()#
-name = c()#
-for (i in 1:nrow(adat)){#
-	row=adat[i,]#
-	annots = unlist(strsplit(as.character(row$swissProt_hits), ';'))#
-	sp = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][1]))#
-	id = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][2]))#
-	seqs = rep(as.character(row$seq), length(sp))#
-	ortho = append(ortho, seqs)#
-	swissProt = append(swissProt, seqs)#
-	name = append(name, id)#
-}#
-adf = data.frame(ortho, swissProt, name)#
-db = sapply(as.character(adf$name), function(x) strsplit(x, "_")[[1]][2])#
-adf$db=db#
-head(adf)
-length(unique(adf$db))
-head(f)
-#add human annotations#
-library("biomaRt")#
-hsembl = useMart("ensembl", dataset="hsapiens_gene_ensembl") #get the human dataset#
-f=listFilters(hsembl)#
-head(f)
-sub = adf[adf$db=='HUMAN',]
-row
-swissProt = c()#
-ortho = c()#
-name = c()#
-for (i in 1:nrow(adat)){#
-	row=adat[i,]#
-	annots = unlist(strsplit(as.character(row$swissProt_hits), ';'))#
-	sp = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][1]))#
-	id = unlist(sapply(annots, function(x) strsplit(x, "|", fixed=T)[[1]][2]))#
-	seqs = rep(as.character(row$seq), length(sp))#
-	ortho = append(ortho, seqs)#
-	swissProt = append(swissProt, sp)#
-	name = append(name, id)#
-}#
-adf = data.frame(ortho, swissProt, name)#
-db = sapply(as.character(adf$name), function(x) strsplit(x, "_")[[1]][2])#
-adf$db=db#
-head(adf)
-sub = adf[adf$db=='HUMAN',]#
-geneSet = sub$swissProt
-head(sub)
-head(adf)
-head(adf)
-sub = adf[adf$db=='HUMAN' & !is.na(adf$db),]
-head(sub)
-geneSet = sub$swissProt
-hnames = getBM(attributes = c('external_gene_name','description'), filters = c('uniprotswissprot'), values = geneSet, mart = hsembl)
-head(hnames)
-dim(hnames)
-dim(sub)
-head(f)
-f$name[grep('sp', f$name)]
-hnames = getBM(attributes = c('uniprotswissprot', 'external_gene_name','description'), filters = c('uniprotswissprot'), values = geneSet, mart = hsembl)
-head(hnames)
-head(sub)
-gnames=hnames
-colnames(gnames)[1] = c('swissProt')
-sub2 = merge(sub, gnames, by = 'swissProt')
-nrow(sub)
-nrow(sub2)
-head(sub2)
-sub2 = merge(sub, gnames, by = 'swissProt', all.x=T)
-nrow(sub2)
-nrow(sub)
-head(sub)
-head(adf)
-adf = data.frame(ortho, swissProt, name)#
-db = sapply(as.character(adf$name), function(x) strsplit(x, "_")[[1]][2])#
-egn = sapply(as.character(adf$name), function(x) strsplit(x, "_")[[1]][1])#
-adf$egn = egn#
-adf$db=db#
-head(adf)
-geneSet = sub$egn
-#add human annotations#
-library("biomaRt")#
-hsembl = useMart("ensembl", dataset="hsapiens_gene_ensembl") #get the human dataset#
-f=listFilters(hsembl)#
-head(f)#
-sub = adf[adf$db=='HUMAN' & !is.na(adf$db),]#
-geneSet = sub$egn
-head(geneSet)
-gnames = getBM(attributes = c('uniprotswissprot', 'external_gene_name','description'), filters = c('external_gene_name'), values = geneSet, mart = hsembl)
-head(gnames)
-geneSet = unique(sub$egn)
-gnames = getBM(attributes = c('uniprotswissprot', 'external_gene_name','description'), filters = c('external_gene_name'), values = geneSet, mart = hsembl)#
-colnames(gnames)[1] = c('swissProt')#
-head(gnames)
-gnames2 = gnames[!duplicated(gnames$external_gene_name),]
-head(gnames2)
-head(sub)
-des = gnames2$description[gnames2$external_gene_name==sub$egn]
-x='RN5A'
-g=gnames2[gnames2$external_gene_name==x,]
-g
-x='PLPP7'
-g=gnames2[gnames2$external_gene_name==x,]
-g
-get.description = function(gnames2){#
-	g=gnames2[gnames2$external_gene_name==x,]#
-	return(g$description)#
-}
-get.description = function(x){#
-	g=gnames2[gnames2$external_gene_name==x,]#
-	return(g$description)#
-}
-get.description(x)
-des = sapply(sub$egn, function(x) get.description(x))
-head(des)
-des = unlist(sapply(sub$egn, function(x) get.description(x)))
-head(des)
-length(des)
-nrow(sub)
-head(sub)
-gnames.sp = getBM(attributes = c('uniprotswissprot', 'external_gene_name','description'), filters = c('uniprotswissprot'), values = geneSet, mart = hsembl)#
-gnames.egn = getBM(attributes = c('uniprotswissprot', 'external_gene_name','description'), filters = c('external_gene_name'), values = geneSet, mart = hsembl)
-head(gnames.sp)
-head(sub)
-spSet = unique(sub$swissProt)#
-egnSet = unique(sub$egn)#
-gnames.sp = getBM(attributes = c('uniprotswissprot', 'external_gene_name','description'), filters = c('uniprotswissprot'), values = spSet, mart = hsembl)#
-gnames.egn = getBM(attributes = c('uniprotswissprot', 'external_gene_name','description'), filters = c('external_gene_name'), values = egnSet, mart = hsembl)
-head(gnames.sp)
-head(gnames.egn)
-nrow(gnames.sp)
-nrow(gnames.egn)
-nrow(sub)
-gm = merge(gnames.sp, gnames.egn, by = 'external_gene_name')
-nrow(gm)
-gm = merge(gnames.sp, gnames.egn, by = 'external_gene_name', all=T)
-nrow(gm)
-g = gm[!duplicated(gm$external_gene_name),]
-nrow(g)
-head(g)
-head(g, n=30)
-head9sub
-head(sub)
-x='RN5A'
-get.description(x)
-z=get.description(x)
-z
-length(z)
-length("ATP binding cassette subfamily D member 2 [Source:HGNC Symbol;Acc:HGNC:66]")
-x='RN5A'#
-get.description = function(x){#
-	g=gnames2[gnames2$external_gene_name==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g$description)#
-		}#
-}#
-z=get.description(x)
-z
-des = unlist(sapply(sub$egn, function(x) get.description(x)))
-get.description = function(x){#
-	g=gnames2[gnames2$external_gene_name==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g$description)#
-		}#
-}#
-z=get.description(x)#
-des = unlist(sapply(sub$egn, function(x) get.description(x)))
-head(sub)
-get.description = function(x){#
-	g= gnames.sp[gnames.sp$external_gene_name==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g$description)#
-		}#
-}#
-z=get.description(x)
-des = unlist(sapply(sub$egn, function(x) get.description(x)))
-head(gnames.sp)
-get.description = function(x){#
-	g=gnames.sp[gnames.sp$external_gene_name==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g$description)#
-		}#
-}
-des = unlist(sapply(sub$egn, function(x) get.description(x)))
-head(sub)
-get.description = function(x){#
-	g=gnames.sp[gnames.sp$external_gene_name==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g)#
-		}#
-}
-des = unlist(sapply(sub$egn, function(x) get.description(x)))
-head(des)
-length(des)
-nrow(sub)
-length(sub$egn)
-head(des)
-des = data.frame(unlist(sapply(sub$egn, function(x) get.description(x))))
-head(des)
-nrow(des)
-head(gnames.sp)
-gnames = gnames.sp[!duplicated(gnames.sp$external_gene_name),]
-get.description = function(x){#
-	g=gnames.sp[gnames.sp$external_gene_name==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g)#
-	}#
-}#
+goGenes#
 #
-des = data.frame(unlist(sapply(sub$egn, function(x) get.description(x))))
-nrow(des)
-head(des)
-des =unlist(sapply(sub$egn, function(x) get.description(x)))
-dres = data.frame(des)
-des =unlist(sapply(sub$egn, function(x) get.description(x)))
-dres = data.frame(des)
-rownames(dres) = names(des)
-head(dres)
-length(des[des!='none'])
-nrow(sub)
-head(gnames.sp)
-nrow(gnames.sp)
-length(spSet)
-nrow(sub)
-nrow(na.omit(sub))
-head(sub)
-head(spSet)
-head(gnames)
-head(gnames.sp)
-head(sub)
-get.description = function(x){#
-	g=gnames.sp[gnames.sp$uniprotswissprot==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g)#
-	}#
-}#
+#merge with gene names#
+adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T)#
+colnames(adat)[1] = 'seq'#
+m=merge(goGenes, adat, by = 'seq')#
+m#
 #
-des =unlist(sapply(sub$swissProt, function(x) get.description(x)))
-length(des)
-nrow(sub)
-get.description = function(x){#
-	g=gnames.sp[gnames.sp$uniprotswissprot==x, 'description']#
-	if (length(g) < 1){#
-		return('none')#
-	}#
-	else{#
-		return(g[1])#
-	}#
-}#
-#
-des =unlist(sapply(sub$swissProt, function(x) get.description(x)))
-length(des)
-head(des)
-res = data.frame(sub$sp, des)
-res = data.frame(sub$swissProt, des)
-colnames(res) = c('swissProt', 'description')
-head(res)
-colnames(res) = c('swissProt2', 'description')
-head(res)
-sub2 = cbind(sub, res)
-head(sub2)
-sum(sub2$swissProt==sub2$swissProt2)
-sum(sub2$swissProt==sub2$swissProt2)==nrow(sub2)
-sub2$swissProt2<-NULL
-td = length(unique(sub2$ortho))
+#make table without duplicated descriptions#
+nonDup = m[!duplicated(m$seq),]#
+nonDup#
+outName = paste(paste('../interesting_genes/genesOfInterest', goDivision, sep="_"), input,  sep="_")#
+outName=sub(".csv", ".tsv", outName)#
+print(outName)#
+write.table(nonDup, file=outName, quote=F, row.names=F, sep="\t")
+#PARITCULAR GO OF INTEREST#
+gotags = c('GO:0007283;GO:0048232;GO:0007276', )#
+goGenes[goGenes$term %in% gotags,]
+head(goGenes)
+goGenes[goGenes$term %in% gotags,]
+#PARITCULAR GO OF INTEREST#
+gotags = c('GO:0007283;GO:0048232;GO:0007276')#
+goGenes[goGenes$term %in% gotags,]
+select = goGenes[goGenes$term %in% gotags,]
 head(adat)
-ta = length(unique(adat$seq))
-td / ta * 100
-round(td / ta, digits=3) * 100
-round(td / ta, digits=4) * 100
-paste(pct, "%", sep = '')
-pct = round(td / ta, digits=4) * 100#
-paste(pct, "%", sep = '')
-?useMart
-useMart('ensembl')
-listDatasets(mart)
-mart = useMart('ensembl')
-listDatasets(mart)
-l=listDatasets(mart)
-l[grep('mus', l)]
+mselect = merge(select, adat, by = 'seq')
+mselect
+select
+head(gdat)
+gdat[gdat$seq=='ORTHOMCL19869',]
+gFile
+gFile
+################################################################
+# First, press command-D on mac or ctrl-shift-H in Rstudio and navigate to the directory containing scripts and input files. Then edit, mark and execute the following bits of code, one after another.#
+# Edit these to match your data file names: #
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")#
+#
+#select input file#
+input="GOMWU_input1_branchSites.csv"; ABS.VALUE=0.99  #significanc
+rm(list=ls())
+################################################################
+# First, press command-D on mac or ctrl-shift-H in Rstudio and navigate to the directory containing scripts and input files. Then edit, mark and execute the following bits of code, one after another.#
+# Edit these to match your data file names: #
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")#
+#
+#select input file#
+input="GOMWU_input1_branchSites.csv"; ABS.VALUE=0.99  #significanc
+goDivision="CC"     # either MF, or BP, or CC
+goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=15,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printo
+goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=15,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the p
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.
+input="GOMWU_input1_plain_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=15,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+goDivision="MF"     # either MF, or BP, or CC
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=15,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if t
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+input="GOMWU_input4_final.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="MF"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=15,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the prin
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many

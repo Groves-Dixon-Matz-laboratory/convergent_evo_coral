@@ -2,35 +2,35 @@
 #Groves Dixon
 #last updated 6-10-18
 
-setwd("~/gitreps/coral_reproductive_evolution")
-source('scripts/coral_reproduction_functions.R')
+setwd("~/gitreps/convergent_evo_coral")
+source('scripts_for_analysis/coral_reproduction_functions.R')
 
 
 #---- CUTOFF SELECTION ----#
 #The sets of cutoffs are stored in separate R scripts
 
-source("scripts/moderate_cutoff_set.R") 
+source("scripts_for_analysis/moderate_cutoff_set.R") 
 
-source("scripts/relaxed_cutoff_set.R")
+source("scripts_for_analysis/relaxed_cutoff_set.R")
 
 #------ LOAD DATA ------#
 
 #read in lrt results from each the branch sites tests
 #target datasets
-gdat = read.table("results/branch_sites/finalVertical/bs_lrt_Gacrhelia.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-mdat = read.table("results/branch_sites/finalVertical/bs_lrt_Montipora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-pdat = read.table("results/branch_sites/finalVertical/bs_lrt_Porites.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-qdat = read.table("results/branch_sites/finalVertical/bs_lrt_Pocillopora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-vdat = read.table("results/branch_sites/finalVertical/bs_lrt_allVertical.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+gdat = read.table("branch_sites_tests/bs_lrt_Gacrhelia.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+mdat = read.table("branch_sites_tests/bs_lrt_Montipora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+pdat = read.table("branch_sites_tests/bs_lrt_Porites.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+qdat = read.table("branch_sites_tests/bs_lrt_Pocillopora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+vdat = read.table("branch_sites_tests/bs_lrt_allVertical.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
 
 
 
 #"anti" target datasets
-a.gdat = read.table("results/branch_sites/finalVertical/bs_lrt_anti_Gacrhelia.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-a.mdat = read.table("results/branch_sites/finalVertical/bs_lrt_anti_Montipora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-a.pdat = read.table("results/branch_sites/finalVertical/bs_lrt_anti_Porites.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-a.qdat = read.table("results/branch_sites/finalVertical/bs_lrt_anti_Pocillopora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
-a.vdat = read.table("results/branch_sites/finalVertical/bs_lrt_anti_allVertical.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+a.gdat = read.table("branch_sites_tests/bs_lrt_anti_Gacrhelia.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+a.mdat = read.table("branch_sites_tests/bs_lrt_anti_Montipora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+a.pdat = read.table("branch_sites_tests/bs_lrt_anti_Porites.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+a.qdat = read.table("branch_sites_tests/bs_lrt_anti_Pocillopora.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
+a.vdat = read.table("branch_sites_tests/bs_lrt_anti_allVertical.tsv", sep = "\t", header = T, quote="", stringsAsFactors=F)
 
 #---- FORMAT AND MERGE ----#
 
@@ -107,20 +107,12 @@ head(sig)
 
 #OUTPUT GO ENRICHMENT FILE
 
-#here the 'score' is the difference in the number of significant
-#results for all targets and all antiTargets
-#values can be -1, 0, or 1
-#idea is that for GO terms that tend to evolve fast in general, 
-#scores of -1 and 1 will be roughly equally frequent
-
-
 genes = unique(c(rownames(tsig), c(rownames(asig))))
 allVps = data.frame(sig[paste('target_v', bs.ptype, sep="_")], sig[paste('anti_v', bs.ptype, sep="_")])
-score = allVps[,1] - allVps[,2]
-plainScore = as.numeric(allVps[,1])
-normt = data.frame(rownames(allVps), plainScore)
+score = as.numeric(allVps[,1])
+normt = data.frame(rownames(allVps), score)
 colnames(normt) = c("gene", "score")
-write.csv(normt, file=paste(results.path, "GO_MWU/GOMWU_input1_plain_branchSites.csv",sep='/'), quote=F, row.names=F)
+write.csv(normt, file=paste(results.path, "GO_MWU/GOMWU_input1_branchSites.csv",sep='/'), quote=F, row.names=F)
 
 #breakdown of scores:
 table(score)
@@ -269,18 +261,18 @@ plot(density(goin$score)); abline(v=0)
 #--------- SUBSET FOR SITES FLAGGED IN THE BRANCH-SITES OUTPUTS ------------#
 #build these files with extract_sig_bs_positions.py
 #targets
-sdat1 = read.table("results/branch_sites/finalVertical/gachrelia_sigBsSites.tsv", header = T)
-sdat2 = read.table("results/branch_sites/finalVertical/montipora_sigBsSites.tsv", header = T)
-sdat3 = read.table("results/branch_sites/finalVertical/porites_sigBsSites.tsv", header = T)
-sdat4 = read.table("results/branch_sites/finalVertical/pocillopora_sigBsSites.tsv", header = T)
-sdat5 = read.table("results/branch_sites/finalVertical/allVertical_sigBsSites.tsv", header = T)
+sdat1 = read.table("branch_sites_tests/gachrelia_sigBsSites.tsv", header = T)
+sdat2 = read.table("branch_sites_tests/montipora_sigBsSites.tsv", header = T)
+sdat3 = read.table("branch_sites_tests/porites_sigBsSites.tsv", header = T)
+sdat4 = read.table("branch_sites_tests/pocillopora_sigBsSites.tsv", header = T)
+sdat5 = read.table("branch_sites_tests/allVertical_sigBsSites.tsv", header = T)
 
 #antis
-sdat6 = read.table("results/branch_sites/finalVertical/anti_gachrelia_sigBsSites.tsv", header = T)
-sdat7 = read.table("results/branch_sites/finalVertical/anti_montipora_sigBsSites.tsv", header = T)
-sdat8 = read.table("results/branch_sites/finalVertical/anti_porites_sigBsSites.tsv", header = T)
-sdat9 = read.table("results/branch_sites/finalVertical/anti_pocillopora_sigBsSites.tsv", header = T)
-sdat10 = read.table("results/branch_sites/finalVertical/anti_allVertical_sigBsSites.tsv", header = T)
+sdat6 = read.table("branch_sites_tests/anti_gachrelia_sigBsSites.tsv", header = T)
+sdat7 = read.table("branch_sites_tests/anti_montipora_sigBsSites.tsv", header = T)
+sdat8 = read.table("branch_sites_tests/anti_porites_sigBsSites.tsv", header = T)
+sdat9 = read.table("branch_sites_tests/anti_pocillopora_sigBsSites.tsv", header = T)
+sdat10 = read.table("branch_sites_tests/anti_allVertical_sigBsSites.tsv", header = T)
 
 #set the clade names for the datasets
 #targets
@@ -381,9 +373,9 @@ table(tt$site)[table(tt$site)>1]
 #---- FORMAT FINAL RESULTS AND OUTPUT -----#
 
 #FINAL SET OF SUBTITUTIONS FITTING ALL CRITERIA
-annots = read.table("ortholog_tables/singleCopyAnnotations.tsv", header = T, row.names='orthoGroup')
+annots = read.table("ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T)
 tt.out = paste(results.path, 'verticalConvergentRes.tsv', sep="/")
-annots$ortholog.x = rownames(annots)
+annots$ortholog.x = annots$ortho
 ttm = merge(tt, annots, by = "ortholog.x", all.x=T)
 ttm=ttm[!colnames(ttm) %in% c('conv', 'divergent', 'para', 'none', 'genConvergent', 'genNone', 'file', 'ortholog.y', 't1', 't2')]
 head(ttm)
@@ -408,6 +400,7 @@ rest.of.scores = rep(0, length(rest.of.genes))
 rest.df = data.frame(rest.of.genes, rest.of.scores)
 colnames(rest.df) = c('gene', 'score')
 finalGo = rbind(fscores, rest.df)
+finalGo$score[finalGo$score>1]<-1
 head(finalGo)
 dim(finalGo)
 table(finalGo$score)

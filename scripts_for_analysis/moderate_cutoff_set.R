@@ -1,6 +1,6 @@
 #---- CUTOFF SELECTION ----#
 set.label = 'moderate'
-results.path = 'results/overlap/moderate'
+results.path = 'overlap_results/moderate'
 
 #Branch-sites test filters
 bs.ptype = "adj.p"             #type of p value to use (adj.p or pvalues)
@@ -8,7 +8,7 @@ bs.alpha = 0.1                 #significance cutoff for chosen p value
 bs.min.lineage = 1             #number of target lineages that must be significant to keep gene
 
 #Convergence filters
-ancestral.file = "datasets/ancestral_recon_full_clades_lineages.Rdata" #which ancestral dataset to use. Generate these with prepareConvergenceInput.R
+ancestral.file = "ancestral_reconstruction/ancestral_recon_full_clades_lineages.Rdata" #which ancestral dataset to use. Generate these with prepareConvergenceInput.R
 anc.sub.types = c('parallel', 'convergent')  #the type of overlapping substitutions that count as convergent
 anc.post.cutoff = 0.9                        #the posterior probability cutoff to use to consider ancestral calls
 min.convergent = 2                           #the number of convergent pairs that must be seen to count
