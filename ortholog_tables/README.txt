@@ -12,3 +12,5 @@ singleCopyOrthos_revised.txt
 	This is considered the best set, and was used for all analyses.
 singleCopyAnnotations.tsv
 	The annotations file based on the SwissProt and Pfam hits from the Transdecoder pipeline
+singleCopyAnnotations.tsv_GO.tsv
+	The Gene Ontology annotations for the orhologs, in format for use in GO_MWU.R
