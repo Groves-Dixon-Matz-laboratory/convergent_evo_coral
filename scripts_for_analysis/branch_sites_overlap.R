@@ -1,6 +1,6 @@
 #branch_sites_overlap.R
 #Groves Dixon
-#last updated 6-10-18
+#last updated 7-1-18
 
 setwd("~/gitreps/convergent_evo_coral")
 source('scripts_for_analysis/coral_reproduction_functions.R')
@@ -11,7 +11,7 @@ source('scripts_for_analysis/coral_reproduction_functions.R')
 
 source("scripts_for_analysis/moderate_cutoff_set.R") 
 
-source("scripts_for_analysis/relaxed_cutoff_set.R")
+# source("scripts_for_analysis/relaxed_cutoff_set.R")
 
 #------ LOAD DATA ------#
 
@@ -89,12 +89,12 @@ nrow(a.cdat)
 
 #look for genes with significance in the branch sites results
 print(paste("Number of significant lineages must be at least", bs.min.lineage))
-bs.genes = bs_sig_overlap(df=cdat, ptype=bs.ptype)
-a.bs.genes = bs_sig_overlap(df=a.cdat, ptype=bs.ptype)
-all.bs.genes = unique(c(bs.genes, a.bs.genes))
+bs.genes = bs_sig_overlap(df=cdat, ptype=bs.ptype)      #significant in at least one vertical transmitter test
+a.bs.genes = bs_sig_overlap(df=a.cdat, ptype=bs.ptype)  #signifiant in at least one horizontal tramsitter test
+all.bs.genes = unique(c(bs.genes, a.bs.genes))          #combined
 
 
-#stats for significance overlap
+#build matrix with booleans for whether each test was significant
 tsig = make_sig_matrix(cdat, bs.ptype, bs.alpha)
 asig = make_sig_matrix(a.cdat, bs.ptype, bs.alpha)
 colnames(tsig) = paste('target', colnames(tsig), sep="_")
@@ -106,13 +106,13 @@ head(sig)
 
 
 #OUTPUT GO ENRICHMENT FILE
-
+#set up binary for whether each gene was significant in at least one test for vertical transmitters
 genes = unique(c(rownames(tsig), c(rownames(asig))))
-allVps = data.frame(sig[paste('target_v', bs.ptype, sep="_")], sig[paste('anti_v', bs.ptype, sep="_")])
-score = as.numeric(allVps[,1])
-normt = data.frame(rownames(allVps), score)
-colnames(normt) = c("gene", "score")
-write.csv(normt, file=paste(results.path, "GO_MWU/GOMWU_input1_branchSites.csv",sep='/'), quote=F, row.names=F)
+score = rep(0, length(genes))
+score[genes %in% bs.genes]<-1
+goin1 = data.frame(genes, score)
+colnames(goin1) = c("gene", "score")
+write.csv(goin1, file=paste(results.path, "GO_MWU/GOMWU_input1_branchSites.csv",sep='/'), quote=F, row.names=F)
 
 #breakdown of scores:
 table(score)
@@ -151,32 +151,34 @@ anc.genes = unique(dat$ortholog)
 c1 = grepl("Anti", dat$b1Clade)
 c2 = grepl("Anti", dat$b2Clade)
 conv = dat$genConvergent
-tt = dat[!c1 & !c2 & conv, ]
-aa = dat[c1 & c2 & conv, ]
+tt.base = dat[!c1 & !c2 & conv, ]
+aa.base = dat[c1 & c2 & conv, ]
 ta1 = dat[!c1 & c2 & conv,]
 ta2 = dat[c1 & !c2 & conv,]
-ta = rbind(ta1, ta2)
+ta.base = rbind(ta1, ta2)
 
 #sum up the number of convergence events for each gene
-tt.sums = data.frame(table(tt$ortholog))
-ta.sums = data.frame(table(ta$ortholog))
-aa.sums = data.frame(table(ta$ortholog))
+tt.sums = data.frame(table(tt.base$ortholog))
+ta.sums = data.frame(table(ta.base$ortholog))
+aa.sums = data.frame(table(aa.base$ortholog))
 
 #merge and output for GO enrichment
 m = merge(tt.sums, ta.sums, by = 'Var1')
-gene = m$Var1
-score = m$Freq.x - m$Freq.y
+gene = as.character(m$Var1)
+score = m$Freq.x
+score[score>1]<-1
 rest.of.genes = genes[!genes %in% gene]
 rest.of.scores = rep(0, length(rest.of.genes))
 go.genes = append(gene, rest.of.genes)
 go.scores = append(score, rest.of.scores)
-goin = data.frame(go.genes, go.scores)
-colnames(goin) = c('gene', 'score')
-write.csv(goin, file=paste(results.path, "GO_MWU/GOMWU_input2_convergence_overlap.csv",sep='/'), quote=F, row.names=F)
-plot(density(goin$score));abline(v=0)
+goin2 = data.frame(go.genes, go.scores)
+colnames(goin2) = c('gene', 'score')
+write.csv(goin2, file=paste(results.path, "GO_MWU/GOMWU_input2_convergence_overlap.csv",sep='/'), quote=F, row.names=F)
+plot(density(goin2$score));abline(v=0)
+sum(goin2$score)
 #=========================================
 
-#SUBSET FOR TEH MINIMUM NUMBER OF CONVERTENT SITES REQUIRED
+#SUBSET FOR THE MINIMUM NUMBER OF CONVERTENT SITES REQUIRED
 
 counts = table(dat$site)
 multiSites = names(counts[counts>=min.convergent])
@@ -216,6 +218,11 @@ tt = bs.conv.subs[t1 & t2,]
 ta = bs.conv.subs[(t1 & !t2) | (!t1 & t2),]
 aa = bs.conv.subs[!t1 & !t2,]
 
+#remove sister comparisons from ta
+sister1 = sub("Anti", "", ta$b1Clade)
+sister2 = sub("Anti", "", ta$b2Clade)
+
+
 #print out counts for the overlapping branch sites and convergence results
 
 print("Numbers of substitutions from each trait combination:")
@@ -232,27 +239,22 @@ length(unique(aa$ortholog))
 print("All subs accounted for?")
 sum(c(nrow(tt), nrow(ta), nrow(aa)))==nrow(bs.conv.subs)
 
-
 #===== OUTPUT GO ENRICHMENT FOR BS-CONVERGENCE OVERLAP =====#
 
-#separate the convergence events based on traits
-
-#sum up the number of convergence events for each gene
-tt.sums = data.frame(table(tt$ortholog))
-ta.sums = data.frame(table(ta$ortholog))
-
-#merge and output for GO enrichment
-m = merge(tt.sums, ta.sums, by = 'Var1')
-gene = m$Var1
-score = m$Freq.x - m$Freq.y
-rest.of.genes = genes[!genes %in% gene]
-rest.of.scores = rep(0, length(rest.of.genes))
-go.genes = append(gene, rest.of.genes)
-go.scores = append(score, rest.of.scores)
-goin = data.frame(go.genes, go.scores)
-colnames(goin) = c('gene', 'score')
-write.csv(goin, file=paste(results.path, "GO_MWU/GOMWU_input3_bs_convergence_overlap.csv",sep='/'), quote=F, row.names=F)
-plot(density(goin$score)); abline(v=0)
+#output for GO enrichment
+head(goin1)
+head(goin2)
+conv.genes = goin2$gene[goin2$score==1]
+print(paste("Total genes with at least one convergence event =", length(conv.genes)))
+print(paste("Total genes with at least one significant branch site test =", length(bs.genes)))
+genes = goin1$gene[goin1$gene %in% goin2$gene]
+score = rep(0, length(genes))
+score[genes %in% bs.genes & genes %in% conv.genes]<-1
+goin3 = data.frame(genes, score)
+colnames(goin3) = c('gene', 'score')
+write.csv(goin3, file=paste(results.path, "GO_MWU/GOMWU_input3_bs_convergence_overlap.csv",sep='/'), quote=F, row.names=F)
+plot(density(goin3$score)); abline(v=0)
+sum(goin3$score)
 #====================
 
 
@@ -373,7 +375,7 @@ table(tt$site)[table(tt$site)>1]
 #---- FORMAT FINAL RESULTS AND OUTPUT -----#
 
 #FINAL SET OF SUBTITUTIONS FITTING ALL CRITERIA
-annots = read.table("ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T)
+annots = read.table("ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T, sep="\t")
 tt.out = paste(results.path, 'verticalConvergentRes.tsv', sep="/")
 annots$ortholog.x = annots$ortho
 ttm = merge(tt, annots, by = "ortholog.x", all.x=T)
@@ -408,7 +410,8 @@ goout.path = paste(results.path, "GO_MWU/GOMWU_input4_final.csv", sep="/")
 write.csv(finalGo, file= goout.path, quote=F, row.names=F)
 
 
-
+#save objects for building barplot
+save(bs.genes, tsig, asig, tt.base, ta.base, sdat, file=paste(results.path, "objects_for_barplot.Rdata", sep="/"))
 
 
 #------------------------------------------- old stuff below -------------------------------------------#

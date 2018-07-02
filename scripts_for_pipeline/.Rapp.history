@@ -1,0 +1,3 @@
+final=read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv")
+head(final)
+write.table(final, file="~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", quote=F, row.names=F, sep="\t")

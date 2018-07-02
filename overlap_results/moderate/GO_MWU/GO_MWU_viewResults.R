@@ -6,22 +6,21 @@
 setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")
 
 #select input file
-input="GOMWU_input1_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
-input="GOMWU_input1_plain_branchSites.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+input="GOMWU_input1_branchSites.csv";  #significance for branch sites for all vertical minus all antivertical
 input="GOMWU_input2_convergence_overlap.csv";
 input="GOMWU_input3_bs_convergence_overlap.csv";
-input="GOMWU_input4_final.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+input="GOMWU_input4_final.csv";   #significance for branch sites for all vertical minus all antivertical
 
 goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.
 goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml
-goDivision="BP"     # either MF, or BP, or CC
+goDivision="MF"     # either MF, or BP, or CC
 source("gomwu.functions.R")
 
 
 # Plotting results
 quartz()
 gomwuPlot(input,goAnnotations,goDivision,
-	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").
 	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.
 	level2=0.05, # FDR cutoff to print in regular (not italic) font.
 	level3=0.01, # FDR cutoff to print in large bold font.
@@ -40,7 +39,8 @@ res=res[order(res$pval),]
 head(res, n=20)
 
 #OUTPUT TOP 20 REGARDLESS OF FDR
-tabOut = paste('figures', sub(".csv", "_top20.tsv", resName), sep="/")
+tabOut = paste('results', sub(".csv", "_top20.tsv", resName), sep="/")
+tabOut
 write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")
 
 #VIEW DENSITY OF THE NUMBER OF SEQUENCES
@@ -60,18 +60,18 @@ goGenes = gdat[gdat$term %in% sigGos$term & gdat$value >= ABS.VALUE,]
 goGenes
 
 #merge with gene names
-adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T)
+adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T, sep="\t", quote="")
 colnames(adat)[1] = 'seq'
-m=merge(goGenes, adat, by = 'seq')
-m
+m=merge(goGenes, adat, by = 'seq', all.x=T)
+m=m[order(m$name.x),]
 
 #make table without duplicated descriptions
 nonDup = m[!duplicated(m$seq),]
-nonDup
-outName = paste(paste('../interesting_genes/genesOfInterest', goDivision, sep="_"), input,  sep="_")
+nonDup = nonDup[order(nonDup$name.x),]
+outName = paste(paste('../interesting_genes/significantGOgenes', goDivision, sep="_"), input,  sep="_")
 outName=sub(".csv", ".tsv", outName)
 print(outName)
-write.table(nonDup, file=outName, quote=F, row.names=F, sep="\t")
+write.table(m, file=outName, quote=F, row.names=F, sep="\t")
 
 #PARITCULAR GO OF INTEREST
 gotags = c('GO:0007283;GO:0048232;GO:0007276')

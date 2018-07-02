@@ -837,18 +837,19 @@ geneset.txt
 cd codon_sequences/
 
 #make a directory for the selection
-SELECTION="selection_relaxed"
+SELECTION="selection_moderate"
 mkdir $SELECTION
 
 
 #set path where rst files are
-ANC_REC_PATH=/scratch/02260/grovesd/carly_evo/fastOrthoFromTransdec/pro_files/run4_FINAL/orthologSetFinal/ancestral_recon/ancestral_results
+ANC_REC_PATH=/scratch/02260/grovesd/carly_evo/fastOrthoFromTransdec/pro_files/run4_FINAL/orthologSetFinal/ancestral_recon
 
 
 #get the ancestral reconstruction files for them
 >copySelectGenes
 while read g
-do echo "cp ${ANC_REC_PATH}/${g}.rst ./${SELECTION}" >>copySelectGenes
+do echo "cp ${ANC_REC_PATH}/ancestral_results/${g}.rst ./${SELECTION}" >>copySelectGenes
+echo "cp ${ANC_REC_PATH}/${g}.cnt ./${SELECTION}/${g}_ANCESTRAL_RECON.cnt" >> copySelectedGenes
 echo "cp ../protein_sequences/${g}.aln ./${SELECTION}">>copySelectGenes
 echo "cp ${g}.codon ./${SELECTION}">>copySelectGenes
 done<geneset.txt

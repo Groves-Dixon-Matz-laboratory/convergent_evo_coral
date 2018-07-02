@@ -115,6 +115,7 @@ adf$description = 'none'
 final = rbind(annotated, adf)
 final = final[!duplicated(final$ortho),]
 head(final)
-write.table(final, file="~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv")
+write.table(final, file="~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", quote=F, row.names=F, sep="\t")
+
 
 
