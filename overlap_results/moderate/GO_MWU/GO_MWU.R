@@ -26,7 +26,10 @@ input="GOMWU_input2_convergence_overlap.csv";
 input="GOMWU_input3_bs_convergence_overlap.csv";
 input="GOMWU_input4_final.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
 
-goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # olde annotations based on the _selected_ set.
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv"
+
+
 goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml
 goDivision="BP"     # either MF, or BP, or CC
 source("gomwu.functions.R")
@@ -36,7 +39,7 @@ source("gomwu.functions.R")
 gomwuStats(input, goDatabase, goAnnotations, goDivision,
 	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already
 	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes
-	smallest=50,   # a GO category should contain at least this many genes to be considered
+	smallest=25,   # a GO category should contain at least this many genes to be considered
 	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.
 	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. 
 #	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)

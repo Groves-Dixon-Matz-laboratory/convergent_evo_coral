@@ -375,7 +375,7 @@ table(tt$site)[table(tt$site)>1]
 #---- FORMAT FINAL RESULTS AND OUTPUT -----#
 
 #FINAL SET OF SUBTITUTIONS FITTING ALL CRITERIA
-annots = read.table("ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T, sep="\t")
+annots = read.table("ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T, sep="\t", quote="")
 tt.out = paste(results.path, 'verticalConvergentRes.tsv', sep="/")
 annots$ortholog.x = annots$ortho
 ttm = merge(tt, annots, by = "ortholog.x", all.x=T)

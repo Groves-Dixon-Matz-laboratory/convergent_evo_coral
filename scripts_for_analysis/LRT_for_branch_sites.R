@@ -6,7 +6,7 @@
 
 #set working directory
 rm(list=ls())
-setwd("~/gitreps/coral_reproductive_evolution")
+setwd("~/gitreps/convergent_evo_coral/branch_sites_tests")
 
 
 #likelihood ratio test function
@@ -34,8 +34,8 @@ foreground = "anti_allVertical"
 
 #read in the data from the null and alternative models for the branch-site test for positive selection
 #see PAML manual for descriptions of these models
-null.name = paste(paste("results/branch_sites/finalVertical/nullLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")
-alt.name = paste(paste("results/branch_sites/finalVertical/altLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")
+null.name = paste(paste("nullLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")
+alt.name = paste(paste("altLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")
 null = read.table(null.name, header = T) #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)
 alt = read.table(alt.name, header = T)   #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)
 
@@ -71,8 +71,7 @@ for (i in cuts){
 	print(paste(paste(paste(i, nrow(sub)), nrow(unadjust)), (nrow(sub)/nrow(dat))*100))
 }
 
-hist(dat$p.values)
-
+hist(dat$p.values, main="P-values before final QC")
 
 
 #WRITE OUT THE RESULTS
@@ -92,6 +91,27 @@ nrow(rdat)
 #output
 out.name = paste(paste("results/branch_sites/finalVertical/bs_lrt", foreground, sep="_"), "tsv", sep=".")
 write.table(rdat, file=out.name, row.names = F, quote=F, sep = "\t")
+
+
+#DOUBLE-CHECK THAT RESULTS MATCH WITH DESCRIPTION IN PAML MANUAL:
+
+#from page 31 on the PAML manual:
+#"Suppose your 2 delta likelihood = 2.71, you will get 0.10 from chi2, then the p value for the mixture is 0.1/2 = 5%
+#We recommend that you use X2 (with critical values 3.84 and 5.99) instead of the mixture to guide against violations of model assumptions"
+#the second part, (with critical values 3.84 and 5.99), amounts to 
+#not dividing the X2 by 2 to get the pvalue.
+
+#here is an example of running the function above
+#showing that 
+G = 2.71
+p.values = pchisq(G, 1, ncp = 0, lower.tail = F)
+p.values #gives 0.1
+
+G = 3.84
+p.values = pchisq(G, 1, ncp = 0, lower.tail = F)
+p.values #gives 0.05
+
+#so by not dividing by 2 we are following the recommendation
 
 
 
@@ -118,3 +138,8 @@ write.table(out3, o3.name, quote = F, row.names = F, sep = ",")
 
 #write out for KOGG
 write.table(out2, 'branch_site_LRT_results_for_KOGGmwu.csv', quote = F, row.names = F, sep = ",")
+
+
+
+
+

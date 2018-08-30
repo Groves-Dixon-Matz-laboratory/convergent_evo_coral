@@ -1,0 +1,101 @@
+setwd("~/gitreps/convergent_evo_coral")
+#set working directory#
+rm(list=ls())#
+setwd("~/gitreps/convergent_evo_coral")#
+#likelihood ratio test function#
+lrt = function(la, lo, df){#
+  G = 2*(la - lo)#
+  # print(G)#
+  p.values = pchisq(G, df, ncp = 0, lower.tail = F)#
+  return(p.values)#
+}#
+#
+#choose the branch sites comparison you want:#
+foreground = "gacrhelia"
+#set working directory#
+rm(list=ls())#
+setwd("~/gitreps/convergent_evo_coral/branch_sites_tests")#
+#likelihood ratio test function#
+lrt = function(la, lo, df){#
+  G = 2*(la - lo)#
+  # print(G)#
+  p.values = pchisq(G, df, ncp = 0, lower.tail = F)#
+  return(p.values)#
+}#
+#
+#choose the branch sites comparison you want:#
+foreground = "gacrhelia"
+null.name = paste(paste("nullLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")
+null = read.table(null.name, header = T) #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)
+alt = read.table(alt.name, header = T)   #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)
+alt.name = paste(paste("altLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")
+alt.name
+alt = read.table(alt.name, header = T)   #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)
+#read in the data from the null and alternative models for the branch-site test for positive selection#
+#see PAML manual for descriptions of these models#
+null.name = paste(paste("nullLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")#
+alt.name = paste(paste("altLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")#
+null = read.table(null.name, header = T) #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)#
+alt = read.table(alt.name, header = T)   #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)
+#these should show the contig, the number of parameters for the model, and it's log likelihood#
+head(null); head(alt)#
+#run lrt between the models#
+contig = alt$contig#
+contigs.null = null$contig#
+sum(contig == contigs.null) == nrow(alt) #double-check the files were assembled correctly#
+la = alt$likelihood#
+lo = null$likelihood#
+p.values = lrt(la, lo, df=1) #note degrees of freedom is difference in number of parameters between models (in this case always 1)#
+#
+#record the results of the test in a new dataframe#
+dat = data.frame(la, lo, p.values, contig, contigs.null)#
+head(dat)#
+#
+#doublecheck the contigs match#
+sum(dat$contig == dat$contigs.null) == nrow(dat)#
+#get adjusted p values for multiple tests#
+dat$adj.p = p.adjust(dat$p.values, method = 'BH')#
+#
+#get an idea of how many genes are significant#
+cuts = c(0.1, 0.05, 0.01, 0.001, 0.0001)#
+for (i in cuts){#
+	sub = dat[dat$adj.p < i,]#
+	unadjust = dat[dat$p.values < i,]#
+	print(paste(paste(paste(i, nrow(sub)), nrow(unadjust)), (nrow(sub)/nrow(dat))*100))#
+}#
+#
+hist(dat$p.values, main="P-values before final QC")
+#LOOK AT COUNTS OF SIGNIFICANT SITES#
+ssFile = paste(paste('sigBsSites', foreground, sep='_'), 'tsv', sep='.')#
+ss = read.table(ssFile, header = T)#
+sc = table(ss$file)#
+hist(sc)#
+plot(density(sc))
+ssFile
+ssFile = paste(paste('sigBsSites', foreground, sep='_'), 'tsv', sep='.')
+ssFile
+ss = read.table(ssFile, header = T)
+foreground = "gacrhelia"
+rm(list=ls())
+#Groves Dixon#
+#10/20/17#
+#R script LRT_for_branch_site_models.R#
+#set working directory#
+rm(list=ls())#
+setwd("~/gitreps/convergent_evo_coral/branch_sites_tests")#
+#likelihood ratio test function#
+lrt = function(la, lo, df){#
+  G = 2*(la - lo)#
+  # print(G)#
+  p.values = pchisq(G, df, ncp = 0, lower.tail = F)#
+  return(p.values)#
+}#
+#
+#choose the branch sites comparison you want:#
+foreground = "gacrhelia"
+#read in the data from the null and alternative models for the branch-site test for positive selection#
+#see PAML manual for descriptions of these models#
+null.name = paste(paste("nullLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")#
+alt.name = paste(paste("altLikelihoods_branchSites", foreground, sep="_"), "tsv", sep=".")#
+null = read.table(null.name, header = T) #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)#
+alt = read.table(alt.name, header = T)   #file generated using parse_codeml_branch_sites.py (see Positive_Selection_Walkthrough.txt)

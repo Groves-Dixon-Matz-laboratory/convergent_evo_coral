@@ -36,7 +36,7 @@ gomwuPlot(input,goAnnotations,goDivision,
 resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")
 res=read.table(resName, header = T)
 res=res[order(res$pval),]
-head(res, n=20)
+head(res, n=30)
 
 #OUTPUT TOP 20 REGARDLESS OF FDR
 tabOut = paste('results', sub(".csv", "_top20.tsv", resName), sep="/")
