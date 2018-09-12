@@ -439,9 +439,13 @@ parse_kegg_module_htext.py -i kegg_modules.htext.keg -o kegg_to_ko.tsv
 #gather the GO annotations for these
 #download the idmappings ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping/idmapping_selected.tab.gz
 gather_go_terms.py singleCopyAnnotations.tsv idmapping_selected.tab
+
+
 #---------NEW GOOD WAY:
 #download full set of GO annotations here: ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/
 #then parse the file to get GO annotations for our selection
+gather_go_terms.py singleCopyAnnotations_long.tsv goa_uniprot_all.gaf singleCopyAnnotations_GO
+
 
 ########################################
 
