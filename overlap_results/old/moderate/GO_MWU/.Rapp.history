@@ -1,0 +1,252 @@
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")
+input="GOMWU_input3_bs_convergence_overlap.csv";
+goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many ca
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.
+input="GOMWU_input3_bs_convergence_overlap.csv";ABS.VALUE=0.99
+goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are to
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.
+input="GOMWU_input3_bs_convergence_overlap.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="BP"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too
+goDivision
+goDivision="CC"     # either MF, or BP, or CC
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too
+goDivision="MF"     # either MF, or BP, or CC
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.#
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#
+#Use GO_MWU_vi
+goDivision="CC"     # either MF, or BP, or CC
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
+#OUTPUT TOP 20 REGARDLESS OF FDR#
+tabOut = paste('results', sub(".csv", "_top20.tsv", resName), sep="/")#
+tabOut#
+write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")
+#VIEW DENSITY OF THE NUMBER OF SEQUENCES#
+plot(density(res$nseqs))#
+#
+#PULL OUT THE SIGNIFICANT GO TERMS#
+#also unmerge GO names#
+sigGos = res[res$p.adj<0.1, c('term', 'name')]#
+sigGos$name = as.character(sigGos$name)
+#LOOK AT INDIVIDUAL GENES FROM GO TERMS#
+gFile = paste(goDivision, input, sep="_")#
+gdat = read.table(gFile, header = T, stringsAsFactors=F)#
+goGenes = gdat[gdat$term %in% sigGos$term & gdat$value >= ABS.VALUE,]#
+goGenes
+adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T, sep="\t", quote="")
+colnames(adat)[1] = 'seq'#
+m=merge(goGenes, adat, by = 'seq', all.x=T)#
+m=m[order(m$name.x),]
+#make table without duplicated descriptions#
+nonDup = m[!duplicated(m$seq),]#
+nonDup = nonDup[order(nonDup$name.x),]#
+outName = paste(paste('../interesting_genes/significantGOgenes', goDivision, sep="_"), input,  sep="_")#
+outName=sub(".csv", ".tsv", outName)#
+print(outName)
+write.table(m, file=outName, quote=F, row.names=F, sep="\t")
+gotags = c('GO:0016023')
+select = goGenes[goGenes$term %in% gotags,]#
+mselect = merge(select, adat, by = 'seq')#
+mselect
+head(res, n=30)
+#PARITCULAR GO OF INTEREST#
+gotags = c('GO:0070062;GO:0065010;GO:0043230')#
+select = goGenes[goGenes$term %in% gotags,]#
+mselect = merge(select, adat, by = 'seq')#
+mselect
+gotags = c('GO:0070062;GO:0065010;GO:0043230')
+select = goGenes[goGenes$term %in% gotags,]
+mselect = merge(select, adat, by = 'seq')
+mselect
+gotags = c('GO:0070062','GO:0065010','GO:0043230')#
+select = goGenes[goGenes$term %in% gotags,]#
+mselect = merge(select, adat, by = 'seq')#
+mselect
+nrow(goGenes)
+head(goGenes)
+#PULL OUT THE SIGNIFICANT GO TERMS#
+#also unmerge GO names#
+sigGos = res[res$p.adj<0.2, c('term', 'name')]#
+sigGos$name = as.character(sigGos$name)#
+#LOOK AT INDIVIDUAL GENES FROM GO TERMS#
+gFile = paste(goDivision, input, sep="_")#
+gdat = read.table(gFile, header = T, stringsAsFactors=F)#
+goGenes = gdat[gdat$term %in% sigGos$term & gdat$value >= ABS.VALUE,]#
+goGenes#
+#
+#merge with gene names#
+adat = read.table("~/gitreps/convergent_evo_coral/ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", header = T, sep="\t", quote="")#
+colnames(adat)[1] = 'seq'#
+m=merge(goGenes, adat, by = 'seq', all.x=T)#
+m=m[order(m$name.x),]#
+#
+#make table without duplicated descriptions#
+nonDup = m[!duplicated(m$seq),]#
+nonDup = nonDup[order(nonDup$name.x),]#
+outName = paste(paste('../interesting_genes/significantGOgenes', goDivision, sep="_"), input,  sep="_")#
+outName=sub(".csv", ".tsv", outName)#
+print(outName)#
+write.table(m, file=outName, quote=F, row.names=F, sep="\t")#
+#
+#PARITCULAR GO OF INTEREST#
+gotags = c('GO:0070062','GO:0065010','GO:0043230')#
+select = goGenes[goGenes$term %in% gotags,]#
+mselect = merge(select, adat, by = 'seq')#
+mselect
+mselect
+head(res, n=30)
+gotags = c('GO:0016023')
+select = goGenes[goGenes$term %in% gotags,]#
+mselect = merge(select, adat, by = 'seq')#
+mselect

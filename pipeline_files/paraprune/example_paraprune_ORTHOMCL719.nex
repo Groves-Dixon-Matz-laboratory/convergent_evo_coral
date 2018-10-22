@@ -1,0 +1,123 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=29;
+	taxlabels
+	'Acervicorn_30723.p1'
+	'Adigitifer_9233.p1'
+	'Aelegantis_53539.p1'
+	'Ahyacinthu_29758.p1'
+	'Amillepora_48179.p1'
+	'Apallida_32996.p1'
+	'Apalmata_42348.p1'
+	'Atenuis_37540.p1'
+	'Fscutaria_65336.p1'
+	'Gacrhelia_63109.p1'
+	'Gastreata_61753.p1'[&!color=#ff0000]
+	'Gastreata_61754.p1'[&!color=#ff0000]
+	'Gcolumna_70775.p1'
+	'Mauretenra_100656.p2'[&!color=#ff0000]
+	'Mauretenra_97561.p1'[&!color=#ff0000]
+	'Mauretenra_98975.p1'[&!color=#ff0000]
+	'Mcapitata_12052.p1'
+	'Mcavernosa_143544.p1'[&!color=#ff0000]
+	'Mcavernosa_144792.p1'[&!color=#ff0000]
+	'Ofaveolata_16782.p1'
+	'Pcarnosus_136618.p1'[&!color=#ff0000]
+	'Pcarnosus_136619.p1'[&!color=#ff0000]
+	'Pdamicorni_2775.p1'[&!color=#ff0000]
+	'Pdamicorni_63475.p1'[&!color=#ff0000]
+	'Plobata_42258.p1'
+	'Shystrix_135961.p1'[&!color=#ff0000]
+	'Shystrix_174048.p1'[&!color=#ff0000]
+	'Spistillat_13864.p1'
+	'Ssiderea_36567.p1'
+;
+end;
+
+begin trees;
+	tree _1_Tree1 = [&R] ((('Gacrhelia_63109.p1':0.08553,('Gastreata_61753.p1':0.0,'Gastreata_61754.p1':0.0):0.00233)[&label=0.988]:0.0909,(('Gcolumna_70775.p1':0.05093,'Plobata_42258.p1':0.05921)[&label=0.997,!rotate=true]:0.13472,('Ssiderea_36567.p1':0.09678,('Mcapitata_12052.p1'[&!rotate=true]:0.11659,('Atenuis_37540.p1':0.00975,('Apalmata_42348.p1':0.01637,('Adigitifer_9233.p1':0.01105,('Amillepora_48179.p1':5.5E-4,('Ahyacinthu_29758.p1':0.05734,'Acervicorn_30723.p1':0.00547)[&label=0.604]:5.4E-4)[&label=0.52]:5.5E-4)[&label=0.961]:5.9E-4)[&label=0.014]:6.2E-4)[&label=0.961,!rotate=true]:0.06686)[&label=0.947,!rotate=true]:0.06278)[&label=0.663,!rotate=true]:0.00849)[&!rotate=true]:0.04078)[&label=0.563,!rotate=true]:0.03428,(('Aelegantis_53539.p1':0.04481,'Apallida_32996.p1':0.24161)[&label=1.0,!rotate=true]:0.60697,('Fscutaria_65336.p1':0.09505,((('Mauretenra_98975.p1':0.07307,('Mauretenra_97561.p1':0.0,'Mauretenra_100656.p2':0.0):5.3E-4)[&label=0.975]:0.06154,(('Pdamicorni_2775.p1':0.00785,'Pdamicorni_63475.p1':5.5E-4)[&label=0.972]:0.04946,(('Shystrix_135961.p1':0.0,'Shystrix_174048.p1':0.0):0.02555,'Spistillat_13864.p1':0.05982)[&label=0.794]:0.01744)[&label=0.967]:0.06267)[&label=0.99]:0.09007,(('Mcavernosa_143544.p1':5.4E-4,'Mcavernosa_144792.p1':0.06977)[&label=0.967]:0.03661,('Ofaveolata_16782.p1':0.00796,('Pcarnosus_136618.p1':0.0,'Pcarnosus_136619.p1':0.0):0.05031)[&label=0.614]:0.01304)[&label=0.676]:0.00806)[&label=0.182]:0.02624)[&label=0.882,!rotate=true]:0.05938)[&label=0.899]:0.04219);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#ffffff;
+	set appearance.branchColorAttribute="User selection";
+	set appearance.branchColorGradient=false;
+	set appearance.branchLineWidth=3.0;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#000000;
+	set appearance.hilightingGradient=false;
+	set appearance.selectionColour=#2d3680;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName="sansserif";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=0;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute="label";
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="Node ages";
+	set nodeLabels.fontName="sansserif";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=false;
+	set nodeLabels.significantDigits=4;
+	set nodeShape.colourAttribute="User selection";
+	set nodeShape.isShown=false;
+	set nodeShape.minSize=10.0;
+	set nodeShape.scaleType=Width;
+	set nodeShape.shapeType=Circle;
+	set nodeShape.size=4.0;
+	set nodeShape.sizeAttribute="Fixed";
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=8.0;
+	set scaleAxis.isShown=false;
+	set scaleAxis.lineWidth=1.0;
+	set scaleAxis.majorTicks=1.0;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=true;
+	set scaleBar.fontSize=10.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=1.0;
+	set scaleBar.scaleRange=0.0;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="sansserif";
+	set tipLabels.fontSize=20;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=false;
+	set trees.orderType="increasing";
+	set trees.rooting=true;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+

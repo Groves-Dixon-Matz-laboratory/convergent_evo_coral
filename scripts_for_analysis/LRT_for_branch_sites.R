@@ -93,7 +93,7 @@ out.name = paste(paste("results/branch_sites/finalVertical/bs_lrt", foreground, 
 write.table(rdat, file=out.name, row.names = F, quote=F, sep = "\t")
 
 
-#DOUBLE-CHECK THAT RESULTS MATCH WITH DESCRIPTION IN PAML MANUAL:
+#----- DOUBLE-CHECK THAT RESULTS MATCH WITH DESCRIPTION IN PAML MANUAL:
 
 #from page 31 on the PAML manual:
 #"Suppose your 2 delta likelihood = 2.71, you will get 0.10 from chi2, then the p value for the mixture is 0.1/2 = 5%
@@ -112,32 +112,6 @@ p.values = pchisq(G, 1, ncp = 0, lower.tail = F)
 p.values #gives 0.05
 
 #so by not dividing by 2 we are following the recommendation
-
-
-
-#--- old stuff below ---#
-
-
-#export the data for GO and KOGG enrichment tests using MWU-tests
-out2 = data.frame(rdat$contig, -log(rdat$p.values, 10))
-colnames(out2) = c('gene', 'logp')
-head(out2)
-nrow(out2)
-#write out for GO
-o2.name = paste(paste("gomwu", foreground, sep="/"), "bs_lrt_goInput.csv", sep="_")
-write.table(out2, o2.name, quote = F, row.names = F, sep = ",")
-#write out for Fisher GO
-ps = rdat$p.values
-x = ps < 0.05
-ps[x==TRUE]<-1
-ps[x==FALSE]<-0
-out3 = data.frame(rdat$contig, ps)
-colnames(out3) = c('isogroup', 'sig')
-o3.name = paste(paste("gomwu", foreground, sep="/"), "bs_lrt_Fisher_goInput.csv", sep="_")
-write.table(out3, o3.name, quote = F, row.names = F, sep = ",")
-
-#write out for KOGG
-write.table(out2, 'branch_site_LRT_results_for_KOGGmwu.csv', quote = F, row.names = F, sep = ",")
 
 
 

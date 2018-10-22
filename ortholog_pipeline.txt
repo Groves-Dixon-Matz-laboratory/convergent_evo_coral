@@ -72,8 +72,6 @@ ls *longest.fa | wc -l
 
 
 
-
-
 ####################################
 ####### GETTING PROTEIN SEQS #######
 ####################################
@@ -153,7 +151,7 @@ done
 launcher_creator.py -n tdec2 -j tdec2 -q normal -N 1 -w 24 -a $allo -e $email -t 2:00:00
 
 #final results are .cds and .pro files
-#these are saved here:
+#these are saved here (checked 9-24-18):
 /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/
 
 
@@ -163,9 +161,9 @@ launcher_creator.py -n tdec2 -j tdec2 -q normal -N 1 -w 24 -a $allo -e $email -t
 #####################################
 
 #FIRST ASSEMBLE THE PROTEIN SEQUENCES
-ls /work/02260/grovesd/lonestar/anthozoan_transcriptomes/PRO_files_8-28-17/*.fas
-ls /work/02260/grovesd/lonestar/anthozoan_transcriptomes/PRO_files_8-28-17/*.fas | wc -l
-	#29 PRO files, including Adig-NCBI
+ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas .
+ln /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas | wc -l
+	#28 PRO files
 
 #the blasting takes a long time, so need to do it in pieces for paralellization
 #first use FastOrtho to build a compiled file for blasting:
@@ -221,7 +219,15 @@ sbatch doBlast.slurm
 #I think it's faster to thread by commands instead of letting blast do it.
 
 
-#filter the compiled blast output for alignment lengths
+#FILTER THE COMPILED BLAST RESULTS BASED ON LENGTH
+
+#first get the lengths of each sequence from the blast input files
+for file in *.pep.fas
+do echo "fasta_sequence_characters.py -fa $file > ${file/_longest.fa.transdecoder.pep.fas/}_lengths.tsv &"
+done
+cat *lengths.tsv > all_lengths.txt
+
+
 #note, the --pmatch_cutoff argument in FastOrtho seems like it should do this, but didn't work for me
 filter_blast_for_orthos.py -i compiled_blast_output.out -l all_lengths.txt -c 0.75 -o reducedCompiled.out
 
@@ -285,19 +291,22 @@ sbatch runFastOrtho.slurm
 #####################################
 
 #FIRST OUTPUT THE PROTEIN SEQUENCES
+mkdir output_seqs1
+cd output_seqs1
+cp /corral-repl/utexas/tagmap/dixon_backups/carly_evo/ortholog_tables/run4.end .
 ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas .
 ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/nucleotide/*.fas .
 output_seqs_step1.py -orthos run4.end -prot *pep.fas -cut 7
 
-		 total orthogroups found in 106300
+		total orthogroups found in 106300
 		85737 groups had total taxa below 7 and were skipped
 		20563 total protein groups written to Orthologs_5_20/protein_sequences
 			 
-
+#outputs the sequences into a directory labeled by the data
 
 
 # ALIGN THEM AND BUILD GENE TREES
-cd Orthologs_5_20/protein_sequences/
+cd Orthologs_DATE_/protein_sequences/
 >doAln
 for file in *.fasta
 do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln && FastTree ${file/.fasta/}.aln > ${file/.fasta/}.newick" >> doAln
@@ -308,10 +317,14 @@ sbatch doAln.slurm
 
 
 #THEN PRUNE TREES TO GET SINGLE-COPY ORTHOLOGS
-paraPrune.py -trees *.newick -l all_lengths.txt
+paraPrune.py -trees *.newick -l all_lengths.txt -subsets True
 
 #output is singleCopyOrthos.txt
-#results summary:
+#results summary: (double-checked these on 9-25-18 in replication_run_9-24-18/)
+		Running paraPrune.py...
+
+		Will save subsets of trees at each step.
+
 		Reading in trees...
 			0 tree files were empty, suggest checking these:
 			20563 total trees for analysis
@@ -320,25 +333,50 @@ paraPrune.py -trees *.newick -l all_lengths.txt
 			20563 total trees checked for paralogs
 			9794 trees were single copy
 			10769 got paralogs
+			Writing out 9794 initally single copy trees to subdirectory A_init_single_copy_trees...
+			Writing out 10769 initally with paralogs trees to subdirectory A_init_paralog_trees...
 
 		Looking for single-species clades...
-			12159 single-species clades were collapsed into single sequence
+			12264 single-species clades were collapsed into single sequence
 
 		Gathering additional single copy trees after collapsing single-species nodes...
 			10769 total trees checked for paralogs
-			2982 trees were single copy
-			7787 got paralogs
-			12776 total single copy orthogroups
+			3020 trees were single copy
+			7749 got paralogs
+			12814 total single copy orthogroups
+			Writing out 3020 single-copy post pruning trees to subdirectory B_post_prune_single_copy_trees...
+			Writing out 7749 with paralogs post pruning trees to subdirectory B_post_prune_paralog_trees...
 
 		Pruning away anemone species and Adig references...
-			11677 leafs from unimportant group pruned away
-			141 repeated species within resulting polytomies were pruned
+			11589 leafs from unimportant group pruned away
+			37 repeated species within resulting polytomies were pruned
 
 		Gathering additional single copy trees after pruning anemones and Adig reference...
-			7787 total trees checked for paralogs
-			316 trees were single copy
+			7749 total trees checked for paralogs
+			278 trees were single copy
 			7471 got paralogs
 			13092 total single copy orthogroups
+			Writing out 278 single-copy post pruning unimportant trees to subdirectory C_post_prune_unimp_single_copy_trees...
+			Writing out 7471 with paralogs post pruning trees to subdirectory C_post_prune_unimp_paralog_trees...
+
+		Single copy orthos saved as singleCopyOrthos.txt...
+
+		Done.
+
+
+#Note that paraPrune.py outputs trees for reference in direcotries:
+	A_init_single_copy_trees
+	A_init_paralog_trees
+	B_post_prune_single_copy_trees
+	B_post_prune_paralog_trees
+	C_post_prune_unimp_single_copy_trees
+	C_post_prune_unimp_paralog_trees
+
+#Spot checked at least five trees from each of these on 9-28-18 GD
+#then 5 more on 9-30-18 after fixing polytomy bug.
+
+
+
 
 
 ########################################
@@ -346,32 +384,32 @@ paraPrune.py -trees *.newick -l all_lengths.txt
 ########################################
 
 #GET EXTRA-HIGH QUALITY ORTHLOGS FOR BUILDING SPECIES TREE
+
+#paraPrune.py outputs a files called singleCopyOrthos.txt, which includes the
+#single copy orthologs after the pruning procedure.
+
+
 output_seqs_step2.py -orthos singleCopyOrthos.txt -prot *.pep.fas -nuc *.cds.fas -rcut 20 -odir treeOrthos
 
 #Results summary:
-		Writing out sequences to treeOrthos/protein_sequences...
 		13092 total orthologs considered
-		11895 failed representation cutoff of >=20 terminal taxa
-		1197 were written
+		11882 failed representation cutoff of >=20 terminal taxa
+		1210 were written
 		All orthologs accounted for.
 
 		Writing out sequences to treeOrthos/cds_sequences...
 		13092 total orthologs considered
-		11895 failed representation cutoff of >=20 terminal taxa
-		1197 were written
+		11882 failed representation cutoff of >=20 terminal taxa
+		1210 were written
 		All orthologs accounted for.
 
-#ALIGN THEM
-cd treeOrthos/protein_sequences
+#ALIGN AND REVERSE TRANSLATE
 >doAln
 for file in *.fasta
-do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln" >> doAln
+do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln && \
+pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output paml -nogap > ${file/.fasta/}.codon &" >> doAln
 done
 
-#RUN PAL2NAL
->reverseTrans; for aln in *.aln; do echo "pal2nal.pl $aln ../cds_sequences/${aln/.aln}.fasta -output paml -nogap > ${aln/.aln/}.codon" >> reverseTrans; done
-launcher_creator.py -n reverseTrans -j reverseTrans -q normal -t 0:10:00 -a $allo -N 1 -w 24
-sbatch reverseTrans.slurm
 
 
 #GET SPECIES LIST FROM CDS FILES
@@ -419,8 +457,6 @@ wget ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/goa_uniprot_all.gaf.gz
 gunzip goa_uniprot_all.gaf.gz
 
 
-
-
 #get the KO annotations from here: https://www.uniprot.org/uploadlists/
 cut -f 2 singleCopyAnnotations_longFormat.tsv > spIDs.txt
 
@@ -432,14 +468,9 @@ parse_kegg_module_htext.py -i kegg_modules.htext.keg -o kegg_to_ko.tsv
 #this gives a table of the kegg
 
 
-
-############### GETTING GO ANNOTATIONS
-
-#---------OLD BAD WAY:
-#gather the GO annotations for these
-#download the idmappings ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping/idmapping_selected.tab.gz
-gather_go_terms.py singleCopyAnnotations.tsv idmapping_selected.tab
-
+##############################################
+########### GETTING GO ANNOTATIONS ###########
+##############################################
 
 #---------NEW GOOD WAY:
 #download full set of GO annotations here: ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/
@@ -447,21 +478,20 @@ gather_go_terms.py singleCopyAnnotations.tsv idmapping_selected.tab
 gather_go_terms.py singleCopyAnnotations_long.tsv goa_uniprot_all.gaf singleCopyAnnotations_GO
 
 
-########################################
-
-
-
-
-#move file singleCopyAnnotations.tsv_GO.tsv to GO_MWU directory
-
+###---------OLD BAD WAY:
+###gather the GO annotations for these
+###download the idmappings ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping/idmapping_selected.tab.gz
+##gather_go_terms.py singleCopyAnnotations.tsv idmapping_selected.tab
 
 
 #####################################
 ######## GET CODON SEQUENCES ########
 #####################################
+#here repeat the steps done above for getting codon sequences to build the species tree
+#this time use relaxed representation cutoff to get larger number of orthologs
 
 #GET SINGLE-COPY ORTHOS WITH TREE COLLAPSING
-output_seqs_step2.py -orthos singleCopyOrthos.txt -prot *.pep.fas -nuc *.cds.fas -rcut 5 -odir orthologSet1
+output_seqs_step2.py -orthos singleCopyOrthos.txt -prot *.pep.fas -nuc *.cds.fas -rcut 5 -odir orthologSet2
 
 
 		Writing out sequences to orthologSet1/protein_sequences...
@@ -473,59 +503,83 @@ output_seqs_step2.py -orthos singleCopyOrthos.txt -prot *.pep.fas -nuc *.cds.fas
 
 
 #RUN MAFFT AND PAL2NAL
-cd orthologSet1/protein_sequences
+
+cd orthologSet2/protein_sequences
+
+#double-check counts
+ls *.fasta | wc -l
+	#13085
+
+
+#align proteins and reverse translate
 >doAln
 for file in *.fasta
 do echo "mafft --maxiterate 1000 --localpair $file > ${file/.fasta/}.aln && \
 pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output paml -nogap > ${file/.fasta/}.codon" >> doAln
 done
 
-launcher_creator.py -n doAln -j doAln -q normal -N 3 -w 24 -a $allo -t 01:00:00 -e $email
+launcher_creator.py -n doAln -j doAln -q normal -N 3 -w 24 -a $allo -t 03:00:00 -e $email
 sbatch doAln.slurm
 
+#runs in about 8 minutes with 72 cores
 
+
+#double-check counts
+ls *aln | wc -l
+ls *.codon | wc -l
+	#13085
 
 #ALSO GET FASTA CODON SEQUENCES FOR GENE TREES
 >geneTrees
 for file in *.fasta
-do echo "pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output fasta -nogap > ${file/.fasta/}_codon.fasta && /work/02260/grovesd/lonestar/raxml/standard-RAxML-master/raxmlHPC-PTHREADS-SSE3 -s ${file/.fasta/}_codon.fasta -n ${file/.fasta/} -m GTRGAMMA -f d -T 1 -p 12345" >> geneTrees
+do echo "pal2nal.pl ${file/.fasta/}.aln ../cds_sequences/${file} -output fasta -nogap > ${file/.fasta/}_codon.fasta && \
+/work/02260/grovesd/lonestar/raxml/standard-RAxML-master/raxmlHPC-PTHREADS-SSE3 -s ${file/.fasta/}_codon.fasta -n ${file/.fasta/} -m GTRGAMMA -f d -T 1 -p 12345" >> geneTrees
 done
 
 launcher_creator.py -n geneTrees -j geneTrees -q normal -N 3 -w 24 -a $allok -t 02:00:00 -e $email
-sbatch geneTrees
+sbatch geneTrees.slurm
+
+
 
 #NOW QUALITY CHECK THE GENE TREES BEFORE CONTINUING
 quality_check_trees.py -trees RAxML_bestTree.ORTHOMCL* -groups checkGroups.txt -orthos singleCopyOrthos.txt > treeQC_fullCheckGroups.log
 
 
-#Summary of results
+#Summary of results (checked to match previous on 10-1-18 GD)
 		Total tree checked = 13079
-		Total passing = 7526 (58.0%)
-		Total failed = 5553 (42.0%)
-		Total failed that could be rescued by pruning a single leaf = 3591 (65.0% of fails)
+		Total passing = 7528 (58.0%)
+		Total failed = 5551 (42.0%)
+		Total failed that could be rescued by pruning a single leaf = 3589 (65.0% of fails)
 		Total passing including rescues = 11117 (85.0%)
 
 		Revising ortholog calls...
 		1962 total trees failed completely
 		1962 orthologs from the failed tree group were removed
 		Of the orthlogs from the rescue group to be revised:
-		Total orthologs to revise = 3591
-		Total orthologs revised = 3591
-		Total taxa to remove = 4713
-		Total removed = 4713
-		Also removed 13752 anemone entries from rescued trees
+		Total orthologs to revise = 3589
+		Total orthologs revised = 3589
+		Total taxa to remove = 4711
+		Total removed = 4711
+		Also removed 13830 anemone entries from rescued trees
 			Nice, everything makes sense
 
 
 #this will output a revised set of orthologs, with bad taxa removed
+#the log file treeQC_fullCheckGroups.log, also shows how QC was performed
+#used this to spot check 20 trees on 10-1-18
+
 
 #OUTPUT FINAL SET OF ORTHOLOGS
+
 #these are single copy (checked and bolstered with paraPrune.py)
 #and also have been double-checked for monophyly of important clades quality_check_trees.py
-
+mkdir output_seqs3
+cd output_seqs3
+ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas .
+ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/nucleotide/*.fas .
 output_seqs_step2.py -orthos singleCopyOrthos_revised.txt -prot *.pep.fas -nuc *.cds.fas -rcut 5 -odir orthologSetFinal
 
-#results summary
+#results summary (checked these with new run on 10-1-18)
 		Writing out sequences to orthologSetFinal/protein_sequences...
 		11130 total orthologs considered
 		356 failed representation cutoff of >=5 terminal taxa
@@ -552,7 +606,7 @@ sbatch doAln.slurm
 #NOW RE-QUALITY CHECK TO MAKE SURE THINGS LOOK GOOD
 quality_check_trees.py -trees RAxML_bestTree.ORTHOMCL* -groups checkGroups.txt -orthos singleCopyOrthos_revised.txt > treeQC_RECHECK_CheckGroups.log
 
-#Results summary:
+#Results summary: (double-checked 10-1-18 GD)
 		Total tree checked = 10770
 		Total passing = 10252 (95.0%)
 		Total failed = 518 (5.0%)

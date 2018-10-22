@@ -1,0 +1,1155 @@
+pairs
+head(allEvList[['Galaxia-Porites']])
+lapply(allEvList, length)
+length(allEvList[['Galaxia-Porites']])
+head(overlap)
+#check if a site passes all conditions #
+cross_check_all = function(x){#
+	cpair=x['cp']#
+	gene = x['ortholog']#
+	geneSet = allEvList[[cpair]]#
+	return(gene %in% geneSet)#
+}
+head(allEvList[['Galaxia-Porites']])
+overlap$geneAll = apply(overlap, 1, function(x) cross_check_all)
+length(unique(overlap$ortholog[overlap$geneAll & overlap$cp=='Galaxia-Porites']))
+length(unique(overlap$ortholog[overlap$geneAll & overlap$cp=='Galaxia-Porites',]))
+head(overlap)
+overlap$geneAll = apply(overlap, 1, function(x) cross_check_all(x))
+head(allEvList[['Galaxia-Porites']])
+cross_check_all = function(x){#
+	cpair=x['cp']#
+	gene = x['ortholog']#
+	geneSet = allEvList[[cpair]]#
+	return(gene %in% geneSet)#
+}
+overlap$geneAll = apply(overlap, 1, function(x) cross_check_all(x))
+head(overlap)
+load(fileName)
+#counts of convergence events AND positive site (substitions)#
+ordered <- conv_filt %>%#
+	group_by(cp, conv_pass) %>%#
+	summarize(N=n()) %>%#
+	filter(conv_pass) %>%#
+	arrange(N)#
+conv_filt %>%#
+	filter(conv_pair=='VV') %>%#
+	filter(conv_pass) %>%#
+	mutate(posin = as.character(c1FlagSite + c2FlagSite)) %>%#
+	mutate(posin = if_else(posin=='0', 'none', posin)) %>% #
+	mutate(posin = if_else(posin=='1', 'one', posin)) %>% #
+	mutate(posin = if_else(posin=='2', 'both', posin)) %>% #
+	mutate(posin = factor(posin, levels=c('none', 'one', 'both'))) %>%#
+	rename(`Positive site in`=posin) %>%#
+	mutate(cp = factor(cp, levels=ordered$cp)) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, fill=`Positive site in`)) +#
+		labs(x='Convergence pair', y='Substitition count', title='Convergence and positive site') +#
+		coord_flip()#
+#---- COMPARE CO-OCCURANCE OF CONVERGENCE AND FLAGGING AMONG ALL TYPES BY SUBSTITION ----##
+#
+#plot frequencies for convergence events and overlap with flagged sites (substitutions)#
+conv_filt %>%#
+	filter(conv_pass) %>%#
+	mutate(`Positive site` = (c1FlagSite + c2FlagSite)>0 ) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, fill=`Positive site`)) +#
+		labs(x='Convergence pair', y='Convergence events', title='Convergence and positive site (substitions)') +#
+		coord_flip()#
+#
+#plot percentage of flagged sites among convergence events (substitutions)#
+pct <- conv_filt %>%#
+	filter(conv_pass) %>%#
+	mutate(`Positive site` = (c1FlagSite + c2FlagSite)>0 ) %>%#
+	group_by(cp, conv_pair, `Positive site`) %>%#
+	summarize(N=n()) %>% mutate(Percentage=N/sum(N)*100) %>%#
+	filter(`Positive site`==TRUE) #
+#
+#plot bars	#
+pct %>%#
+	rename(`Phenotype pair` = conv_pair) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=Percentage, fill=`Phenotype pair`), stat='identity') +#
+		labs(x='Convergence pair', y='Convergence events', title='Convergence and positive site (substitions)') +#
+		coord_flip()#
+#
+#plot boxplots#
+pct %>%#
+	rename(`Phenotype pair` = conv_pair) %>%#
+	ggplot() +#
+		geom_boxplot(aes(x=`Phenotype pair`, y=Percentage, fill=`Phenotype pair`)) +#
+		labs(x='Convergence pair', y='Percentage of convergence events also positive', title='Convergence and positive site (substitions)')#
+#
+#---- COMPARE CO-OCCURANCE OF CONVERGENCE AND FLAGGING AMONG ALL TYPES BY GENE ----##
+#
+#plot frequencies for genes with convergence events and flagged sites #
+conv_filt %>%#
+	filter(conv_pass) %>%#
+	mutate(`Positive site` = (c1FlagSite + c2FlagSite)>0  ) %>%#
+	group_by(cp, `Positive site`) %>%#
+	summarize(Ngenes=length(unique(ortholog))) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y= Ngenes, fill=`Positive site`), stat='identity') +#
+		labs(x='Convergence pair', y='Genes with convergence and positive sites', title='Convergence and positive site (genes)') +#
+		coord_flip()#
+#
+#plot percentages of convergent genes and convergent genes with flagged sites#
+conv_filt %>%#
+	filter(conv_pass) %>%#
+	mutate(`Positive site` = (c1FlagSite + c2FlagSite)>0 ) %>%#
+	group_by(cp, conv_pair, `Positive site`) %>%#
+	summarize(Ngene=length(unique(ortholog))) %>% mutate(pctBoth = Ngene / sum(Ngene)*100) %>%#
+	filter(`Positive site`==TRUE) %>%#
+	rename(`Phenotype pair`= conv_pair) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=pctBoth, fill=`Phenotype pair`), stat='identity') +#
+		labs(x='Convergence pair', y='Percentage of convergent genes', title='Genes with convergence and positive sites') +#
+		coord_flip()#
+#
+#set up percentages for boxplot (genes)#
+pct<-conv_filt %>%#
+	filter(conv_pass) %>%#
+	mutate(`Positive site` = (c1FlagSite + c2FlagSite)>0 ) %>%#
+	group_by(cp, conv_pair, `Positive site`) %>%#
+	summarize(Ngene=length(unique(ortholog))) %>% mutate(pctBoth = Ngene / sum(Ngene)*100) %>%#
+	filter(`Positive site`==TRUE) %>%#
+	rename(`Phenotype pair`= conv_pair)#
+#
+#plot boxplot (genes)#
+pct %>%#
+	ggplot() +#
+		geom_boxplot(aes(x=`Phenotype pair`, y=pctBoth, fill=`Phenotype pair`)) +#
+		labs(x='Phenotype pair', y='Percentage of convergent genes', title='Convergence and positive site (genes)')#
+#
+#stats on this#
+fit<-aov(pctBoth~`Phenotype pair`, data=pct)#
+summary(fit)
+AGGEDE SITES AND CONVERGENCE AND POSITIVE ######
+########################################################
+#
+#set up factor for overlaps of different data types#
+overlap <- conv_filt %>%#
+	mutate(positive = ( (c1PosGene & c1FlagSite) | (c2PosGene & c2FlagSite) )) %>% #
+	mutate(fullEv = positive & conv_pass) %>% #
+	mutate(allEv = 'not convergent or positive') %>% #
+	mutate(allEv = if_else(!positive & conv_pass, 'convergent', allEv)) %>%#
+	mutate(allEv = if_else(positive & !conv_pass, 'positive', allEv)) %>%#
+	mutate(allEv = if_else(fullEv, 'convergent and positive', allEv)) %>%#
+	mutate(allEv = factor(allEv, levels=c('not convergent or positive', 'convergent', 'positive', 'convergent and positive')))
+#PLOT FREQUENCY FOR VERTICALS ONLY#
+#
+#counts of convergence events AND positive site (substitions)#
+ordered <- conv_filt %>%#
+	filter(conv_pair=='VV') %>%#
+	group_by(cp) %>%#
+	summarize(N=n()) %>%#
+	arrange(N)#
+#
+#plot absolute for all overlapping substitions#
+overlap %>%#
+	filter(conv_pair=='VV') %>%#
+	rename(`Overlapping substitions:`= allEv) %>% #
+	mutate(cp = factor(cp, levels=ordered$cp)) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, fill=`Overlapping substitions:`)) +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among sites') +#
+		coord_flip()#
+#---- LOOK AT BREAKDOWN BY SUBSTITION ----##
+#
+#plot breakdown for all pairs for all overlapping subs#
+overlap %>%#
+	rename(`Overlapping substitions:`= allEv) %>% #
+	ggplot() +#
+		geom_bar(aes(x=cp, fill=`Overlapping substitions:`)) +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()#
+#plot breakdown for all pairs for all overlapping subs without 'nones'#
+overlap %>%#
+	filter(allEv!='not convergent or positive') %>%#
+	rename(`Overlapping substitions:`= allEv) %>% #
+	ggplot() +#
+		geom_bar(aes(x=cp, fill=`Overlapping substitions:`)) +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()#
+#plot percentage both convergent and positive#
+over_pct <- overlap %>%#
+	group_by(cp, conv_pair, allEv) %>%#
+	summarize(N=n()) %>% mutate(Percentage=N/sum(N)*100) %>%#
+	filter(allEv=='convergent and positive') %>%#
+	arrange(desc(conv_pair), Percentage) %>%#
+	data.frame() %>%#
+	mutate(cp=factor(cp, levels=cp)) %>%#
+	rename(`Phenotype pair` = conv_pair)#
+over_pct %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=Percentage, fill=`Phenotype pair`), stat='identity') +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()#
+#
+over_pct %>%#
+	ggplot() +#
+	geom_boxplot(aes(x=`Phenotype pair`, y=Percentage, fill=`Phenotype pair`))#
+#---- LOOK AT BREAKDOWN
+#make lists of genes for each pairing that have all three pieces of evidence#
+gather_allEv_genes = function(x){#
+	csub <- overlap %>%#
+		filter(cp==x & allEv=="convergent and positive")#
+	return(unique(csub$ortholog))#
+}
+pairs = unique(overlap$cp)#
+allEvList = lapply(pairs, function(x) gather_allEv_genes(x))#
+names(allEvList) = pairs#
+head(allEvList[['Galaxia-Porites']])#
+length(allEvList[['Galaxia-Porites']])
+geneAll = apply(overlap, 1, function(x) cross_check_all(x))
+head(geneAll)
+overlap$geneAll = apply(overlap, 1, function(x) cross_check_all(x))
+length(unique(overlap$ortholog[overlap$geneAll & overlap$cp=='Galaxia-Porites']))
+head(allEvList[['Galaxia-Porites']])
+length(allEvList[['Galaxia-Porites']])
+#plot breakdown for all pairs for all overlapping subs by gene#
+overlap %>%#
+	rename(`Genes:`= allEv) %>% #
+	group_by(cp, conv_pair, geneAll) %>%#
+	mutate(N=length(unique(ortholog))) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=conv_pair, fill=`Genes:`)) +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()
+#plot breakdown for all pairs for all overlapping subs by gene#
+overlap %>%#
+	rename(`Convergent and positive`= geneAll) %>% #
+	group_by(cp, conv_pair, geneAll) %>%#
+	mutate(N=length(unique(ortholog))) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=conv_pair, fill=`Convergent and positive`)) +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()
+head(overlap)
+#plot breakdown for all pairs for all overlapping subs by gene#
+overlap %>%#
+	rename(`Convergent and positive`= geneAll) %>% #
+	group_by(cp, conv_pair, `Convergent and positive`) %>%#
+	mutate(N=length(unique(ortholog))) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=conv_pair, fill=`Convergent and positive`)) +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()
+#plot breakdown for all pairs for all overlapping subs by gene#
+overlap %>%#
+	rename(`Convergent and positive`= geneAll) %>% #
+	group_by(cp, conv_pair, `Convergent and positive`) %>%#
+	mutate(N=length(unique(ortholog)))
+head(overlap)
+overlap %>%#
+	rename(`Convergent and positive`= geneAll) %>% #
+	group_by(cp, conv_pair, `Convergent and positive`) %>%#
+	mutate(N=length(unique(ortholog)))
+overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	mutate(N=length(unique(ortholog)))
+head(overlap)
+levels(geneAll)
+unique(overlap$geneAll)
+overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	mutate(N=length(unique(ortholog)))
+overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog)))
+#plot breakdown for all pairs for all overlapping subs by gene#
+overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog))) %>%#
+	rename(`Convergent and positive`=geneAll) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=N, fill=`Convergent and positive`)) +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()
+#plot breakdown for all pairs for all overlapping subs by gene#
+overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog))) %>%#
+	rename(`Convergent and positive`=geneAll) %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=N, fill=`Convergent and positive`), stat='identity') +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()
+over_pct <- overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog)))
+over_pct
+over_pct <- overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog))) %>%#
+	mutate(Percentage=N/sum(N)) %>%#
+	arrange(desc(conv_pair), Percentage) %>%#
+	data.frame() %>%#
+	mutate(cp=factor(cp, levels=cp)) %>%#
+	rename(`Phenotype pair` = conv_pair)
+over_pct <- overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog))) %>%#
+	mutate(Percentage=N/sum(N)) %>%#
+	arrange(desc(conv_pair), Percentage) %>%#
+	data.frame()
+over_pct
+#plot percentage both convergent and positive#
+over_pct <- overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog))) %>%#
+	mutate(Percentage=N/sum(N)) %>%#
+	filter(geneAll) %>%#
+	arrange(desc(conv_pair), Percentage) %>%#
+	data.frame() %>%#
+	mutate(cp=factor(cp, levels=cp)) %>%#
+	rename(`Phenotype pair` = conv_pair)
+over_pct
+overall_pct <- overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog))) %>%#
+	mutate(Percentage=N/sum(N)) %>%#
+	filter(geneAll) %>%#
+	arrange(desc(conv_pair), Percentage) %>%#
+	data.frame() %>%#
+	mutate(cp=factor(cp, levels=cp)) %>%#
+	rename(`Phenotype pair` = conv_pair)
+overall_pct %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=Percentage, fill=`Phenotype pair`), stat='identity') +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()
+#plot percentage both convergent and positive#
+overall_pct <- overlap %>%#
+	group_by(cp, conv_pair, geneAll) %>%#
+	summarize(N=length(unique(ortholog))) %>%#
+	mutate(Percentage=N/sum(N)*100) %>%#
+	filter(geneAll) %>%#
+	arrange(desc(conv_pair), Percentage) %>%#
+	data.frame() %>%#
+	mutate(cp=factor(cp, levels=cp)) %>%#
+	rename(`Phenotype pair` = conv_pair)#
+overall_pct %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=Percentage, fill=`Phenotype pair`), stat='identity') +#
+		labs(x='Convergence pair', y='Overlapping substitions', title='Convergence & positive selection among overlapping substitions') +#
+		coord_flip()
+overall_pct %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=Percentage, fill=`Phenotype pair`), stat='identity') +#
+		labs(x='Convergence pair', y='Percentage of tested genes', title='Genes with convergence & positive selection') +#
+		coord_flip()
+overall_pct %>%#
+	ggplot() +#
+	geom_boxplot(aes(x=`Phenotype pair`, y=Percentage, fill=`Phenotype pair`))
+overall_pct
+?t.test
+vvhh <- overall_pct %>%#
+	filter(`Phenotype pair` != 'VH')
+vvhh
+t.test(Percentage~pair, data=vvhh)
+vv=overall_pct[overall_pct[,2]=='VV']
+vv=overall_pct[overall_pct[,2]=='VV', 'Percentage']
+vv
+hh=overall_pct[overall_pct[,2]=='HH', 'Percentage']
+t.test(vv, hh)
+t.test(vv, hh, alternative='greater')
+#plot #
+overall_pct %>%#
+	ggplot() +#
+		geom_bar(aes(x=cp, y=Percentage, fill=`Phenotype pair`), stat='identity') +#
+		labs(x='Convergence pair', y='Percentage of tested genes', title='Genes with convergence & positive selection') +#
+		coord_flip()
+head(overlap)
+#run fisher test#
+overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(N=n())
+overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog)))
+overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	mutate(tot=sum(N))
+#run fisher test#
+overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	mutate(tot=sum(Ngenes))
+length(all_target_genes)
+length(all_anti_genes)
+length(all_anti_genes)
+overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	filter(geneAll)
+length(all_target_genes)
+allCounts <- overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	filter(geneAll)
+allCounts
+at
+at = length(all_target_genes)#
+aa = length(all_anti_genes)#
+ata = length(all_ta_genes)
+allCounts$possible = allCounts$Ngenes - c(at, ata, aa)
+allCounts
+allCounts$possible = c(at, ata, aa) - allCounts$Ngenes
+allCounts$not = c(at, ata, aa) - allCounts$Ngenes
+allCounts <- overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	filter(geneAll)#
+allCounts$not = c(at, ata, aa) - allCounts$Ngenes
+?chisq.test
+?gather
+allCounts
+allCounts <- gather(key='count', value=c('Ngenes', 'not'))
+allCounts <- allCounts %>%#
+	gather(key='count', value=c('Ngenes', 'not'))
+allCounts
+# Tidyr#
+library(tidyverse)#
+library(cowplot)#
+library(readxl)#
+#
+## New data set: #
+succession_data = read_csv("data/wide_succession_data.csv")#
+glimpse(succession_data)#
+View(succession_data)#
+#
+## These data were collected by my Field Ecology students#
+## Four Teams surveyed the diversity and density of #
+## three habitat types at Brackenridge Field Lab#
+## In each Habitat type, each team selected three points (Sample),#
+## and recorded 4 canopy (C) and 4 understory (U) trees at each point#
+## The distance to each tree, the DBH of the canopy trees, #
+## and the species of tree was also recorded#
+#
+## A few notes about the dataset:#
+  ## Habitat type and canopy/understory type are combined into the "Type" column#
+  ## Species presence is indicated by a "1" in the appropriate column#
+  ## A specific sample point is identified by the combination of #
+  ## Habitat, Sample, and Team#
+#
+# First, we should convert all of the presence/absense species #
+  # columns into a single column#
+# This is done with the gather() command
+succession_data
+# Tidyr#
+library(tidyverse)#
+library(cowplot)#
+library(readxl)#
+#
+## New data set: #
+succession_data = read_csv("data/wide_succession_data.csv")#
+glimpse(succession_data)#
+View(succession_data)
+allCounts
+allCounts <- overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	filter(geneAll)
+allCounts
+allCounts$not = c(at, ata, aa) - allCounts$Ngenes#
+allCounts <- allCounts %>%#
+	gather(key='all', value='count', Ngenes, not)
+allCounts
+? chisq.test
+chisq.test(x=allCounts$all, y=allCounts$count)
+allCounts$all
+allCounts
+t=t(allCounts)
+t
+allCounts
+allCounts <- allCounts %>%#
+	gather(key='all', value='count', Ngenes, not) %>%#
+	filter(conv_pair !='VH')
+allCounts
+allCounts <- allCounts %>%#
+	gather(key='all', value='count', Ngenes, not)
+allCounts
+allCounts <- overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	filter(geneAll)#
+allCounts$not = c(at, ata, aa) - allCounts$Ngenes#
+#
+allCounts <- allCounts %>%#
+	gather(key='all', value='count', Ngenes, not) %>%#
+	filter(conv_pair !='VH')
+allCounts
+t=t(allCounts)
+t
+allCounts
+allCounts <- overlap %>% #
+	group_by(conv_pair, geneAll) %>%#
+	summarize(Ngenes = length(unique(ortholog))) %>%#
+	filter(geneAll)#
+allCounts$not = c(at, ata, aa) - allCounts$Ngenes#
+#
+allCounts <- allCounts %>%#
+	gather(key='all', value='count', Ngenes, not) %>%#
+	filter(conv_pair !='VH') %>%#
+	arrange(conv_pair)
+allCounts
+t=rbind(allCounts$conv_pair, allCounts$count)
+t
+t=cbind(allCounts$conv_pair, allCounts$count)
+t
+head(conv_filt)
+pc_genes <-conv_filt %>% #
+	filter(conv_pair=='VV') %>%#
+	filter(c1PosGene | c2PosGene) %>%#
+	select(ortholog)
+length(all_bs_target_genes)
+length(all_target_genes)
+not_pc_genes = all_target_genes[!all_target_genes %in% pc_genes]
+pc_score = rep(1, length(pc_genes))
+length(pc_score)
+?rep
+pc_score = rep.int(1, length(pc_genes))
+pc_score
+length(pc_genes)
+pc_score = rep.int(1, length(pc_genes$ortholog))
+pc_score = rep(1, length(pc_genes$ortholog))
+pc_score
+#positive and convergent#
+pc_genes <-conv_filt %>% #
+	filter(conv_pair=='VV') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+not_pc_genes = all_target_genes[!all_target_genes %in% pc_genes]
+pc_score = rep(1, length(pc_genes$ortholog))
+length(pc_genes$ortholog)
+not_score = rep(0, length(not_pc_genes))
+length(not_pc_genes)
+length(all_target_genes)
+pc_genes = pc$ortholog
+pc <-conv_filt %>% #
+	filter(conv_pair=='VV') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = pc$ortholog
+not_pc_genes = all_target_genes[!all_target_genes %in% pc_genes]
+length(pc_genes)
+length(not_pc_genes)
+not_score = rep(0, length(not_pc_genes))
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))
+head(goin)
+sum(goin$score)
+table(goin$score)
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlap.csv', sep='/')
+outName
+write.csv(goin, file=outName, col.names=TRUE, quote=F, row.names=F)
+write.csv(goin, file=outName, colnames=TRUE, quote=F, row.names=F)
+write.csv(goin, file=outName, quote=F, row.names=F)
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+input="GOMWU_input3_bs_convergence_overlap.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="MF"     # either MF, or BP, or CC#
+source("gomwu.functions.R")
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not conti
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manua
+goDivision="CC"     # either MF, or BP, or CC
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if th
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are t
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=300,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#
+#Use GO_MWU_viewResults.R
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=100,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.#
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)
+goDivision="BP"     # either MF, or BP, or CC
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)
+#positive and convergent#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = pc$ortholog#
+not_pc_genes = all_target_genes[!all_target_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+outName
+setwd("~/gitreps/convergent_evo_coral")
+setwd("~/gitreps/convergent_evo_coral")
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')
+write.csv(goin, file=outName, quote=F, row.names=F)
+goDivision="CC"     # either MF, or BP, or CC
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the prin
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
+input
+#positive and convergent#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)
+pc
+head(goin)
+table(goin$score)
+not_pc_genes = all_target_genes[!all_anti_genes %in% pc_genes]
+#positive and convergent#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = pc$ortholog#
+not_pc_genes = all_target_genes[!all_anti_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)#
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+setwd("~/gitreps/convergent_evo_coral")
+#positive and convergent#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = pc$ortholog#
+not_pc_genes = all_target_genes[!all_anti_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)#
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not c
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
+table(goin$score)
+#positive and convergent#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = pc$ortholog
+not_pc_genes = all_target_genes[!all_target_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)
+setwd("~/gitreps/convergent_evo_coral")
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not co
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.
+length(all_ta_genes)
+setwd("~/gitreps/convergent_evo_coral")
+#positive and convergent#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = pc$ortholog#
+not_pc_genes = all_ta_genes[!all_ta_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)#
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.
+length(all_anti_genes)
+length(all_ta_genes)
+length(all_target_genes)
+#positive and convergent#
+setwd("~/gitreps/convergent_evo_coral")#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = pc$ortholog#
+not_pc_genes = all_anti_genes[!all_anti_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)#
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continu
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are t
+head(overlap)
+#positive and convergent#
+setwd("~/gitreps/convergent_evo_coral")#
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass & (c1PosGene | c2PosGene) ) %>%#
+	select(ortholog)#
+pc_genes = unique(pc$ortholog)#
+not_pc_genes = all_anti_genes[!all_anti_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)#
+outName = paste(results.path, 'GO_MWU/GOMWU_input3_bs_convergence_overlapHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not cont
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=ABS.VALUE,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#
+#Use GO_MWU_viewRe
+#positive and convergent#
+setwd("~/gitreps/convergent_evo_coral")#
+pc <-overlap %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(geneAll) %>%#
+	select(ortholog)#
+pc_genes = unique(pc$ortholog)#
+not_pc_genes = all_ta_genes[! all_ta_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)
+#positive and convergent#
+setwd("~/gitreps/convergent_evo_coral")#
+pc <-overlap %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(geneAll) %>%#
+	select(ortholog)#
+pc_genes = unique(pc$ortholog)#
+not_pc_genes = all_ta_genes[! all_ta_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)#
+outName = paste(results.path, 'GO_MWU/GOMWU_input4_finalHH.csv', sep='/')#
+write.csv(goin, file=outName, quote=F, row.names=F)
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+input="GOMWU_input4_finalHH.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.
+#positive and convergent#
+setwd("~/gitreps/convergent_evo_coral")#
+pc <-overlap %>% #
+	filter(conv_pair=='VV') %>%#
+	filter(geneAll) %>%#
+	select(ortholog)#
+pc_genes = unique(pc$ortholog)#
+not_pc_genes = all_ta_genes[! all_ta_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)
+outName = paste(results.path, 'GO_MWU/VV_GOMWU_input4_final.csv', sep='/')
+write.csv(goin, file=outName, quote=F, row.names=F)
+input="VV_GOMWU_input4_final.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the printout shows that no GO terms pass 10% FDR.
+input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
+pc <-conv_filt %>% #
+	filter(conv_pair=='HH') %>%#
+	filter(conv_pass) %>%#
+	select(ortholog)#
+pc_genes = unique(pc$ortholog)#
+not_pc_genes = all_anti_genes[!all_anti_genes %in% pc_genes]#
+pc_score = rep(1, length(pc_genes))#
+not_score = rep(0, length(not_pc_genes))#
+goin = data.frame('gene' = c(pc_genes, not_pc_genes), 'score' = c(pc_score, not_score))#
+head(goin)#
+table(goin$score)
+input="VV_GOMWU_input4_final.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
+input="HH_GOMWU_input4_final.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.#
+gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already#
+	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes#
+	smallest=200,   # a GO category should contain at least this many genes to be considered#
+	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.#
+	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. #
+#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)#
+#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module #
+)#
+# do not continue if the
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=30)
