@@ -6,12 +6,21 @@
 setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")
 
 #select input file
-input="GOMWU_input1_branchSites.csv";  #significance for branch sites for all vertical minus all antivertical
-input="GOMWU_input2_convergence_overlap.csv";
-input="GOMWU_input3_bs_convergence_overlap.csv";
-input="GOMWU_input4_final.csv";   #significance for branch sites for all vertical minus all antivertical
+#vertical
+input='GOMWU_input1_branchSitesVertical.csv'
+input='GOMWU_input2_covergenceVV.csv'
+input='GOMWU_input3_bs_convergence_overlapVV.csv'
+input='GOMWU_input4_flagged_convergence_overlapVV.csv'
 
-goAnnotations="singleCopyAnnotations.tsv_GO.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.
+#horizontal
+input='GOMWU_input1_branchSitesHorizontal.csv'
+input='GOMWU_input2_covergenceHH.csv'
+input='GOMWU_input3_bs_convergence_overlapHH.csv'
+input='GOMWU_input4_flagged_convergence_overlapHH.csv'
+
+
+
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.
 goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml
 goDivision="MF"     # either MF, or BP, or CC
 source("gomwu.functions.R")
@@ -36,10 +45,10 @@ gomwuPlot(input,goAnnotations,goDivision,
 resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")
 res=read.table(resName, header = T)
 res=res[order(res$pval),]
-head(res, n=30)
+head(res, n=20)
 
 #OUTPUT TOP 20 REGARDLESS OF FDR
-tabOut = paste('results', sub(".csv", "_top20.tsv", resName), sep="/")
+tabOut = paste('..', sub(".csv", "_top20.tsv", resName), sep="/")
 tabOut
 write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")
 

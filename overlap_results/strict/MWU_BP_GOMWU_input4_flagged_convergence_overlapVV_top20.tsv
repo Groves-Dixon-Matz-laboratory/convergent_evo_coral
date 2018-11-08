@@ -1,0 +1,21 @@
+delta.rank	pval	level	nseqs	term	name	p.adj
+1	0	1	3	447	GO:0000122	negative regulation of transcription from RNA polymerase II promoter	1
+2	0	1	2	260	GO:0000226	microtubule cytoskeleton organization	1
+3	0	1	2	281	GO:0000904;GO:0000902	cell morphogenesis	1
+4	0	1	3	217	GO:0001101	response to acid	1
+5	0	1	2	224	GO:0001525	angiogenesis	1
+6	0	1	2	268	GO:0001558	regulation of cell growth	1
+7	0	1	2	384	GO:0001775;GO:0045321	cell activation	1
+8	0	1	2	281	GO:0001817	regulation of cytokine production	1
+9	0	1	4	717	GO:0001932	regulation of protein phosphorylation	1
+10	0	1	3	220	GO:0001933	negative regulation of protein phosphorylation	1
+11	0	1	2	468	GO:0001934	positive regulation of protein phosphorylation	1
+12	0	1	3	374	GO:0002009;GO:0048729	tissue morphogenesis	1
+13	0	1	2	304	GO:0002252	immune effector process	1
+14	0	1	1	764	GO:0002376	immune system process	1
+15	0	1	3	633	GO:0002682	regulation of immune system process	1
+16	0	1	2	324	GO:0002684	positive regulation of immune system process	1
+17	0	1	2	237	GO:0002694;GO:0050865	regulation of cell activation	1
+18	0	1	2	283	GO:0003002	regionalization	1
+19	0	1	2	433	GO:0003006	developmental process involved in reproduction	1
+20	0	1	3	794	GO:0003008	system process	1

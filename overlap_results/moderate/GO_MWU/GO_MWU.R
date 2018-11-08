@@ -18,34 +18,69 @@
 
 
 # Edit these to match your data file names: 
-setwd("~/gitreps/convergent_evo_coral/overlap_results/moderateV2/GO_MWU")
+setwd("~/gitreps/convergent_evo_coral/overlap_results/moderate/GO_MWU")
 
-#select input file
-input="GOMWU_input1_branchSitesVertical.csv"; ABS.VALUE=0.99  #significance for branch sites for all vertical minus all antivertical
-input="GOMWU_input2_convergence_overlap.csv";ABS.VALUE=0.99
-input="GOMWU_input3_bs_convergence_overlap.csv";ABS.VALUE=0.99
-input="GOMWU_input3_bs_convergence_overlapHH.csv";ABS.VALUE=0.99
+# #select input file
+# input="GOMWU_input1_branchSitesVertical.csv"
+# input="GOMWU_input2_convergence_overlap.csv"
+# input="GOMWU_input3_bs_convergence_overlap.csv"
+# input="GOMWU_input3_bs_convergence_overlapHH.csv"
 
 
 # goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)
 goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf
-
 goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml
-goDivision="CC"     # either MF, or BP, or CC
+# goDivision="CC"     # either MF, or BP, or CC
 source("gomwu.functions.R")
 
 
-# Calculating stats. It might take ~3 min for MF and BP. Do not rerun it if you just want to replot the data with different cutoffs, go straight to gomwuPlot. If you change any of the numeric values below, delete the files that were generated in previos runs first.
-gomwuStats(input, goDatabase, goAnnotations, goDivision,
-	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already
-	largest=0.1,  # a GO category will not be considered if it contains more than this fraction of the total number of genes
-	smallest=200,   # a GO category should contain at least this many genes to be considered
-	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.
-	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. 
-#	Module=TRUE,Alternative="g" # un-remark this if you are analyzing a SIGNED WGCNA module (values: 0 for not in module genes, kME for in-module genes). In the call to gomwuPlot below, specify absValue=0.001 (count number of "good genes" that fall into the module)
-#	Module=TRUE # un-remark this if you are analyzing an UNSIGNED WGCNA module 
-)
-# do not continue if the printout shows that no GO terms pass 10% FDR.
+#SET UP SETS OF VARS FOR LOOPED RUNS
+ABS.VALUE=0.99
+
+
+inputs = c('GOMWU_input4_flagged_convergence_overlapVV.csv', 'GOMWU_input4_flagged_convergence_overlapHH.csv')
+
+inputs = c(
+	'GOMWU_input1_branchSitesVertical.csv',
+	'GOMWU_input2_covergenceVV.csv',
+	'GOMWU_input3_bs_convergence_overlapVV.csv',
+	'GOMWU_input1_branchSitesHorizontal.csv',
+	'GOMWU_input2_covergenceHH.csv',
+	'GOMWU_input3_bs_convergence_overlapHH.csv',
+	'GOMWU_input4_flagged_convergence_overlapVV.csv',
+	'GOMWU_input4_flagged_convergence_overlapHH.csv'
+	)
+
+
+goDivisions = c('CC', 'MF', 'BP')
+goDivisions=c('CC')
+
+
+#Loop through inputs and GO divisions running GO_MWU for all
+for (input in inputs){
+	for (goDivision in goDivisions){
+		print('----------------')
+		print(paste(paste('RUNNING FOR ', input), goDivision))
+		print('----------------')
+
+		#Run GO MWU
+		gomwuStats(input, goDatabase, goAnnotations, goDivision,
+			perlPath="perl", 
+			largest=0.1,  
+			smallest=200,   
+			clusterCutHeight=0.25, 
+			Alternative="g"
+		)
+		
+		#Save top 20
+		resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")
+		res=read.table(resName, header = T)
+		res=res[order(res$pval),]
+		tabOut = paste('..', sub(".csv", "_top20.tsv", resName), sep="/")
+		tabOut
+		write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")
+	}
+}
 
 
 # Plotting results

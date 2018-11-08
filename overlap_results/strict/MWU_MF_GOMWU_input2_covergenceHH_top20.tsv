@@ -1,0 +1,21 @@
+delta.rank	pval	level	nseqs	term	name	p.adj
+9	0	0.0468228763590137	6	353	GO:0004842;GO:0019787;GO:0016881;GO:0016879	ligase activity, forming carbon-nitrogen bonds	1
+51	0	0.0637480323053454	2	202	GO:0048037	cofactor binding	1
+31	0	0.0879374521256168	2	415	GO:0016874	ligase activity	1
+26	0	0.115185588314851	2	249	GO:0015631	tubulin binding	1
+20	0	0.131257305520279	3	680	GO:0008092	cytoskeletal protein binding	1
+14	0	0.191335080415379	1	410	GO:0005198	structural molecule activity	1
+18	0	0.222165703316948	3	323	GO:0005543	phospholipid binding	1
+42	0	0.223564672151811	2	218	GO:0035091	phosphatidylinositol binding	1
+11	0	0.231529162825031	4	222	GO:0004930	G-protein coupled receptor activity	1
+39	0	0.263894467024279	2	238	GO:0030695;GO:0060589	nucleoside-triphosphatase regulator activity	1
+38	0	0.282754637580777	1	593	GO:0030234	enzyme regulator activity	1
+34	0	0.327537901036173	2	505	GO:0017111;GO:0016462;GO:0016818;GO:0016817	pyrophosphatase activity	1
+36	0	0.339712752670551	3	513	GO:0019904	protein domain specific binding	1
+52	0	0.342579444935693	3	276	GO:0050839	cell adhesion molecule binding	1
+19	0	0.447303823497278	2	327	GO:0008047	enzyme activator activity	1
+37	0	0.451535679919204	2	586	GO:0022892;GO:0005215	transporter activity	1
+35	0	0.466542609994765	3	466	GO:0019901;GO:0019900	kinase binding	1
+25	0	0.481701885849453	2	475	GO:0015075;GO:0022891;GO:0022857	transmembrane transporter activity	1
+23	0	0.491724880065278	2	481	GO:0008289	lipid binding	1
+13	0	0.495065734107466	3	747	GO:0005102	receptor binding	1

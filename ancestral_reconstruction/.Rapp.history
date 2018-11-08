@@ -1,0 +1,63 @@
+#prepareConvergenceInput.R#
+#This takes the large output file from parse_multi_rstV2.py#
+#It divides the file up into manageble pieces for different overlap sets#
+setwd("~/gitreps/convergent_evo_coral/ancestral_reconstruction")#
+#
+#--- UPLOAD CONVERGENCE DATA ---##
+#read in the ancestral convergence results#
+dat = read.table("verticalAncestralRes.tsv", sep = "\t", header = T, stringsAsFactors=F, fill=T) #file generated using parse_multi_rstV2.py -- these comparisons included all species#
+# dat = read.table("ballancedVerticalAncestralRes.tsv", sep = "\t", header = T, stringsAsFactors=F, fill=T) #file generated using parse_multi_rstV2.py -- these are the 'ballanced' comparisons#
+head(dat)#
+anc.genes = unique(dat$ortholog)#
+#--- CALL SUBSTITUTION TYPES ---##
+#parallel, convergent, divergent, or none#
+a1=dat$b1Anc#
+a2=dat$b2Anc#
+n1=dat$b1New#
+n2=dat$b2New#
+same.a = a1==a2#
+same.n = n1==n2#
+#
+parallel = same.a & same.n#
+divergent = same.a & !same.n#
+convergent = !same.a & same.n#
+none = !same.a & !same.n#
+#
+nd = sum(divergent)#
+nc = sum(convergent)#
+np = sum(parallel)#
+nn = sum(none)#
+x=c(nc, nd, nn, np)#
+#all types accounted for?#
+sum(x) == nrow(dat)#
+type = rep("divergent", nrow(dat))#
+type[parallel]<-'parallel'#
+type[convergent]<-'convergent'#
+type[none]<-'none'#
+table(type)#
+#setup subdatasets #
+dat$sub.type = type#
+dat$conv = type == 'convergent'#
+dat$para = type == 'parallel'#
+dat$divergent = type == 'divergent'#
+dat$none = type == 'none'#
+dat$genConvergent = dat$conv | dat$para#
+dat$genNone = dat$divergent | dat$none#
+head(dat)#
+dat.backup = dat
+heaed(conv_dat)
+head(conv_dat)
+#------- SUBSET FOR OVERLAPPING SUBSTITUTIONS WITHIN FULL CLADE LINEAGES ----##
+#These have "All" in the branch names#
+#subset datat for only 'All' lineage subs#
+subAll = dat[grepl("All", dat$b1Name) & grepl("All", dat$b2Name),]#
+subAll = subAll[subAll$b1post > 0.5 & subAll$b2post > 0.5, ]  #this is a baseline filter, more stringency applied later will be added#
+dat = subAll#
+conv_dat = dat
+head(conv_dat)
+before = nrow(conv_dat)
+conv_dat = conv_dat[!grepl('_single_', conv_dat$b1Name) & !grepl('_single_', conv_dat$b2Name),]
+after = nrow(conv_dat)
+before - after
+(before - after) / before
+save(conv_dat, file="ancestral_recon_no_single_spp.Rdata")

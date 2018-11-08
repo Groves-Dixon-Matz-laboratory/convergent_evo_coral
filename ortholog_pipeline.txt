@@ -930,21 +930,34 @@ geneset.txt
 cd codon_sequences/
 
 #make a directory for the selection
-SELECTION="selection_moderate"
+SELECTION="semi_strict_flagged_and_convergence_passing"
 mkdir $SELECTION
+cp geneset.txt $SELECTION
+mkdir ${SELECTION}/all_vertical
+mkdir ${SELECTION}/montipora
+mkdir ${SELECTION}/galaxia
+mkdir ${SELECTION}/porites
+mkdir ${SELECTION}/pocilloporid
 
 
 #set path where rst files are
-ANC_REC_PATH=/scratch/02260/grovesd/carly_evo/fastOrthoFromTransdec/pro_files/run4_FINAL/orthologSetFinal/ancestral_recon
+ANC_REC_PATH=../ancestral_recon
 
 
 #get the ancestral reconstruction files for them
 >copySelectGenes
 while read g
 do echo "cp ${ANC_REC_PATH}/ancestral_results/${g}.rst ./${SELECTION}" >>copySelectGenes
-echo "cp ${ANC_REC_PATH}/${g}.cnt ./${SELECTION}/${g}_ANCESTRAL_RECON.cnt" >> copySelectedGenes
+echo "cp ${ANC_REC_PATH}/ancestral_results/${g}.rstrodTree.newick ./${SELECTION}" >>copySelectGenes
+echo "cp ${ANC_REC_PATH}/${g}.cnt ./${SELECTION}/${g}_ANCESTRAL_RECON.cnt" >> copySelectGenes
 echo "cp ../protein_sequences/${g}.aln ./${SELECTION}">>copySelectGenes
 echo "cp ${g}.codon ./${SELECTION}">>copySelectGenes
+echo "cp ../branch_sites_vertical/all_vertical/${g}_* ./${SELECTION}/all_vertical" >> copySelectGenes
+echo "cp ../branch_sites_vertical/montipora/${g}_* ./${SELECTION}/montipora" >> copySelectGenes
+echo "cp ../branch_sites_vertical/gachrelia/${g}_* ./${SELECTION}/galaxia" >> copySelectGenes
+echo "cp ../branch_sites_vertical/porites/${g}_* ./${SELECTION}/porites" >> copySelectGenes
+echo "cp ../branch_sites_vertical/pocillopora/${g}_* ./${SELECTION}/pocilloporid" >> copySelectGenes
+echo "cp ${g}.codon.tree ${SELECTION}" >> copySelectGenes
 done<geneset.txt
 
 sh copySelectGenes

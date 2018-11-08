@@ -1,0 +1,1120 @@
+ortho	swissProt	name	egn	db	description
+ORTHOMCL10005	Q9C0D7	ZC12C_HUMAN	ZC12C	HUMAN	zinc finger CCCH-type containing 12C [Source:HGNC Symbol;Acc:HGNC:29362]
+ORTHOMCL10070	Q96LL4	CH048_HUMAN	CH048	HUMAN	chromosome 8 open reading frame 48 [Source:HGNC Symbol;Acc:HGNC:26345]
+ORTHOMCL10127	Q01804	OTUD4_HUMAN	OTUD4	HUMAN	OTU deubiquitinase 4 [Source:HGNC Symbol;Acc:HGNC:24949]
+ORTHOMCL10170	A6NMZ7	CO6A6_HUMAN	CO6A6	HUMAN	collagen type VI alpha 6 chain [Source:HGNC Symbol;Acc:HGNC:27023]
+ORTHOMCL10206	Q9H4G4	GAPR1_HUMAN	GAPR1	HUMAN	GLI pathogenesis related 2 [Source:HGNC Symbol;Acc:HGNC:18007]
+ORTHOMCL10212	Q8WY21	SORC1_HUMAN	SORC1	HUMAN	sortilin related VPS10 domain containing receptor 1 [Source:HGNC Symbol;Acc:HGNC:16697]
+ORTHOMCL10227	P16591	FER_HUMAN	FER	HUMAN	FER tyrosine kinase [Source:HGNC Symbol;Acc:HGNC:3655]
+ORTHOMCL10277	Q86VQ0	LCA5_HUMAN	LCA5	HUMAN	LCA5, lebercilin [Source:HGNC Symbol;Acc:HGNC:31923]
+ORTHOMCL10302	Q9UDY8	MALT1_HUMAN	MALT1	HUMAN	MALT1 paracaspase [Source:HGNC Symbol;Acc:HGNC:6819]
+ORTHOMCL10306	Q5TFE4	NT5D1_HUMAN	NT5D1	HUMAN	5'-nucleotidase domain containing 1 [Source:HGNC Symbol;Acc:HGNC:21556]
+ORTHOMCL10346	Q9UHB6	LIMA1_HUMAN	LIMA1	HUMAN	LIM domain and actin binding 1 [Source:HGNC Symbol;Acc:HGNC:24636]
+ORTHOMCL10350	O00267	SPT5H_HUMAN	SPT5H	HUMAN	SPT5 homolog, DSIF elongation factor subunit [Source:HGNC Symbol;Acc:HGNC:11469]
+ORTHOMCL10382	Q13523	PRP4B_HUMAN	PRP4B	HUMAN	pre-mRNA processing factor 4B [Source:HGNC Symbol;Acc:HGNC:17346]
+ORTHOMCL10394	O60244	MED14_HUMAN	MED14	HUMAN	mediator complex subunit 14 [Source:HGNC Symbol;Acc:HGNC:2370]
+ORTHOMCL10447	Q9BV38	WDR18_HUMAN	WDR18	HUMAN	WD repeat domain 18 [Source:HGNC Symbol;Acc:HGNC:17956]
+ORTHOMCL10481	Q13490	BIRC2_HUMAN	BIRC2	HUMAN	baculoviral IAP repeat containing 2 [Source:HGNC Symbol;Acc:HGNC:590]
+ORTHOMCL10482	Q16629	SRSF7_HUMAN	SRSF7	HUMAN	serine and arginine rich splicing factor 7 [Source:HGNC Symbol;Acc:HGNC:10789]
+ORTHOMCL10487	Q14517	FAT1_HUMAN	FAT1	HUMAN	FAT atypical cadherin 1 [Source:HGNC Symbol;Acc:HGNC:3595]
+ORTHOMCL10496	Q8N5H7	SH2D3_HUMAN	SH2D3	HUMAN	SH2 domain containing 3C [Source:HGNC Symbol;Acc:HGNC:16884]
+ORTHOMCL10517	Q5VV67	PPRC1_HUMAN	PPRC1	HUMAN	peroxisome proliferator-activated receptor gamma, coactivator-related 1 [Source:HGNC Symbol;Acc:HGNC:30025]
+ORTHOMCL10530	P46013	KI67_HUMAN	KI67	HUMAN	marker of proliferation Ki-67 [Source:HGNC Symbol;Acc:HGNC:7107]
+ORTHOMCL10554	O15084	ANR28_HUMAN	ANR28	HUMAN	ankyrin repeat domain 28 [Source:HGNC Symbol;Acc:HGNC:29024]
+ORTHOMCL10561	Q58F21	BRDT_HUMAN	BRDT	HUMAN	bromodomain testis associated [Source:HGNC Symbol;Acc:HGNC:1105]
+ORTHOMCL10618	Q15022	SUZ12_HUMAN	SUZ12	HUMAN	SUZ12 polycomb repressive complex 2 subunit [Source:HGNC Symbol;Acc:HGNC:17101]
+ORTHOMCL10628	Q96EP0	RNF31_HUMAN	RNF31	HUMAN	ring finger protein 31 [Source:HGNC Symbol;Acc:HGNC:16031]
+ORTHOMCL10631	O94851	MICA2_HUMAN	MICA2	HUMAN	microtubule associated monooxygenase, calponin and LIM domain containing 2 [Source:HGNC Symbol;Acc:HGNC:24693]
+ORTHOMCL10737	Q9UBK8	MTRR_HUMAN	MTRR	HUMAN	5-methyltetrahydrofolate-homocysteine methyltransferase reductase [Source:HGNC Symbol;Acc:HGNC:7473]
+ORTHOMCL10777	Q9BXY5	CAYP2_HUMAN	CAYP2	HUMAN	calcyphosine 2 [Source:HGNC Symbol;Acc:HGNC:16471]
+ORTHOMCL10795	Q71F56	MD13L_HUMAN	MD13L	HUMAN	mediator complex subunit 13 like [Source:HGNC Symbol;Acc:HGNC:22962]
+ORTHOMCL10820	O94913	PCF11_HUMAN	PCF11	HUMAN	PCF11 cleavage and polyadenylation factor subunit [Source:HGNC Symbol;Acc:HGNC:30097]
+ORTHOMCL10829	P10244	MYBB_HUMAN	MYBB	HUMAN	MYB proto-oncogene like 2 [Source:HGNC Symbol;Acc:HGNC:7548]
+ORTHOMCL10871	O15394	NCAM2_HUMAN	NCAM2	HUMAN	neural cell adhesion molecule 2 [Source:HGNC Symbol;Acc:HGNC:7657]
+ORTHOMCL10894	Q96MG7	NSE3_HUMAN	NSE3	HUMAN	NSE3 homolog, SMC5-SMC6 complex component [Source:HGNC Symbol;Acc:HGNC:7677]
+ORTHOMCL10896	Q5VWG9	TAF3_HUMAN	TAF3	HUMAN	TATA-box binding protein associated factor 3 [Source:HGNC Symbol;Acc:HGNC:17303]
+ORTHOMCL10899	P0C870	JMJD7_HUMAN	JMJD7	HUMAN	jumonji domain containing 7 [Source:HGNC Symbol;Acc:HGNC:34397]
+ORTHOMCL10906	P51957	NEK4_HUMAN	NEK4	HUMAN	NIMA related kinase 4 [Source:HGNC Symbol;Acc:HGNC:11399]
+ORTHOMCL10908	Q9BY12	SCAPE_HUMAN	SCAPE	HUMAN	S-phase cyclin A associated protein in the ER [Source:HGNC Symbol;Acc:HGNC:13081]
+ORTHOMCL10911	Q99707	METH_HUMAN	METH	HUMAN	5-methyltetrahydrofolate-homocysteine methyltransferase [Source:HGNC Symbol;Acc:HGNC:7468]
+ORTHOMCL10913	Q9HCS5	E41LA_HUMAN	E41LA	HUMAN	erythrocyte membrane protein band 4.1 like 4A [Source:HGNC Symbol;Acc:HGNC:13278]
+ORTHOMCL10941	Q8WWI1	LMO7_HUMAN	LMO7	HUMAN	LIM domain 7 [Source:HGNC Symbol;Acc:HGNC:6646]
+ORTHOMCL10982	Q96RW7	HMCN1_HUMAN	HMCN1	HUMAN	hemicentin 1 [Source:HGNC Symbol;Acc:HGNC:19194]
+ORTHOMCL11018	Q12950	FOXD4_HUMAN	FOXD4	HUMAN	forkhead box D4 [Source:HGNC Symbol;Acc:HGNC:3805]
+ORTHOMCL11074	Q15075	EEA1_HUMAN	EEA1	HUMAN	early endosome antigen 1 [Source:HGNC Symbol;Acc:HGNC:3185]
+ORTHOMCL11127	P98095	FBLN2_HUMAN	FBLN2	HUMAN	fibulin 2 [Source:HGNC Symbol;Acc:HGNC:3601]
+ORTHOMCL11131	Q15032	R3HD1_HUMAN	R3HD1	HUMAN	R3H domain containing 1 [Source:HGNC Symbol;Acc:HGNC:9757]
+ORTHOMCL11145	P52594	AGFG1_HUMAN	AGFG1	HUMAN	ArfGAP with FG repeats 1 [Source:HGNC Symbol;Acc:HGNC:5175]
+ORTHOMCL11246	Q6ZRR5	TM136_HUMAN	TM136	HUMAN	transmembrane protein 136 [Source:HGNC Symbol;Acc:HGNC:28280]
+ORTHOMCL11262	Q9BV44	THUM3_HUMAN	THUM3	HUMAN	THUMP domain containing 3 [Source:HGNC Symbol;Acc:HGNC:24493]
+ORTHOMCL1129	P05026	AT1B1_HUMAN	AT1B1	HUMAN	ATPase Na+/K+ transporting subunit beta 1 [Source:HGNC Symbol;Acc:HGNC:804]
+ORTHOMCL11314	O94979	SC31A_HUMAN	SC31A	HUMAN	SEC31 homolog A, COPII coat complex component [Source:HGNC Symbol;Acc:HGNC:17052]
+ORTHOMCL11380	P26368	U2AF2_HUMAN	U2AF2	HUMAN	U2 small nuclear RNA auxiliary factor 2 [Source:HGNC Symbol;Acc:HGNC:23156]
+ORTHOMCL11468	P40818	UBP8_HUMAN	UBP8	HUMAN	ubiquitin specific peptidase 8 [Source:HGNC Symbol;Acc:HGNC:12631]
+ORTHOMCL11469	O60235	TM11D_HUMAN	TM11D	HUMAN	transmembrane serine protease 11D [Source:HGNC Symbol;Acc:HGNC:24059]
+ORTHOMCL11495	Q0ZLH3	PJVK_HUMAN	PJVK	HUMAN	pejvakin [Source:HGNC Symbol;Acc:HGNC:29502]
+ORTHOMCL11503	P09543	CN37_HUMAN	CN37	HUMAN	2',3'-cyclic nucleotide 3' phosphodiesterase [Source:HGNC Symbol;Acc:HGNC:2158]
+ORTHOMCL11508	P35869	AHR_HUMAN	AHR	HUMAN	aryl hydrocarbon receptor [Source:HGNC Symbol;Acc:HGNC:348]
+ORTHOMCL11530	Q92547	TOPB1_HUMAN	TOPB1	HUMAN	DNA topoisomerase II binding protein 1 [Source:HGNC Symbol;Acc:HGNC:17008]
+ORTHOMCL11535	O43663	PRC1_HUMAN	PRC1	HUMAN	protein regulator of cytokinesis 1 [Source:HGNC Symbol;Acc:HGNC:9341]
+ORTHOMCL11583	Q8TF05	PP4R1_HUMAN	PP4R1	HUMAN	protein phosphatase 4 regulatory subunit 1 [Source:HGNC Symbol;Acc:HGNC:9320]
+ORTHOMCL11628	Q6NXR4	TTI2_HUMAN	TTI2	HUMAN	TELO2 interacting protein 2 [Source:HGNC Symbol;Acc:HGNC:26262]
+ORTHOMCL11692	O60242	AGRB3_HUMAN	AGRB3	HUMAN	adhesion G protein-coupled receptor B3 [Source:HGNC Symbol;Acc:HGNC:945]
+ORTHOMCL11739	O14795	UN13B_HUMAN	UN13B	HUMAN	unc-13 homolog B [Source:HGNC Symbol;Acc:HGNC:12566]
+ORTHOMCL11744	Q8NDZ2	SIMC1_HUMAN	SIMC1	HUMAN	SUMO interacting motifs containing 1 [Source:HGNC Symbol;Acc:HGNC:24779]
+ORTHOMCL11760	Q9GZT4	SRR_HUMAN	SRR	HUMAN	serine racemase [Source:HGNC Symbol;Acc:HGNC:14398]
+ORTHOMCL11761	Q8IWU5	SULF2_HUMAN	SULF2	HUMAN	sulfatase 2 [Source:HGNC Symbol;Acc:HGNC:20392]
+ORTHOMCL11790	P10586	PTPRF_HUMAN	PTPRF	HUMAN	protein tyrosine phosphatase, receptor type F [Source:HGNC Symbol;Acc:HGNC:9670]
+ORTHOMCL11799	Q8N4T8	CBR4_HUMAN	CBR4	HUMAN	carbonyl reductase 4 [Source:HGNC Symbol;Acc:HGNC:25891]
+ORTHOMCL11815	Q03701	CEBPZ_HUMAN	CEBPZ	HUMAN	CCAAT/enhancer binding protein zeta [Source:HGNC Symbol;Acc:HGNC:24218]
+ORTHOMCL11821	Q0VFZ6	CC173_HUMAN	CC173	HUMAN	coiled-coil domain containing 173 [Source:HGNC Symbol;Acc:HGNC:25064]
+ORTHOMCL11824	Q86TI0	TBCD1_HUMAN	TBCD1	HUMAN	TBC1 domain family member 1 [Source:HGNC Symbol;Acc:HGNC:11578]
+ORTHOMCL11829	Q6PKC3	TXD11_HUMAN	TXD11	HUMAN	thioredoxin domain containing 11 [Source:HGNC Symbol;Acc:HGNC:28030]
+ORTHOMCL11847	Q01664	TFAP4_HUMAN	TFAP4	HUMAN	transcription factor AP-4 [Source:HGNC Symbol;Acc:HGNC:11745]
+ORTHOMCL11913	Q9BYW2	SETD2_HUMAN	SETD2	HUMAN	SET domain containing 2 [Source:HGNC Symbol;Acc:HGNC:18420]
+ORTHOMCL11940	Q96JK9	MAML3_HUMAN	MAML3	HUMAN	mastermind like transcriptional coactivator 3 [Source:HGNC Symbol;Acc:HGNC:16272]
+ORTHOMCL11961	Q8TD84	DSCL1_HUMAN	DSCL1	HUMAN	DS cell adhesion molecule like 1 [Source:HGNC Symbol;Acc:HGNC:14656]
+ORTHOMCL11983	Q5T7P8	SYT6_HUMAN	SYT6	HUMAN	synaptotagmin 6 [Source:HGNC Symbol;Acc:HGNC:18638]
+ORTHOMCL12034	A0JNW5	UH1BL_HUMAN	UH1BL	HUMAN	UHRF1 binding protein 1 like [Source:HGNC Symbol;Acc:HGNC:29102]
+ORTHOMCL12063	P28290	SSFA2_HUMAN	SSFA2	HUMAN	sperm specific antigen 2 [Source:HGNC Symbol;Acc:HGNC:11319]
+ORTHOMCL12088	Q5VT52	RPRD2_HUMAN	RPRD2	HUMAN	regulation of nuclear pre-mRNA domain containing 2 [Source:HGNC Symbol;Acc:HGNC:29039]
+ORTHOMCL12092	Q9BVW5	TIPIN_HUMAN	TIPIN	HUMAN	TIMELESS interacting protein [Source:HGNC Symbol;Acc:HGNC:30750]
+ORTHOMCL12103	P43378	PTN9_HUMAN	PTN9	HUMAN	protein tyrosine phosphatase, non-receptor type 9 [Source:HGNC Symbol;Acc:HGNC:9661]
+ORTHOMCL12166	Q8N122	RPTOR_HUMAN	RPTOR	HUMAN	regulatory associated protein of MTOR complex 1 [Source:HGNC Symbol;Acc:HGNC:30287]
+ORTHOMCL12191	Q96PZ0	PUS7_HUMAN	PUS7	HUMAN	pseudouridylate synthase 7 (putative) [Source:HGNC Symbol;Acc:HGNC:26033]
+ORTHOMCL12202	Q15643	TRIPB_HUMAN	TRIPB	HUMAN	thyroid hormone receptor interactor 11 [Source:HGNC Symbol;Acc:HGNC:12305]
+ORTHOMCL12204	Q9UBT2	SAE2_HUMAN	SAE2	HUMAN	ubiquitin like modifier activating enzyme 2 [Source:HGNC Symbol;Acc:HGNC:30661]
+ORTHOMCL12205	Q15459	SF3A1_HUMAN	SF3A1	HUMAN	splicing factor 3a subunit 1 [Source:HGNC Symbol;Acc:HGNC:10765]
+ORTHOMCL12227	P07942	LAMB1_HUMAN	LAMB1	HUMAN	laminin subunit beta 1 [Source:HGNC Symbol;Acc:HGNC:6486]
+ORTHOMCL12232	O15014	ZN609_HUMAN	ZN609	HUMAN	zinc finger protein 609 [Source:HGNC Symbol;Acc:HGNC:29003]
+ORTHOMCL12242	Q8IZD2	KMT2E_HUMAN	KMT2E	HUMAN	lysine methyltransferase 2E [Source:HGNC Symbol;Acc:HGNC:18541]
+ORTHOMCL12250	Q96KP1	EXOC2_HUMAN	EXOC2	HUMAN	exocyst complex component 2 [Source:HGNC Symbol;Acc:HGNC:24968]
+ORTHOMCL12260	Q13439	GOGA4_HUMAN	GOGA4	HUMAN	golgin A4 [Source:HGNC Symbol;Acc:HGNC:4427]
+ORTHOMCL12267	O75179	ANR17_HUMAN	ANR17	HUMAN	ankyrin repeat domain 17 [Source:HGNC Symbol;Acc:HGNC:23575]
+ORTHOMCL12268	Q6ZU80	CE128_HUMAN	CE128	HUMAN	centrosomal protein 128 [Source:HGNC Symbol;Acc:HGNC:20359]
+ORTHOMCL12269	Q9P232	CNTN3_HUMAN	CNTN3	HUMAN	contactin 3 [Source:HGNC Symbol;Acc:HGNC:2173]
+ORTHOMCL12274	P52948	NUP98_HUMAN	NUP98	HUMAN	nucleoporin 98 [Source:HGNC Symbol;Acc:HGNC:8068]
+ORTHOMCL12286	P51815	ZN75D_HUMAN	ZN75D	HUMAN	zinc finger protein 75D [Source:HGNC Symbol;Acc:HGNC:13145]
+ORTHOMCL12391	Q9HAU5	RENT2_HUMAN	RENT2	HUMAN	UPF2, regulator of nonsense mediated mRNA decay [Source:HGNC Symbol;Acc:HGNC:17854]
+ORTHOMCL12409	Q8TEQ0	SNX29_HUMAN	SNX29	HUMAN	sorting nexin 29 [Source:HGNC Symbol;Acc:HGNC:30542]
+ORTHOMCL12483	P18433	PTPRA_HUMAN	PTPRA	HUMAN	protein tyrosine phosphatase, receptor type A [Source:HGNC Symbol;Acc:HGNC:9664]
+ORTHOMCL12611	Q7Z7M0	MEGF8_HUMAN	MEGF8	HUMAN	multiple EGF like domains 8 [Source:HGNC Symbol;Acc:HGNC:3233]
+ORTHOMCL12618	Q8TDN1	KCNG4_HUMAN	KCNG4	HUMAN	potassium voltage-gated channel modifier subfamily G member 4 [Source:HGNC Symbol;Acc:HGNC:19697]
+ORTHOMCL12636	Q9Y490	TLN1_HUMAN	TLN1	HUMAN	talin 1 [Source:HGNC Symbol;Acc:HGNC:11845]
+ORTHOMCL12708	Q92626	PXDN_HUMAN	PXDN	HUMAN	peroxidasin [Source:HGNC Symbol;Acc:HGNC:14966]
+ORTHOMCL12956	Q15303	ERBB4_HUMAN	ERBB4	HUMAN	erb-b2 receptor tyrosine kinase 4 [Source:HGNC Symbol;Acc:HGNC:3432]
+ORTHOMCL13009	Q68DC2	ANKS6_HUMAN	ANKS6	HUMAN	ankyrin repeat and sterile alpha motif domain containing 6 [Source:HGNC Symbol;Acc:HGNC:26724]
+ORTHOMCL13038	Q14247	SRC8_HUMAN	SRC8	HUMAN	cortactin [Source:HGNC Symbol;Acc:HGNC:3338]
+ORTHOMCL13084	P50851	LRBA_HUMAN	LRBA	HUMAN	LPS responsive beige-like anchor protein [Source:HGNC Symbol;Acc:HGNC:1742]
+ORTHOMCL13115	Q8NEG5	ZSWM2_HUMAN	ZSWM2	HUMAN	zinc finger SWIM-type containing 2 [Source:HGNC Symbol;Acc:HGNC:30990]
+ORTHOMCL13133	Q9HAV5	TNR27_HUMAN	TNR27	HUMAN	ectodysplasin A2 receptor [Source:HGNC Symbol;Acc:HGNC:17756]
+ORTHOMCL13135	Q9H706	GARE1_HUMAN	GARE1	HUMAN	GRB2 associated regulator of MAPK1 subtype 1 [Source:HGNC Symbol;Acc:HGNC:26136]
+ORTHOMCL13167	O00462	MANBA_HUMAN	MANBA	HUMAN	mannosidase beta [Source:HGNC Symbol;Acc:HGNC:6831]
+ORTHOMCL13174	Q9HCI7	MSL2_HUMAN	MSL2	HUMAN	MSL complex subunit 2 [Source:HGNC Symbol;Acc:HGNC:25544]
+ORTHOMCL13186	Q13591	SEM5A_HUMAN	SEM5A	HUMAN	semaphorin 5A [Source:HGNC Symbol;Acc:HGNC:10736]
+ORTHOMCL13196	Q96CC6	RHDF1_HUMAN	RHDF1	HUMAN	rhomboid 5 homolog 1 [Source:HGNC Symbol;Acc:HGNC:20561]
+ORTHOMCL13203	Q13332	PTPRS_HUMAN	PTPRS	HUMAN	protein tyrosine phosphatase, receptor type S [Source:HGNC Symbol;Acc:HGNC:9681]
+ORTHOMCL13239	Q8TDD1	DDX54_HUMAN	DDX54	HUMAN	DEAD-box helicase 54 [Source:HGNC Symbol;Acc:HGNC:20084]
+ORTHOMCL13254	Q9P2G1	AKIB1_HUMAN	AKIB1	HUMAN	ankyrin repeat and IBR domain containing 1 [Source:HGNC Symbol;Acc:HGNC:22215]
+ORTHOMCL13255	O95405	ZFYV9_HUMAN	ZFYV9	HUMAN	zinc finger FYVE-type containing 9 [Source:HGNC Symbol;Acc:HGNC:6775]
+ORTHOMCL13281	Q9Y5T5	UBP16_HUMAN	UBP16	HUMAN	ubiquitin specific peptidase 16 [Source:HGNC Symbol;Acc:HGNC:12614]
+ORTHOMCL13282	Q5TAX3	TUT4_HUMAN	TUT4	HUMAN	zinc finger CCHC-type containing 11 [Source:HGNC Symbol;Acc:HGNC:28981]
+ORTHOMCL13329	Q6UXG2	K1324_HUMAN	K1324	HUMAN	KIAA1324 [Source:HGNC Symbol;Acc:HGNC:29618]
+ORTHOMCL13343	Q5VWQ0	RSBN1_HUMAN	RSBN1	HUMAN	round spermatid basic protein 1 [Source:HGNC Symbol;Acc:HGNC:25642]
+ORTHOMCL13400	Q93063	EXT2_HUMAN	EXT2	HUMAN	exostosin glycosyltransferase 2 [Source:HGNC Symbol;Acc:HGNC:3513]
+ORTHOMCL13409	Q9P2P5	HECW2_HUMAN	HECW2	HUMAN	HECT, C2 and WW domain containing E3 ubiquitin protein ligase 2 [Source:HGNC Symbol;Acc:HGNC:29853]
+ORTHOMCL13458	P11586	C1TC_HUMAN	C1TC	HUMAN	methylenetetrahydrofolate dehydrogenase, cyclohydrolase and formyltetrahydrofolate synthetase 1 [Source:HGNC Symbol;Acc:HGNC:7432]
+ORTHOMCL13515	A8MXY4	ZNF99_HUMAN	ZNF99	HUMAN	zinc finger protein 99 [Source:HGNC Symbol;Acc:HGNC:13175]
+ORTHOMCL13562	O15439	MRP4_HUMAN	MRP4	HUMAN	ATP binding cassette subfamily C member 4 [Source:HGNC Symbol;Acc:HGNC:55]
+ORTHOMCL13563	Q08431	MFGM_HUMAN	MFGM	HUMAN	milk fat globule-EGF factor 8 protein [Source:HGNC Symbol;Acc:HGNC:7036]
+ORTHOMCL13578	Q08J23	NSUN2_HUMAN	NSUN2	HUMAN	NOP2/Sun RNA methyltransferase family member 2 [Source:HGNC Symbol;Acc:HGNC:25994]
+ORTHOMCL13608	Q7L576	CYFP1_HUMAN	CYFP1	HUMAN	cytoplasmic FMR1 interacting protein 1 [Source:HGNC Symbol;Acc:HGNC:13759]
+ORTHOMCL13609	O43826	G6PT1_HUMAN	G6PT1	HUMAN	solute carrier family 37 member 4 [Source:HGNC Symbol;Acc:HGNC:4061]
+ORTHOMCL13622	Q9C0J8	WDR33_HUMAN	WDR33	HUMAN	WD repeat domain 33 [Source:HGNC Symbol;Acc:HGNC:25651]
+ORTHOMCL13623	Q8TF32	ZN431_HUMAN	ZN431	HUMAN	zinc finger protein 431 [Source:HGNC Symbol;Acc:HGNC:20809]
+ORTHOMCL13635	Q9UBV2	SE1L1_HUMAN	SE1L1	HUMAN	SEL1L ERAD E3 ligase adaptor subunit [Source:HGNC Symbol;Acc:HGNC:10717]
+ORTHOMCL13636	P11047	LAMC1_HUMAN	LAMC1	HUMAN	laminin subunit gamma 1 [Source:HGNC Symbol;Acc:HGNC:6492]
+ORTHOMCL13645	P06276	CHLE_HUMAN	CHLE	HUMAN	butyrylcholinesterase [Source:HGNC Symbol;Acc:HGNC:983]
+ORTHOMCL13649	Q14980	NUMA1_HUMAN	NUMA1	HUMAN	nuclear mitotic apparatus protein 1 [Source:HGNC Symbol;Acc:HGNC:8059]
+ORTHOMCL13655	Q6PIY7	GLD2_HUMAN	GLD2	HUMAN	poly(A) RNA polymerase D4, non-canonical [Source:HGNC Symbol;Acc:HGNC:26776]
+ORTHOMCL13661	Q9NYZ3	GTSE1_HUMAN	GTSE1	HUMAN	G2 and S-phase expressed 1 [Source:HGNC Symbol;Acc:HGNC:13698]
+ORTHOMCL13668	Q9BXT4	TDRD1_HUMAN	TDRD1	HUMAN	tudor domain containing 1 [Source:HGNC Symbol;Acc:HGNC:11712]
+ORTHOMCL13669	O94966	UBP19_HUMAN	UBP19	HUMAN	ubiquitin specific peptidase 19 [Source:HGNC Symbol;Acc:HGNC:12617]
+ORTHOMCL13675	Q01968	OCRL_HUMAN	OCRL	HUMAN	OCRL, inositol polyphosphate-5-phosphatase [Source:HGNC Symbol;Acc:HGNC:8108]
+ORTHOMCL13691	Q9Y6Y1	CMTA1_HUMAN	CMTA1	HUMAN	calmodulin binding transcription activator 1 [Source:HGNC Symbol;Acc:HGNC:18806]
+ORTHOMCL13721	Q96HC4	PDLI5_HUMAN	PDLI5	HUMAN	PDZ and LIM domain 5 [Source:HGNC Symbol;Acc:HGNC:17468]
+ORTHOMCL13733	Q9UIG0	BAZ1B_HUMAN	BAZ1B	HUMAN	bromodomain adjacent to zinc finger domain 1B [Source:HGNC Symbol;Acc:HGNC:961]
+ORTHOMCL13745	P78316	NOP14_HUMAN	NOP14	HUMAN	NOP14 nucleolar protein [Source:HGNC Symbol;Acc:HGNC:16821]
+ORTHOMCL13766	Q9UIF8	BAZ2B_HUMAN	BAZ2B	HUMAN	bromodomain adjacent to zinc finger domain 2B [Source:HGNC Symbol;Acc:HGNC:963]
+ORTHOMCL13768	Q659A1	ICE2_HUMAN	ICE2	HUMAN	interactor of little elongation complex ELL subunit 2 [Source:HGNC Symbol;Acc:HGNC:29885]
+ORTHOMCL13823	Q56NI9	ESCO2_HUMAN	ESCO2	HUMAN	establishment of sister chromatid cohesion N-acetyltransferase 2 [Source:HGNC Symbol;Acc:HGNC:27230]
+ORTHOMCL13860	Q96T60	PNKP_HUMAN	PNKP	HUMAN	polynucleotide kinase 3'-phosphatase [Source:HGNC Symbol;Acc:HGNC:9154]
+ORTHOMCL13883	P78364	PHC1_HUMAN	PHC1	HUMAN	polyhomeotic homolog 1 [Source:HGNC Symbol;Acc:HGNC:3182]
+ORTHOMCL13945	Q9Y5Q9	TF3C3_HUMAN	TF3C3	HUMAN	general transcription factor IIIC subunit 3 [Source:HGNC Symbol;Acc:HGNC:4666]
+ORTHOMCL14145	Q5S007	LRRK2_HUMAN	LRRK2	HUMAN	leucine rich repeat kinase 2 [Source:HGNC Symbol;Acc:HGNC:18618]
+ORTHOMCL1424	P10606	COX5B_HUMAN	COX5B	HUMAN	cytochrome c oxidase subunit 5B [Source:HGNC Symbol;Acc:HGNC:2269]
+ORTHOMCL14250	Q9NQR9	G6PC2_HUMAN	G6PC2	HUMAN	glucose-6-phosphatase catalytic subunit 2 [Source:HGNC Symbol;Acc:HGNC:28906]
+ORTHOMCL14253	A0A1B0GVH7	IQCM_HUMAN	IQCM	HUMAN	IQ motif containing M [Source:HGNC Symbol;Acc:HGNC:53443]
+ORTHOMCL14277	Q0P6H9	TMM62_HUMAN	TMM62	HUMAN	transmembrane protein 62 [Source:HGNC Symbol;Acc:HGNC:26269]
+ORTHOMCL14290	Q9H8P0	PORED_HUMAN	PORED	HUMAN	steroid 5 alpha-reductase 3 [Source:HGNC Symbol;Acc:HGNC:25812]
+ORTHOMCL14310	Q6Q759	SPG17_HUMAN	SPG17	HUMAN	sperm associated antigen 17 [Source:HGNC Symbol;Acc:HGNC:26620]
+ORTHOMCL14322	A6H8Y1	BDP1_HUMAN	BDP1	HUMAN	B double prime 1, subunit of RNA polymerase III transcription initiation factor IIIB [Source:HGNC Symbol;Acc:HGNC:13652]
+ORTHOMCL14342	Q7Z5J8	ANKAR_HUMAN	ANKAR	HUMAN	ankyrin and armadillo repeat containing [Source:HGNC Symbol;Acc:HGNC:26350]
+ORTHOMCL14346	Q02386	ZNF45_HUMAN	ZNF45	HUMAN	zinc finger protein 45 [Source:HGNC Symbol;Acc:HGNC:13111]
+ORTHOMCL14354	Q8TAD4	ZNT5_HUMAN	ZNT5	HUMAN	solute carrier family 30 member 5 [Source:HGNC Symbol;Acc:HGNC:19089]
+ORTHOMCL14369	Q14667	K0100_HUMAN	K0100	HUMAN	KIAA0100 [Source:HGNC Symbol;Acc:HGNC:28960]
+ORTHOMCL14534	Q7L5Y6	DET1_HUMAN	DET1	HUMAN	DET1, COP1 ubiquitin ligase partner [Source:HGNC Symbol;Acc:HGNC:25477]
+ORTHOMCL14621	P78348	ASIC1_HUMAN	ASIC1	HUMAN	acid sensing ion channel subunit 1 [Source:HGNC Symbol;Acc:HGNC:100]
+ORTHOMCL14799	P78312	F193A_HUMAN	F193A	HUMAN	family with sequence similarity 193 member A [Source:HGNC Symbol;Acc:HGNC:16822]
+ORTHOMCL14888	Q8N556	AFAP1_HUMAN	AFAP1	HUMAN	actin filament associated protein 1 [Source:HGNC Symbol;Acc:HGNC:24017]
+ORTHOMCL14915	Q6YBV0	S36A4_HUMAN	S36A4	HUMAN	solute carrier family 36 member 4 [Source:HGNC Symbol;Acc:HGNC:19660]
+ORTHOMCL14958	O14841	OPLA_HUMAN	OPLA	HUMAN	5-oxoprolinase, ATP-hydrolysing [Source:HGNC Symbol;Acc:HGNC:8149]
+ORTHOMCL14989	P11362	FGFR1_HUMAN	FGFR1	HUMAN	fibroblast growth factor receptor 1 [Source:HGNC Symbol;Acc:HGNC:3688]
+ORTHOMCL14991	Q9H9Y6	RPA2_HUMAN	RPA2	HUMAN	RNA polymerase I subunit B [Source:HGNC Symbol;Acc:HGNC:20454]
+ORTHOMCL15017	Q86YV5	PRAG1_HUMAN	PRAG1	HUMAN	PEAK1 related, kinase-activating pseudokinase 1 [Source:HGNC Symbol;Acc:HGNC:25438]
+ORTHOMCL15044	Q5VVJ2	MYSM1_HUMAN	MYSM1	HUMAN	Myb like, SWIRM and MPN domains 1 [Source:HGNC Symbol;Acc:HGNC:29401]
+ORTHOMCL15091	O95248	MTMR5_HUMAN	MTMR5	HUMAN	SET binding factor 1 [Source:HGNC Symbol;Acc:HGNC:10542]
+ORTHOMCL15109	O75445	USH2A_HUMAN	USH2A	HUMAN	usherin [Source:HGNC Symbol;Acc:HGNC:12601]
+ORTHOMCL15144	P51810	GP143_HUMAN	GP143	HUMAN	G protein-coupled receptor 143 [Source:HGNC Symbol;Acc:HGNC:20145]
+ORTHOMCL15156	P13688	CEAM1_HUMAN	CEAM1	HUMAN	carcinoembryonic antigen related cell adhesion molecule 1 [Source:HGNC Symbol;Acc:HGNC:1814]
+ORTHOMCL15170	Q96RW7	HMCN1_HUMAN	HMCN1	HUMAN	hemicentin 1 [Source:HGNC Symbol;Acc:HGNC:19194]
+ORTHOMCL15207	Q8WZ64	ARAP2_HUMAN	ARAP2	HUMAN	ArfGAP with RhoGAP domain, ankyrin repeat and PH domain 2 [Source:HGNC Symbol;Acc:HGNC:16924]
+ORTHOMCL15223	O75478	TAD2A_HUMAN	TAD2A	HUMAN	transcriptional adaptor 2A [Source:HGNC Symbol;Acc:HGNC:11531]
+ORTHOMCL15242	Q96RW7	HMCN1_HUMAN	HMCN1	HUMAN	hemicentin 1 [Source:HGNC Symbol;Acc:HGNC:19194]
+ORTHOMCL15298	Q9UJA5	TRM6_HUMAN	TRM6	HUMAN	tRNA methyltransferase 6 [Source:HGNC Symbol;Acc:HGNC:20900]
+ORTHOMCL15338	Q96A83	COQA1_HUMAN	COQA1	HUMAN	collagen type XXVI alpha 1 chain [Source:HGNC Symbol;Acc:HGNC:18038]
+ORTHOMCL15372	O60673	REV3L_HUMAN	REV3L	HUMAN	REV3 like, DNA directed polymerase zeta catalytic subunit [Source:HGNC Symbol;Acc:HGNC:9968]
+ORTHOMCL15395	P23508	CRCM_HUMAN	CRCM	HUMAN	mutated in colorectal cancers [Source:HGNC Symbol;Acc:HGNC:6935]
+ORTHOMCL15431	A7E2V4	ZSWM8_HUMAN	ZSWM8	HUMAN	zinc finger SWIM-type containing 8 [Source:HGNC Symbol;Acc:HGNC:23528]
+ORTHOMCL15448	Q8NDG6	TDRD9_HUMAN	TDRD9	HUMAN	tudor domain containing 9 [Source:HGNC Symbol;Acc:HGNC:20122]
+ORTHOMCL15485	Q76I76	SSH2_HUMAN	SSH2	HUMAN	slingshot protein phosphatase 2 [Source:HGNC Symbol;Acc:HGNC:30580]
+ORTHOMCL15505	Q7Z591	AKNA_HUMAN	AKNA	HUMAN	AT-hook transcription factor [Source:HGNC Symbol;Acc:HGNC:24108]
+ORTHOMCL15512	Q9NR09	BIRC6_HUMAN	BIRC6	HUMAN	baculoviral IAP repeat containing 6 [Source:HGNC Symbol;Acc:HGNC:13516]
+ORTHOMCL15526	O95714	HERC2_HUMAN	HERC2	HUMAN	HECT and RLD domain containing E3 ubiquitin protein ligase 2 [Source:HGNC Symbol;Acc:HGNC:4868]
+ORTHOMCL15553	Q569K4	Z385B_HUMAN	Z385B	HUMAN	zinc finger protein 385B [Source:HGNC Symbol;Acc:HGNC:26332]
+ORTHOMCL15554	Q9UQF2	JIP1_HUMAN	JIP1	HUMAN	mitogen-activated protein kinase 8 interacting protein 1 [Source:HGNC Symbol;Acc:HGNC:6882]
+ORTHOMCL15560	O14924	RGS12_HUMAN	RGS12	HUMAN	regulator of G protein signaling 12 [Source:HGNC Symbol;Acc:HGNC:9994]
+ORTHOMCL15563	Q8NBF2	NHLC2_HUMAN	NHLC2	HUMAN	NHL repeat containing 2 [Source:HGNC Symbol;Acc:HGNC:24731]
+ORTHOMCL15565	Q2TAC2	CCD57_HUMAN	CCD57	HUMAN	coiled-coil domain containing 57 [Source:HGNC Symbol;Acc:HGNC:27564]
+ORTHOMCL15613	Q9UI17	M2GD_HUMAN	M2GD	HUMAN	dimethylglycine dehydrogenase [Source:HGNC Symbol;Acc:HGNC:24475]
+ORTHOMCL15616	P42566	EPS15_HUMAN	EPS15	HUMAN	epidermal growth factor receptor pathway substrate 15 [Source:HGNC Symbol;Acc:HGNC:3419]
+ORTHOMCL15626	O15085	ARHGB_HUMAN	ARHGB	HUMAN	Rho guanine nucleotide exchange factor 11 [Source:HGNC Symbol;Acc:HGNC:14580]
+ORTHOMCL15636	O00291	HIP1_HUMAN	HIP1	HUMAN	huntingtin interacting protein 1 [Source:HGNC Symbol;Acc:HGNC:4913]
+ORTHOMCL15701	Q71F56	MD13L_HUMAN	MD13L	HUMAN	mediator complex subunit 13 like [Source:HGNC Symbol;Acc:HGNC:22962]
+ORTHOMCL15770	Q92503	S14L1_HUMAN	S14L1	HUMAN	SEC14 like lipid binding 1 [Source:HGNC Symbol;Acc:HGNC:10698]
+ORTHOMCL15839	Q86YF9	DZIP1_HUMAN	DZIP1	HUMAN	DAZ interacting zinc finger protein 1 [Source:HGNC Symbol;Acc:HGNC:20908]
+ORTHOMCL15901	Q9NYI0	PSD3_HUMAN	PSD3	HUMAN	pleckstrin and Sec7 domain containing 3 [Source:HGNC Symbol;Acc:HGNC:19093]
+ORTHOMCL15906	Q8NFW1	COMA1_HUMAN	COMA1	HUMAN	collagen type XXII alpha 1 chain [Source:HGNC Symbol;Acc:HGNC:22989]
+ORTHOMCL15942	P00734	THRB_HUMAN	THRB	HUMAN	coagulation factor II, thrombin [Source:HGNC Symbol;Acc:HGNC:3535]
+ORTHOMCL15965	Q15025	TNIP1_HUMAN	TNIP1	HUMAN	TNFAIP3 interacting protein 1 [Source:HGNC Symbol;Acc:HGNC:16903]
+ORTHOMCL16083	Q5T200	ZC3HD_HUMAN	ZC3HD	HUMAN	zinc finger CCCH-type containing 13 [Source:HGNC Symbol;Acc:HGNC:20368]
+ORTHOMCL16108	Q0JRZ9	FCHO2_HUMAN	FCHO2	HUMAN	FCH domain only 2 [Source:HGNC Symbol;Acc:HGNC:25180]
+ORTHOMCL16118	Q8N531	FBXL6_HUMAN	FBXL6	HUMAN	F-box and leucine rich repeat protein 6 [Source:HGNC Symbol;Acc:HGNC:13603]
+ORTHOMCL16182	Q9Y4D2	DGLA_HUMAN	DGLA	HUMAN	diacylglycerol lipase alpha [Source:HGNC Symbol;Acc:HGNC:1165]
+ORTHOMCL16192	Q14181	DPOA2_HUMAN	DPOA2	HUMAN	DNA polymerase alpha 2, accessory subunit [Source:HGNC Symbol;Acc:HGNC:30073]
+ORTHOMCL16234	O75970	MPDZ_HUMAN	MPDZ	HUMAN	multiple PDZ domain crumbs cell polarity complex component [Source:HGNC Symbol;Acc:HGNC:7208]
+ORTHOMCL16279	P52824	DGKQ_HUMAN	DGKQ	HUMAN	diacylglycerol kinase theta [Source:HGNC Symbol;Acc:HGNC:2856]
+ORTHOMCL16300	Q9NVI1	FANCI_HUMAN	FANCI	HUMAN	Fanconi anemia complementation group I [Source:HGNC Symbol;Acc:HGNC:25568]
+ORTHOMCL16319	Q5JUK3	KCNT1_HUMAN	KCNT1	HUMAN	potassium sodium-activated channel subfamily T member 1 [Source:HGNC Symbol;Acc:HGNC:18865]
+ORTHOMCL16328	Q9Y5W7	SNX14_HUMAN	SNX14	HUMAN	sorting nexin 14 [Source:HGNC Symbol;Acc:HGNC:14977]
+ORTHOMCL16334	Q5S007	LRRK2_HUMAN	LRRK2	HUMAN	leucine rich repeat kinase 2 [Source:HGNC Symbol;Acc:HGNC:18618]
+ORTHOMCL16360	Q7LBC6	KDM3B_HUMAN	KDM3B	HUMAN	lysine demethylase 3B [Source:HGNC Symbol;Acc:HGNC:1337]
+ORTHOMCL16533	P13942	COBA2_HUMAN	COBA2	HUMAN	collagen type XI alpha 2 chain [Source:HGNC Symbol;Acc:HGNC:2187]
+ORTHOMCL16546	Q5M9N0	CD158_HUMAN	CD158	HUMAN	coiled-coil domain containing 158 [Source:HGNC Symbol;Acc:HGNC:26374]
+ORTHOMCL16559	Q6P444	MTFR2_HUMAN	MTFR2	HUMAN	mitochondrial fission regulator 2 [Source:HGNC Symbol;Acc:HGNC:21115]
+ORTHOMCL16994	Q8IUB2	WFDC3_HUMAN	WFDC3	HUMAN	WAP four-disulfide core domain 3 [Source:HGNC Symbol;Acc:HGNC:15957]
+ORTHOMCL17037	Q96ME1	FXL18_HUMAN	FXL18	HUMAN	F-box and leucine rich repeat protein 18 [Source:HGNC Symbol;Acc:HGNC:21874]
+ORTHOMCL17158	Q5T6L9	EMARD_HUMAN	EMARD	HUMAN	ER membrane associated RNA degradation [Source:HGNC Symbol;Acc:HGNC:21056]
+ORTHOMCL17165	P11362	FGFR1_HUMAN	FGFR1	HUMAN	fibroblast growth factor receptor 1 [Source:HGNC Symbol;Acc:HGNC:3688]
+ORTHOMCL17186	Q9C0H5	RHG39_HUMAN	RHG39	HUMAN	Rho GTPase activating protein 39 [Source:HGNC Symbol;Acc:HGNC:29351]
+ORTHOMCL17256	Q8N957	ANKF1_HUMAN	ANKF1	HUMAN	ankyrin repeat and fibronectin type III domain containing 1 [Source:HGNC Symbol;Acc:HGNC:26766]
+ORTHOMCL17264	Q7Z6L1	TCPR1_HUMAN	TCPR1	HUMAN	tectonin beta-propeller repeat containing 1 [Source:HGNC Symbol;Acc:HGNC:22214]
+ORTHOMCL17265	A6NK53	ZN233_HUMAN	ZN233	HUMAN	zinc finger protein 233 [Source:HGNC Symbol;Acc:HGNC:30946]
+ORTHOMCL17278	P11532	DMD_HUMAN	DMD	HUMAN	dystrophin [Source:HGNC Symbol;Acc:HGNC:2928]
+ORTHOMCL17530	Q14CX7	NAA25_HUMAN	NAA25	HUMAN	N(alpha)-acetyltransferase 25, NatB auxiliary subunit [Source:HGNC Symbol;Acc:HGNC:25783]
+ORTHOMCL1754	Q9H246	CA021_HUMAN	CA021	HUMAN	chromosome 1 open reading frame 21 [Source:HGNC Symbol;Acc:HGNC:15494]
+ORTHOMCL17553	Q8WXX0	DYH7_HUMAN	DYH7	HUMAN	dynein axonemal heavy chain 7 [Source:HGNC Symbol;Acc:HGNC:18661]
+ORTHOMCL1755	P52815	RM12_HUMAN	RM12	HUMAN	mitochondrial ribosomal protein L12 [Source:HGNC Symbol;Acc:HGNC:10378]
+ORTHOMCL17590	Q8NEZ4	KMT2C_HUMAN	KMT2C	HUMAN	lysine methyltransferase 2C [Source:HGNC Symbol;Acc:HGNC:13726]
+ORTHOMCL17612	Q86XL3	ANKL2_HUMAN	ANKL2	HUMAN	ankyrin repeat and LEM domain containing 2 [Source:HGNC Symbol;Acc:HGNC:29101]
+ORTHOMCL17713	Q8IZX4	TAF1L_HUMAN	TAF1L	HUMAN	TATA-box binding protein associated factor 1 like [Source:HGNC Symbol;Acc:HGNC:18056]
+ORTHOMCL17727	Q8WXG9	GPR98_HUMAN	GPR98	HUMAN	adhesion G protein-coupled receptor V1 [Source:HGNC Symbol;Acc:HGNC:17416]
+ORTHOMCL17761	O60235	TM11D_HUMAN	TM11D	HUMAN	transmembrane serine protease 11D [Source:HGNC Symbol;Acc:HGNC:24059]
+ORTHOMCL17770	Q9P2H3	IFT80_HUMAN	IFT80	HUMAN	intraflagellar transport 80 [Source:HGNC Symbol;Acc:HGNC:29262]
+ORTHOMCL17774	Q8WWZ8	OIT3_HUMAN	OIT3	HUMAN	oncoprotein induced transcript 3 [Source:HGNC Symbol;Acc:HGNC:29953]
+ORTHOMCL17789	Q92833	JARD2_HUMAN	JARD2	HUMAN	jumonji and AT-rich interaction domain containing 2 [Source:HGNC Symbol;Acc:HGNC:6196]
+ORTHOMCL17854	Q8N2M8	CLASR_HUMAN	CLASR	HUMAN	CLK4 associating serine/arginine rich protein [Source:HGNC Symbol;Acc:HGNC:17731]
+ORTHOMCL17892	Q9P219	DAPLE_HUMAN	DAPLE	HUMAN	coiled-coil domain containing 88C [Source:HGNC Symbol;Acc:HGNC:19967]
+ORTHOMCL17935	Q9GZR1	SENP6_HUMAN	SENP6	HUMAN	SUMO1/sentrin specific peptidase 6 [Source:HGNC Symbol;Acc:HGNC:20944]
+ORTHOMCL18107	Q7L5Y1	ENOF1_HUMAN	ENOF1	HUMAN	enolase superfamily member 1 [Source:HGNC Symbol;Acc:HGNC:30365]
+ORTHOMCL18143	Q5VU43	MYOME_HUMAN	MYOME	HUMAN	phosphodiesterase 4D interacting protein [Source:HGNC Symbol;Acc:HGNC:15580]
+ORTHOMCL18428	Q9NR09	BIRC6_HUMAN	BIRC6	HUMAN	baculoviral IAP repeat containing 6 [Source:HGNC Symbol;Acc:HGNC:13516]
+ORTHOMCL18466	Q96M20	CNBD2_HUMAN	CNBD2	HUMAN	cyclic nucleotide binding domain containing 2 [Source:HGNC Symbol;Acc:HGNC:16145]
+ORTHOMCL18520	Q9NRP7	STK36_HUMAN	STK36	HUMAN	serine/threonine kinase 36 [Source:HGNC Symbol;Acc:HGNC:17209]
+ORTHOMCL18540	Q96RW7	HMCN1_HUMAN	HMCN1	HUMAN	hemicentin 1 [Source:HGNC Symbol;Acc:HGNC:19194]
+ORTHOMCL18562	Q8N6Q8	MET25_HUMAN	MET25	HUMAN	methyltransferase like 25 [Source:HGNC Symbol;Acc:HGNC:26228]
+ORTHOMCL18571	O00339	MATN2_HUMAN	MATN2	HUMAN	matrilin 2 [Source:HGNC Symbol;Acc:HGNC:6908]
+ORTHOMCL18576	Q96RW7	HMCN1_HUMAN	HMCN1	HUMAN	hemicentin 1 [Source:HGNC Symbol;Acc:HGNC:19194]
+ORTHOMCL18611	O43313	ATMIN_HUMAN	ATMIN	HUMAN	ATM interactor [Source:HGNC Symbol;Acc:HGNC:29034]
+ORTHOMCL18622	Q8NEV4	MYO3A_HUMAN	MYO3A	HUMAN	myosin IIIA [Source:HGNC Symbol;Acc:HGNC:7601]
+ORTHOMCL18630	Q9C091	GRB1L_HUMAN	GRB1L	HUMAN	growth regulation by estrogen in breast cancer 1 like [Source:HGNC Symbol;Acc:HGNC:31042]
+ORTHOMCL18633	O15072	ATS3_HUMAN	ATS3	HUMAN	ADAM metallopeptidase with thrombospondin type 1 motif 3 [Source:HGNC Symbol;Acc:HGNC:219]
+ORTHOMCL18651	Q8NE09	RGS22_HUMAN	RGS22	HUMAN	regulator of G protein signaling 22 [Source:HGNC Symbol;Acc:HGNC:24499]
+ORTHOMCL18694	Q5HYC2	K2026_HUMAN	K2026	HUMAN	KIAA2026 [Source:HGNC Symbol;Acc:HGNC:23378]
+ORTHOMCL1882	Q96HF1	SFRP2_HUMAN	SFRP2	HUMAN	secreted frizzled related protein 2 [Source:HGNC Symbol;Acc:HGNC:10777]
+ORTHOMCL18893	Q8N8X9	MB213_HUMAN	MB213	HUMAN	mab-21 like 3 [Source:HGNC Symbol;Acc:HGNC:26787]
+ORTHOMCL18959	Q49AR2	CE022_HUMAN	CE022	HUMAN	chromosome 5 open reading frame 22 [Source:HGNC Symbol;Acc:HGNC:25639]
+ORTHOMCL19057	Q8NA47	CCD63_HUMAN	CCD63	HUMAN	coiled-coil domain containing 63 [Source:HGNC Symbol;Acc:HGNC:26669]
+ORTHOMCL19480	Q96AY4	TTC28_HUMAN	TTC28	HUMAN	tetratricopeptide repeat domain 28 [Source:HGNC Symbol;Acc:HGNC:29179]
+ORTHOMCL19558	Q8WZ42	TITIN_HUMAN	TITIN	HUMAN	titin [Source:HGNC Symbol;Acc:HGNC:12403]
+ORTHOMCL19679	Q86UL8	MAGI2_HUMAN	MAGI2	HUMAN	membrane associated guanylate kinase, WW and PDZ domain containing 2 [Source:HGNC Symbol;Acc:HGNC:18957]
+ORTHOMCL19711	Q05209	PTN12_HUMAN	PTN12	HUMAN	protein tyrosine phosphatase, non-receptor type 12 [Source:HGNC Symbol;Acc:HGNC:9645]
+ORTHOMCL19875	Q14118	DAG1_HUMAN	DAG1	HUMAN	dystroglycan 1 [Source:HGNC Symbol;Acc:HGNC:2666]
+ORTHOMCL19933	Q96CG8	CTHR1_HUMAN	CTHR1	HUMAN	collagen triple helix repeat containing 1 [Source:HGNC Symbol;Acc:HGNC:18831]
+ORTHOMCL19953	Q03468	ERCC6_HUMAN	ERCC6	HUMAN	ERCC excision repair 6, chromatin remodeling factor [Source:HGNC Symbol;Acc:HGNC:3438]
+ORTHOMCL1998	Q9BYD3	RM04_HUMAN	RM04	HUMAN	mitochondrial ribosomal protein L4 [Source:HGNC Symbol;Acc:HGNC:14276]
+ORTHOMCL20178	Q96JM7	LMBL3_HUMAN	LMBL3	HUMAN	L3MBTL3, histone methyl-lysine binding protein [Source:HGNC Symbol;Acc:HGNC:23035]
+ORTHOMCL20191	P10586	PTPRF_HUMAN	PTPRF	HUMAN	protein tyrosine phosphatase, receptor type F [Source:HGNC Symbol;Acc:HGNC:9670]
+ORTHOMCL20313	O43933	PEX1_HUMAN	PEX1	HUMAN	peroxisomal biogenesis factor 1 [Source:HGNC Symbol;Acc:HGNC:8850]
+ORTHOMCL20369	Q8WWN9	ICEF1_HUMAN	ICEF1	HUMAN	interaction protein for cytohesin exchange factors 1 [Source:HGNC Symbol;Acc:HGNC:21204]
+ORTHOMCL20405	Q02763	TIE2_HUMAN	TIE2	HUMAN	TEK receptor tyrosine kinase [Source:HGNC Symbol;Acc:HGNC:11724]
+ORTHOMCL20420	Q96L42	KCNH8_HUMAN	KCNH8	HUMAN	potassium voltage-gated channel subfamily H member 8 [Source:HGNC Symbol;Acc:HGNC:18864]
+ORTHOMCL20435	Q99549	MPP8_HUMAN	MPP8	HUMAN	M-phase phosphoprotein 8 [Source:HGNC Symbol;Acc:HGNC:29810]
+ORTHOMCL20491	Q641Q2	WAC2A_HUMAN	WAC2A	HUMAN	WASH complex subunit 2A [Source:HGNC Symbol;Acc:HGNC:23416]
+ORTHOMCL20616	Q8IVV2	LOXH1_HUMAN	LOXH1	HUMAN	lipoxygenase homology domains 1 [Source:HGNC Symbol;Acc:HGNC:26521]
+ORTHOMCL20630	Q9HD67	MYO10_HUMAN	MYO10	HUMAN	myosin X [Source:HGNC Symbol;Acc:HGNC:7593]
+ORTHOMCL20967	Q9UGJ1	GCP4_HUMAN	GCP4	HUMAN	tubulin gamma complex associated protein 4 [Source:HGNC Symbol;Acc:HGNC:16691]
+ORTHOMCL21087	O60462	NRP2_HUMAN	NRP2	HUMAN	neuropilin 2 [Source:HGNC Symbol;Acc:HGNC:8005]
+ORTHOMCL21266	Q8WTW4	NPRL2_HUMAN	NPRL2	HUMAN	NPR2 like, GATOR1 complex subunit [Source:HGNC Symbol;Acc:HGNC:24969]
+ORTHOMCL21298	Q13614	MTMR2_HUMAN	MTMR2	HUMAN	myotubularin related protein 2 [Source:HGNC Symbol;Acc:HGNC:7450]
+ORTHOMCL21504	Q9UPZ3	HPS5_HUMAN	HPS5	HUMAN	HPS5, biogenesis of lysosomal organelles complex 2 subunit 2 [Source:HGNC Symbol;Acc:HGNC:17022]
+ORTHOMCL21506	P54277	PMS1_HUMAN	PMS1	HUMAN	PMS1 homolog 1, mismatch repair system component [Source:HGNC Symbol;Acc:HGNC:9121]
+ORTHOMCL21528	Q8NDA8	MROH1_HUMAN	MROH1	HUMAN	maestro heat like repeat family member 1 [Source:HGNC Symbol;Acc:HGNC:26958]
+ORTHOMCL2152	Q96B36	AKTS1_HUMAN	AKTS1	HUMAN	AKT1 substrate 1 [Source:HGNC Symbol;Acc:HGNC:28426]
+ORTHOMCL21556	Q8NEN0	ARMC2_HUMAN	ARMC2	HUMAN	armadillo repeat containing 2 [Source:HGNC Symbol;Acc:HGNC:23045]
+ORTHOMCL21565	Q9NXG6	P4HTM_HUMAN	P4HTM	HUMAN	prolyl 4-hydroxylase, transmembrane [Source:HGNC Symbol;Acc:HGNC:28858]
+ORTHOMCL2165	Q6UX65	DRAM2_HUMAN	DRAM2	HUMAN	DNA damage regulated autophagy modulator 2 [Source:HGNC Symbol;Acc:HGNC:28769]
+ORTHOMCL21677	Q96T23	RSF1_HUMAN	RSF1	HUMAN	remodeling and spacing factor 1 [Source:HGNC Symbol;Acc:HGNC:18118]
+ORTHOMCL21724	Q96GX1	TECT2_HUMAN	TECT2	HUMAN	tectonic family member 2 [Source:HGNC Symbol;Acc:HGNC:25774]
+ORTHOMCL21786	Q9H892	TTC12_HUMAN	TTC12	HUMAN	tetratricopeptide repeat domain 12 [Source:HGNC Symbol;Acc:HGNC:23700]
+ORTHOMCL21807	Q96B70	LENG9_HUMAN	LENG9	HUMAN	leukocyte receptor cluster member 9 [Source:HGNC Symbol;Acc:HGNC:16306]
+ORTHOMCL21943	C9JQI7	TM232_HUMAN	TM232	HUMAN	transmembrane protein 232 [Source:HGNC Symbol;Acc:HGNC:37270]
+ORTHOMCL21966	Q9UKZ1	CNO11_HUMAN	CNO11	HUMAN	CCR4-NOT transcription complex subunit 11 [Source:HGNC Symbol;Acc:HGNC:25217]
+ORTHOMCL22078	Q9Y4W6	AFG32_HUMAN	AFG32	HUMAN	AFG3 like matrix AAA peptidase subunit 2 [Source:HGNC Symbol;Acc:HGNC:315]
+ORTHOMCL22142	Q9H6R7	WDCP_HUMAN	WDCP	HUMAN	WD repeat and coiled coil containing [Source:HGNC Symbol;Acc:HGNC:26157]
+ORTHOMCL22172	O95271	TNKS1_HUMAN	TNKS1	HUMAN	tankyrase [Source:HGNC Symbol;Acc:HGNC:11941]
+ORTHOMCL22232	Q8WXW3	PIBF1_HUMAN	PIBF1	HUMAN	progesterone immunomodulatory binding factor 1 [Source:HGNC Symbol;Acc:HGNC:23352]
+ORTHOMCL2373	Q5TID7	CC181_HUMAN	CC181	HUMAN	coiled-coil domain containing 181 [Source:HGNC Symbol;Acc:HGNC:28051]
+ORTHOMCL2429	P42765	THIM_HUMAN	THIM	HUMAN	acetyl-CoA acyltransferase 2 [Source:HGNC Symbol;Acc:HGNC:83]
+ORTHOMCL2642	Q9Y6M1	IF2B2_HUMAN	IF2B2	HUMAN	insulin like growth factor 2 mRNA binding protein 2 [Source:HGNC Symbol;Acc:HGNC:28867]
+ORTHOMCL2770	Q14094	CCNI_HUMAN	CCNI	HUMAN	cyclin I [Source:HGNC Symbol;Acc:HGNC:1595]
+ORTHOMCL2809	Q86UF1	TSN33_HUMAN	TSN33	HUMAN	tetraspanin 33 [Source:HGNC Symbol;Acc:HGNC:28743]
+ORTHOMCL2957	Q15061	WDR43_HUMAN	WDR43	HUMAN	WD repeat domain 43 [Source:HGNC Symbol;Acc:HGNC:28945]
+ORTHOMCL2960	Q8NDH3	PEPL1_HUMAN	PEPL1	HUMAN	aminopeptidase like 1 [Source:HGNC Symbol;Acc:HGNC:16244]
+ORTHOMCL3067	Q01484	ANK2_HUMAN	ANK2	HUMAN	ankyrin 2 [Source:HGNC Symbol;Acc:HGNC:493]
+ORTHOMCL3238	O94985	CSTN1_HUMAN	CSTN1	HUMAN	calsyntenin 1 [Source:HGNC Symbol;Acc:HGNC:17447]
+ORTHOMCL3560	Q8N7X2	STPG3_HUMAN	STPG3	HUMAN	sperm-tail PG-rich repeat containing 3 [Source:HGNC Symbol;Acc:HGNC:37285]
+ORTHOMCL3567	Q9P0J7	KCMF1_HUMAN	KCMF1	HUMAN	potassium channel modulatory factor 1 [Source:HGNC Symbol;Acc:HGNC:20589]
+ORTHOMCL3580	Q9Y2Z0	SGT1_HUMAN	SGT1	HUMAN	SGT1 homolog, MIS12 kinetochore complex assembly cochaperone [Source:HGNC Symbol;Acc:HGNC:16987]
+ORTHOMCL3605	Q9P031	TAP26_HUMAN	TAP26	HUMAN	coiled-coil domain containing 59 [Source:HGNC Symbol;Acc:HGNC:25005]
+ORTHOMCL3616	Q9NZJ6	COQ3_HUMAN	COQ3	HUMAN	coenzyme Q3, methyltransferase [Source:HGNC Symbol;Acc:HGNC:18175]
+ORTHOMCL3619	P46199	IF2M_HUMAN	IF2M	HUMAN	mitochondrial translational initiation factor 2 [Source:HGNC Symbol;Acc:HGNC:7441]
+ORTHOMCL3643	Q8NG66	NEK11_HUMAN	NEK11	HUMAN	NIMA related kinase 11 [Source:HGNC Symbol;Acc:HGNC:18593]
+ORTHOMCL3651	Q9BSG0	PADC1_HUMAN	PADC1	HUMAN	protease associated domain containing 1 [Source:HGNC Symbol;Acc:HGNC:16047]
+ORTHOMCL3682	Q8NCF5	NF2IP_HUMAN	NF2IP	HUMAN	nuclear factor of activated T cells 2 interacting protein [Source:HGNC Symbol;Acc:HGNC:25906]
+ORTHOMCL3833	P82933	RT09_HUMAN	RT09	HUMAN	mitochondrial ribosomal protein S9 [Source:HGNC Symbol;Acc:HGNC:14501]
+ORTHOMCL4025	O95084	PRS23_HUMAN	PRS23	HUMAN	serine protease 23 [Source:HGNC Symbol;Acc:HGNC:14370]
+ORTHOMCL4077	Q9H3L0	MMAD_HUMAN	MMAD	HUMAN	methylmalonic aciduria and homocystinuria, cblD type [Source:HGNC Symbol;Acc:HGNC:25221]
+ORTHOMCL4112	Q9NZM5	NOP53_HUMAN	NOP53	HUMAN	NOP53 ribosome biogenesis factor [Source:HGNC Symbol;Acc:HGNC:4333]
+ORTHOMCL4197	Q9NQ48	LZTL1_HUMAN	LZTL1	HUMAN	leucine zipper transcription factor like 1 [Source:HGNC Symbol;Acc:HGNC:6741]
+ORTHOMCL4247	P49354	FNTA_HUMAN	FNTA	HUMAN	farnesyltransferase, CAAX box, alpha [Source:HGNC Symbol;Acc:HGNC:3782]
+ORTHOMCL4291	O14508	SOCS2_HUMAN	SOCS2	HUMAN	suppressor of cytokine signaling 2 [Source:HGNC Symbol;Acc:HGNC:19382]
+ORTHOMCL4352	Q8N0U8	VKORL_HUMAN	VKORL	HUMAN	vitamin K epoxide reductase complex subunit 1 like 1 [Source:HGNC Symbol;Acc:HGNC:21492]
+ORTHOMCL4418	Q9ULK6	RN150_HUMAN	RN150	HUMAN	ring finger protein 150 [Source:HGNC Symbol;Acc:HGNC:23138]
+ORTHOMCL4520	O14548	COX7R_HUMAN	COX7R	HUMAN	cytochrome c oxidase subunit 7A2 like [Source:HGNC Symbol;Acc:HGNC:2289]
+ORTHOMCL4642	Q9Y2U9	KLDC2_HUMAN	KLDC2	HUMAN	kelch domain containing 2 [Source:HGNC Symbol;Acc:HGNC:20231]
+ORTHOMCL4662	Q4G0X9	CCD40_HUMAN	CCD40	HUMAN	coiled-coil domain containing 40 [Source:HGNC Symbol;Acc:HGNC:26090]
+ORTHOMCL4739	Q3KNV8	PCGF3_HUMAN	PCGF3	HUMAN	polycomb group ring finger 3 [Source:HGNC Symbol;Acc:HGNC:10066]
+ORTHOMCL4789	Q8NB59	SYT14_HUMAN	SYT14	HUMAN	synaptotagmin 14 [Source:HGNC Symbol;Acc:HGNC:23143]
+ORTHOMCL4889	Q96JB5	CK5P3_HUMAN	CK5P3	HUMAN	CDK5 regulatory subunit associated protein 3 [Source:HGNC Symbol;Acc:HGNC:18673]
+ORTHOMCL4893	P50416	CPT1A_HUMAN	CPT1A	HUMAN	carnitine palmitoyltransferase 1A [Source:HGNC Symbol;Acc:HGNC:2328]
+ORTHOMCL4935	A8MWY0	K132L_HUMAN	K132L	HUMAN	KIAA1324 like [Source:HGNC Symbol;Acc:HGNC:21945]
+ORTHOMCL4978	P35555	FBN1_HUMAN	FBN1	HUMAN	fibrillin 1 [Source:HGNC Symbol;Acc:HGNC:3603]
+ORTHOMCL5016	Q6URK8	TEPP_HUMAN	TEPP	HUMAN	testis, prostate and placenta expressed [Source:HGNC Symbol;Acc:HGNC:33745]
+ORTHOMCL5146	P42167	LAP2B_HUMAN	LAP2B	HUMAN	thymopoietin [Source:HGNC Symbol;Acc:HGNC:11875]
+ORTHOMCL5150	O75369	FLNB_HUMAN	FLNB	HUMAN	filamin B [Source:HGNC Symbol;Acc:HGNC:3755]
+ORTHOMCL5188	Q13435	SF3B2_HUMAN	SF3B2	HUMAN	splicing factor 3b subunit 2 [Source:HGNC Symbol;Acc:HGNC:10769]
+ORTHOMCL5345	O75487	GPC4_HUMAN	GPC4	HUMAN	glypican 4 [Source:HGNC Symbol;Acc:HGNC:4452]
+ORTHOMCL5386	Q0P6D2	FA69C_HUMAN	FA69C	HUMAN	family with sequence similarity 69 member C [Source:HGNC Symbol;Acc:HGNC:31729]
+ORTHOMCL5391	Q9UM73	ALK_HUMAN	ALK	HUMAN	ALK receptor tyrosine kinase [Source:HGNC Symbol;Acc:HGNC:427]
+ORTHOMCL5414	O75521	ECI2_HUMAN	ECI2	HUMAN	enoyl-CoA delta isomerase 2 [Source:HGNC Symbol;Acc:HGNC:14601]
+ORTHOMCL5452	O95149	SPN1_HUMAN	SPN1	HUMAN	snurportin 1 [Source:HGNC Symbol;Acc:HGNC:14245]
+ORTHOMCL5479	Q8TBZ3	WDR20_HUMAN	WDR20	HUMAN	WD repeat domain 20 [Source:HGNC Symbol;Acc:HGNC:19667]
+ORTHOMCL5580	O95835	LATS1_HUMAN	LATS1	HUMAN	large tumor suppressor kinase 1 [Source:HGNC Symbol;Acc:HGNC:6514]
+ORTHOMCL5586	Q9BY08	EBPL_HUMAN	EBPL	HUMAN	emopamil binding protein like [Source:HGNC Symbol;Acc:HGNC:18061]
+ORTHOMCL5589	P07814	SYEP_HUMAN	SYEP	HUMAN	glutamyl-prolyl-tRNA synthetase [Source:HGNC Symbol;Acc:HGNC:3418]
+ORTHOMCL5636	Q495T6	MMEL1_HUMAN	MMEL1	HUMAN	membrane metalloendopeptidase like 1 [Source:HGNC Symbol;Acc:HGNC:14668]
+ORTHOMCL5709	P26232	CTNA2_HUMAN	CTNA2	HUMAN	catenin alpha 2 [Source:HGNC Symbol;Acc:HGNC:2510]
+ORTHOMCL5726	Q92930	RAB8B_HUMAN	RAB8B	HUMAN	RAB8B, member RAS oncogene family [Source:HGNC Symbol;Acc:HGNC:30273]
+ORTHOMCL5744	Q99816	TS101_HUMAN	TS101	HUMAN	tumor susceptibility 101 [Source:HGNC Symbol;Acc:HGNC:15971]
+ORTHOMCL5776	P51512	MMP16_HUMAN	MMP16	HUMAN	matrix metallopeptidase 16 [Source:HGNC Symbol;Acc:HGNC:7162]
+ORTHOMCL5806	P18089	ADA2B_HUMAN	ADA2B	HUMAN	adrenoceptor alpha 2B [Source:HGNC Symbol;Acc:HGNC:282]
+ORTHOMCL5822	Q9Y5B8	NDK7_HUMAN	NDK7	HUMAN	NME/NM23 family member 7 [Source:HGNC Symbol;Acc:HGNC:20461]
+ORTHOMCL5865	Q10588	BST1_HUMAN	BST1	HUMAN	bone marrow stromal cell antigen 1 [Source:HGNC Symbol;Acc:HGNC:1118]
+ORTHOMCL5881	Q8WW01	SEN15_HUMAN	SEN15	HUMAN	tRNA splicing endonuclease subunit 15 [Source:HGNC Symbol;Acc:HGNC:16791]
+ORTHOMCL5889	Q6UX73	CP089_HUMAN	CP089	HUMAN	chromosome 16 open reading frame 89 [Source:HGNC Symbol;Acc:HGNC:28687]
+ORTHOMCL5941	Q5T089	MORN1_HUMAN	MORN1	HUMAN	MORN repeat containing 1 [Source:HGNC Symbol;Acc:HGNC:25852]
+ORTHOMCL5978	Q96KC8	DNJC1_HUMAN	DNJC1	HUMAN	DnaJ heat shock protein family (Hsp40) member C1 [Source:HGNC Symbol;Acc:HGNC:20090]
+ORTHOMCL6140	P46531	NOTC1_HUMAN	NOTC1	HUMAN	notch 1 [Source:HGNC Symbol;Acc:HGNC:7881]
+ORTHOMCL6156	P19878	NCF2_HUMAN	NCF2	HUMAN	neutrophil cytosolic factor 2 [Source:HGNC Symbol;Acc:HGNC:7661]
+ORTHOMCL6182	Q8N371	KDM8_HUMAN	KDM8	HUMAN	lysine demethylase 8 [Source:HGNC Symbol;Acc:HGNC:25840]
+ORTHOMCL6265	Q5T8D3	ACBD5_HUMAN	ACBD5	HUMAN	acyl-CoA binding domain containing 5 [Source:HGNC Symbol;Acc:HGNC:23338]
+ORTHOMCL6277	Q9UGP8	SEC63_HUMAN	SEC63	HUMAN	SEC63 homolog, protein translocation regulator [Source:HGNC Symbol;Acc:HGNC:21082]
+ORTHOMCL6279	O43147	SGSM2_HUMAN	SGSM2	HUMAN	small G protein signaling modulator 2 [Source:HGNC Symbol;Acc:HGNC:29026]
+ORTHOMCL6283	Q14160	SCRIB_HUMAN	SCRIB	HUMAN	scribbled planar cell polarity protein [Source:HGNC Symbol;Acc:HGNC:30377]
+ORTHOMCL6307	Q13480	GAB1_HUMAN	GAB1	HUMAN	GRB2 associated binding protein 1 [Source:HGNC Symbol;Acc:HGNC:4066]
+ORTHOMCL6311	Q14409	GLPK3_HUMAN	GLPK3	HUMAN	glycerol kinase 3 pseudogene [Source:HGNC Symbol;Acc:HGNC:4292]
+ORTHOMCL6317	Q9BX70	BTBD2_HUMAN	BTBD2	HUMAN	BTB domain containing 2 [Source:HGNC Symbol;Acc:HGNC:15504]
+ORTHOMCL6353	Q8TA86	RP9_HUMAN	RP9	HUMAN	RP9, pre-mRNA splicing factor [Source:HGNC Symbol;Acc:HGNC:10288]
+ORTHOMCL6360	Q96MD7	CI085_HUMAN	CI085	HUMAN	chromosome 9 open reading frame 85 [Source:HGNC Symbol;Acc:HGNC:28784]
+ORTHOMCL6368	Q8NB59	SYT14_HUMAN	SYT14	HUMAN	synaptotagmin 14 [Source:HGNC Symbol;Acc:HGNC:23143]
+ORTHOMCL6369	P18405	S5A1_HUMAN	S5A1	HUMAN	steroid 5 alpha-reductase 1 [Source:HGNC Symbol;Acc:HGNC:11284]
+ORTHOMCL6389	Q9BXF3	CECR2_HUMAN	CECR2	HUMAN	CECR2, histone acetyl-lysine reader [Source:HGNC Symbol;Acc:HGNC:1840]
+ORTHOMCL6417	A2A3L6	TTC24_HUMAN	TTC24	HUMAN	tetratricopeptide repeat domain 24 [Source:HGNC Symbol;Acc:HGNC:32348]
+ORTHOMCL6429	Q9ULJ8	NEB1_HUMAN	NEB1	HUMAN	protein phosphatase 1 regulatory subunit 9A [Source:HGNC Symbol;Acc:HGNC:14946]
+ORTHOMCL6493	Q96I15	SCLY_HUMAN	SCLY	HUMAN	selenocysteine lyase [Source:HGNC Symbol;Acc:HGNC:18161]
+ORTHOMCL6536	C9JJ37	BTBDJ_HUMAN	BTBDJ	HUMAN	BTB domain containing 19 [Source:HGNC Symbol;Acc:HGNC:27145]
+ORTHOMCL6580	Q9H6E4	CC134_HUMAN	CC134	HUMAN	coiled-coil domain containing 134 [Source:HGNC Symbol;Acc:HGNC:26185]
+ORTHOMCL6585	Q05084	ICA69_HUMAN	ICA69	HUMAN	islet cell autoantigen 1 [Source:HGNC Symbol;Acc:HGNC:5343]
+ORTHOMCL6664	Q14192	FHL2_HUMAN	FHL2	HUMAN	four and a half LIM domains 2 [Source:HGNC Symbol;Acc:HGNC:3703]
+ORTHOMCL6665	P15170	ERF3A_HUMAN	ERF3A	HUMAN	G1 to S phase transition 1 [Source:HGNC Symbol;Acc:HGNC:4621]
+ORTHOMCL6705	Q92626	PXDN_HUMAN	PXDN	HUMAN	peroxidasin [Source:HGNC Symbol;Acc:HGNC:14966]
+ORTHOMCL6793	Q7Z6B0	CCD91_HUMAN	CCD91	HUMAN	coiled-coil domain containing 91 [Source:HGNC Symbol;Acc:HGNC:24855]
+ORTHOMCL6805	Q6P2H3	CEP85_HUMAN	CEP85	HUMAN	centrosomal protein 85 [Source:HGNC Symbol;Acc:HGNC:25309]
+ORTHOMCL6812	Q92738	US6NL_HUMAN	US6NL	HUMAN	USP6 N-terminal like [Source:HGNC Symbol;Acc:HGNC:16858]
+ORTHOMCL6813	Q01973	ROR1_HUMAN	ROR1	HUMAN	receptor tyrosine kinase like orphan receptor 1 [Source:HGNC Symbol;Acc:HGNC:10256]
+ORTHOMCL6862	O15516	CLOCK_HUMAN	CLOCK	HUMAN	clock circadian regulator [Source:HGNC Symbol;Acc:HGNC:2082]
+ORTHOMCL6865	P56706	WNT7B_HUMAN	WNT7B	HUMAN	Wnt family member 7B [Source:HGNC Symbol;Acc:HGNC:12787]
+ORTHOMCL6923	P82914	RT15_HUMAN	RT15	HUMAN	mitochondrial ribosomal protein S15 [Source:HGNC Symbol;Acc:HGNC:14504]
+ORTHOMCL7183	Q9Y278	HS3S2_HUMAN	HS3S2	HUMAN	heparan sulfate-glucosamine 3-sulfotransferase 2 [Source:HGNC Symbol;Acc:HGNC:5195]
+ORTHOMCL7223	Q9BXW7	HDHD5_HUMAN	HDHD5	HUMAN	haloacid dehalogenase like hydrolase domain containing 5 [Source:HGNC Symbol;Acc:HGNC:1843]
+ORTHOMCL7237	O75563	SKAP2_HUMAN	SKAP2	HUMAN	src kinase associated phosphoprotein 2 [Source:HGNC Symbol;Acc:HGNC:15687]
+ORTHOMCL7242	P27986	P85A_HUMAN	P85A	HUMAN	phosphoinositide-3-kinase regulatory subunit 1 [Source:HGNC Symbol;Acc:HGNC:8979]
+ORTHOMCL7249	Q9H788	SH24A_HUMAN	SH24A	HUMAN	SH2 domain containing 4A [Source:HGNC Symbol;Acc:HGNC:26102]
+ORTHOMCL7344	Q96FV0	LRC46_HUMAN	LRC46	HUMAN	leucine rich repeat containing 46 [Source:HGNC Symbol;Acc:HGNC:25047]
+ORTHOMCL7434	Q9NVU0	RPC5_HUMAN	RPC5	HUMAN	RNA polymerase III subunit E [Source:HGNC Symbol;Acc:HGNC:30347]
+ORTHOMCL7446	O15034	RIMB2_HUMAN	RIMB2	HUMAN	RIMS binding protein 2 [Source:HGNC Symbol;Acc:HGNC:30339]
+ORTHOMCL7480	P11387	TOP1_HUMAN	TOP1	HUMAN	DNA topoisomerase I [Source:HGNC Symbol;Acc:HGNC:11986]
+ORTHOMCL7508	P49757	NUMB_HUMAN	NUMB	HUMAN	NUMB, endocytic adaptor protein [Source:HGNC Symbol;Acc:HGNC:8060]
+ORTHOMCL7515	Q8NDZ4	DIA1_HUMAN	DIA1	HUMAN	chromosome 3 open reading frame 58 [Source:HGNC Symbol;Acc:HGNC:28490]
+ORTHOMCL7549	P29371	NK3R_HUMAN	NK3R	HUMAN	tachykinin receptor 3 [Source:HGNC Symbol;Acc:HGNC:11528]
+ORTHOMCL7569	O14672	ADA10_HUMAN	ADA10	HUMAN	ADAM metallopeptidase domain 10 [Source:HGNC Symbol;Acc:HGNC:188]
+ORTHOMCL7611	Q96G27	WBP1_HUMAN	WBP1	HUMAN	WW domain binding protein 1 [Source:HGNC Symbol;Acc:HGNC:12737]
+ORTHOMCL7642	P16157	ANK1_HUMAN	ANK1	HUMAN	ankyrin 1 [Source:HGNC Symbol;Acc:HGNC:492]
+ORTHOMCL7648	Q8TEB9	RHBL4_HUMAN	RHBL4	HUMAN	rhomboid domain containing 1 [Source:HGNC Symbol;Acc:HGNC:23081]
+ORTHOMCL7651	P41214	EIF2D_HUMAN	EIF2D	HUMAN	eukaryotic translation initiation factor 2D [Source:HGNC Symbol;Acc:HGNC:6583]
+ORTHOMCL7709	Q6ZQX7	LIAT1_HUMAN	LIAT1	HUMAN	chromosome 17 open reading frame 97 [Source:HGNC Symbol;Acc:HGNC:33800]
+ORTHOMCL7718	Q9Y6P5	SESN1_HUMAN	SESN1	HUMAN	sestrin 1 [Source:HGNC Symbol;Acc:HGNC:21595]
+ORTHOMCL7800	Q9BV23	ABHD6_HUMAN	ABHD6	HUMAN	abhydrolase domain containing 6 [Source:HGNC Symbol;Acc:HGNC:21398]
+ORTHOMCL8031	Q8NBP5	MFSD9_HUMAN	MFSD9	HUMAN	major facilitator superfamily domain containing 9 [Source:HGNC Symbol;Acc:HGNC:28158]
+ORTHOMCL8112	Q17RW2	COOA1_HUMAN	COOA1	HUMAN	collagen type XXIV alpha 1 chain [Source:HGNC Symbol;Acc:HGNC:20821]
+ORTHOMCL8133	Q15063	POSTN_HUMAN	POSTN	HUMAN	periostin [Source:HGNC Symbol;Acc:HGNC:16953]
+ORTHOMCL8154	Q9H706	GARE1_HUMAN	GARE1	HUMAN	GRB2 associated regulator of MAPK1 subtype 1 [Source:HGNC Symbol;Acc:HGNC:26136]
+ORTHOMCL8168	Q13873	BMPR2_HUMAN	BMPR2	HUMAN	bone morphogenetic protein receptor type 2 [Source:HGNC Symbol;Acc:HGNC:1078]
+ORTHOMCL8170	Q14157	UBP2L_HUMAN	UBP2L	HUMAN	ubiquitin associated protein 2 like [Source:HGNC Symbol;Acc:HGNC:29877]
+ORTHOMCL8191	Q9HCD5	NCOA5_HUMAN	NCOA5	HUMAN	nuclear receptor coactivator 5 [Source:HGNC Symbol;Acc:HGNC:15909]
+ORTHOMCL8207	Q08174	PCDH1_HUMAN	PCDH1	HUMAN	protocadherin 1 [Source:HGNC Symbol;Acc:HGNC:8655]
+ORTHOMCL8218	Q4LDE5	SVEP1_HUMAN	SVEP1	HUMAN	sushi, von Willebrand factor type A, EGF and pentraxin domain containing 1 [Source:HGNC Symbol;Acc:HGNC:15985]
+ORTHOMCL8220	Q05086	UBE3A_HUMAN	UBE3A	HUMAN	ubiquitin protein ligase E3A [Source:HGNC Symbol;Acc:HGNC:12496]
+ORTHOMCL8256	Q96GD3	SCMH1_HUMAN	SCMH1	HUMAN	Scm polycomb group protein homolog 1 [Source:HGNC Symbol;Acc:HGNC:19003]
+ORTHOMCL8280	Q8IWX8	CHERP_HUMAN	CHERP	HUMAN	calcium homeostasis endoplasmic reticulum protein [Source:HGNC Symbol;Acc:HGNC:16930]
+ORTHOMCL8331	O75909	CCNK_HUMAN	CCNK	HUMAN	cyclin K [Source:HGNC Symbol;Acc:HGNC:1596]
+ORTHOMCL8341	Q5VW38	GP107_HUMAN	GP107	HUMAN	G protein-coupled receptor 107 [Source:HGNC Symbol;Acc:HGNC:17830]
+ORTHOMCL8358	P53370	NUDT6_HUMAN	NUDT6	HUMAN	nudix hydrolase 6 [Source:HGNC Symbol;Acc:HGNC:8053]
+ORTHOMCL8382	P08237	PFKAM_HUMAN	PFKAM	HUMAN	phosphofructokinase, muscle [Source:HGNC Symbol;Acc:HGNC:8877]
+ORTHOMCL8383	Q9NTJ5	SAC1_HUMAN	SAC1	HUMAN	SAC1 like phosphatidylinositide phosphatase [Source:HGNC Symbol;Acc:HGNC:17059]
+ORTHOMCL8391	Q5T5P2	SKT_HUMAN	SKT	HUMAN	KIAA1217 [Source:HGNC Symbol;Acc:HGNC:25428]
+ORTHOMCL8401	O43602	DCX_HUMAN	DCX	HUMAN	doublecortin [Source:HGNC Symbol;Acc:HGNC:2714]
+ORTHOMCL8405	P30085	KCY_HUMAN	KCY	HUMAN	cytidine/uridine monophosphate kinase 1 [Source:HGNC Symbol;Acc:HGNC:18170]
+ORTHOMCL8423	O76095	JTB_HUMAN	JTB	HUMAN	jumping translocation breakpoint [Source:HGNC Symbol;Acc:HGNC:6201]
+ORTHOMCL8431	O94827	PKHG5_HUMAN	PKHG5	HUMAN	pleckstrin homology and RhoGEF domain containing G5 [Source:HGNC Symbol;Acc:HGNC:29105]
+ORTHOMCL8481	P11717	MPRI_HUMAN	MPRI	HUMAN	insulin like growth factor 2 receptor [Source:HGNC Symbol;Acc:HGNC:5467]
+ORTHOMCL8489	P25100	ADA1D_HUMAN	ADA1D	HUMAN	adrenoceptor alpha 1D [Source:HGNC Symbol;Acc:HGNC:280]
+ORTHOMCL8494	Q01484	ANK2_HUMAN	ANK2	HUMAN	ankyrin 2 [Source:HGNC Symbol;Acc:HGNC:493]
+ORTHOMCL8509	Q9BZ19	ANR60_HUMAN	ANR60	HUMAN	ankyrin repeat domain 60 [Source:HGNC Symbol;Acc:HGNC:16217]
+ORTHOMCL8518	Q9NP66	HM20A_HUMAN	HM20A	HUMAN	high mobility group 20A [Source:HGNC Symbol;Acc:HGNC:5001]
+ORTHOMCL8543	O14672	ADA10_HUMAN	ADA10	HUMAN	ADAM metallopeptidase domain 10 [Source:HGNC Symbol;Acc:HGNC:188]
+ORTHOMCL8547	Q9UBH6	XPR1_HUMAN	XPR1	HUMAN	xenotropic and polytropic retrovirus receptor 1 [Source:HGNC Symbol;Acc:HGNC:12827]
+ORTHOMCL8569	Q12986	NFX1_HUMAN	NFX1	HUMAN	nuclear transcription factor, X-box binding 1 [Source:HGNC Symbol;Acc:HGNC:7803]
+ORTHOMCL8609	Q5TZA2	CROCC_HUMAN	CROCC	HUMAN	ciliary rootlet coiled-coil, rootletin [Source:HGNC Symbol;Acc:HGNC:21299]
+ORTHOMCL8623	Q6VMQ6	MCAF1_HUMAN	MCAF1	HUMAN	activating transcription factor 7 interacting protein [Source:HGNC Symbol;Acc:HGNC:20092]
+ORTHOMCL8631	Q9H4G4	GAPR1_HUMAN	GAPR1	HUMAN	GLI pathogenesis related 2 [Source:HGNC Symbol;Acc:HGNC:18007]
+ORTHOMCL8655	O75096	LRP4_HUMAN	LRP4	HUMAN	LDL receptor related protein 4 [Source:HGNC Symbol;Acc:HGNC:6696]
+ORTHOMCL8658	Q14315	FLNC_HUMAN	FLNC	HUMAN	filamin C [Source:HGNC Symbol;Acc:HGNC:3756]
+ORTHOMCL8674	Q14151	SAFB2_HUMAN	SAFB2	HUMAN	scaffold attachment factor B2 [Source:HGNC Symbol;Acc:HGNC:21605]
+ORTHOMCL8697	Q08378	GOGA3_HUMAN	GOGA3	HUMAN	golgin A3 [Source:HGNC Symbol;Acc:HGNC:4426]
+ORTHOMCL8727	Q9UJU6	DBNL_HUMAN	DBNL	HUMAN	drebrin like [Source:HGNC Symbol;Acc:HGNC:2696]
+ORTHOMCL8731	Q6IPM2	IQCE_HUMAN	IQCE	HUMAN	IQ motif containing E [Source:HGNC Symbol;Acc:HGNC:29171]
+ORTHOMCL8853	P46940	IQGA1_HUMAN	IQGA1	HUMAN	IQ motif containing GTPase activating protein 1 [Source:HGNC Symbol;Acc:HGNC:6110]
+ORTHOMCL8882	Q8WXK4	ASB12_HUMAN	ASB12	HUMAN	ankyrin repeat and SOCS box containing 12 [Source:HGNC Symbol;Acc:HGNC:19763]
+ORTHOMCL9045	Q96MS0	ROBO3_HUMAN	ROBO3	HUMAN	roundabout guidance receptor 3 [Source:HGNC Symbol;Acc:HGNC:13433]
+ORTHOMCL9052	Q7Z407	CSMD3_HUMAN	CSMD3	HUMAN	CUB and Sushi multiple domains 3 [Source:HGNC Symbol;Acc:HGNC:19291]
+ORTHOMCL9071	Q9P287	BCCIP_HUMAN	BCCIP	HUMAN	BRCA2 and CDKN1A interacting protein [Source:HGNC Symbol;Acc:HGNC:978]
+ORTHOMCL9089	Q6ZT07	TBCD9_HUMAN	TBCD9	HUMAN	TBC1 domain family member 9 [Source:HGNC Symbol;Acc:HGNC:21710]
+ORTHOMCL9100	P49915	GUAA_HUMAN	GUAA	HUMAN	guanine monophosphate synthase [Source:HGNC Symbol;Acc:HGNC:4378]
+ORTHOMCL9113	Q8NCA5	FA98A_HUMAN	FA98A	HUMAN	family with sequence similarity 98 member A [Source:HGNC Symbol;Acc:HGNC:24520]
+ORTHOMCL9150	Q96SU4	OSBL9_HUMAN	OSBL9	HUMAN	oxysterol binding protein like 9 [Source:HGNC Symbol;Acc:HGNC:16386]
+ORTHOMCL9155	P10075	GLI4_HUMAN	GLI4	HUMAN	GLI family zinc finger 4 [Source:HGNC Symbol;Acc:HGNC:4320]
+ORTHOMCL9197	Q96ER3	SAAL1_HUMAN	SAAL1	HUMAN	serum amyloid A like 1 [Source:HGNC Symbol;Acc:HGNC:25158]
+ORTHOMCL9204	Q3V6T2	GRDN_HUMAN	GRDN	HUMAN	coiled-coil domain containing 88A [Source:HGNC Symbol;Acc:HGNC:25523]
+ORTHOMCL9214	Q96M20	CNBD2_HUMAN	CNBD2	HUMAN	cyclic nucleotide binding domain containing 2 [Source:HGNC Symbol;Acc:HGNC:16145]
+ORTHOMCL9279	Q53G59	KLH12_HUMAN	KLH12	HUMAN	kelch like family member 12 [Source:HGNC Symbol;Acc:HGNC:19360]
+ORTHOMCL9280	P54886	P5CS_HUMAN	P5CS	HUMAN	aldehyde dehydrogenase 18 family member A1 [Source:HGNC Symbol;Acc:HGNC:9722]
+ORTHOMCL9294	Q8NFG4	FLCN_HUMAN	FLCN	HUMAN	folliculin [Source:HGNC Symbol;Acc:HGNC:27310]
+ORTHOMCL9310	Q13322	GRB10_HUMAN	GRB10	HUMAN	growth factor receptor bound protein 10 [Source:HGNC Symbol;Acc:HGNC:4564]
+ORTHOMCL9363	O95876	FRITZ_HUMAN	FRITZ	HUMAN	WD repeat containing planar cell polarity effector [Source:HGNC Symbol;Acc:HGNC:28027]
+ORTHOMCL9365	O43934	MFS11_HUMAN	MFS11	HUMAN	major facilitator superfamily domain containing 11 [Source:HGNC Symbol;Acc:HGNC:25458]
+ORTHOMCL9515	O43347	MSI1H_HUMAN	MSI1H	HUMAN	musashi RNA binding protein 1 [Source:HGNC Symbol;Acc:HGNC:7330]
+ORTHOMCL9526	O60306	AQR_HUMAN	AQR	HUMAN	aquarius intron-binding spliceosomal factor [Source:HGNC Symbol;Acc:HGNC:29513]
+ORTHOMCL9565	Q7Z4V5	HDGR2_HUMAN	HDGR2	HUMAN	HDGF like 2 [Source:HGNC Symbol;Acc:HGNC:14680]
+ORTHOMCL9584	Q8TF40	FNIP1_HUMAN	FNIP1	HUMAN	folliculin interacting protein 1 [Source:HGNC Symbol;Acc:HGNC:29418]
+ORTHOMCL9600	O75694	NU155_HUMAN	NU155	HUMAN	nucleoporin 155 [Source:HGNC Symbol;Acc:HGNC:8063]
+ORTHOMCL9615	P50613	CDK7_HUMAN	CDK7	HUMAN	cyclin dependent kinase 7 [Source:HGNC Symbol;Acc:HGNC:1778]
+ORTHOMCL9621	Q96FV9	THOC1_HUMAN	THOC1	HUMAN	THO complex 1 [Source:HGNC Symbol;Acc:HGNC:19070]
+ORTHOMCL9649	Q9P2K9	DISP3_HUMAN	DISP3	HUMAN	dispatched RND transporter family member 3 [Source:HGNC Symbol;Acc:HGNC:29251]
+ORTHOMCL9659	Q6ZMJ2	SCAR5_HUMAN	SCAR5	HUMAN	scavenger receptor class A member 5 [Source:HGNC Symbol;Acc:HGNC:28701]
+ORTHOMCL9682	Q17RW2	COOA1_HUMAN	COOA1	HUMAN	collagen type XXIV alpha 1 chain [Source:HGNC Symbol;Acc:HGNC:20821]
+ORTHOMCL9700	Q8IZJ3	CPMD8_HUMAN	CPMD8	HUMAN	C3 and PZP like, alpha-2-macroglobulin domain containing 8 [Source:HGNC Symbol;Acc:HGNC:23228]
+ORTHOMCL9701	O43897	TLL1_HUMAN	TLL1	HUMAN	tolloid like 1 [Source:HGNC Symbol;Acc:HGNC:11843]
+ORTHOMCL9715	Q8WVL7	ANR49_HUMAN	ANR49	HUMAN	ankyrin repeat domain 49 [Source:HGNC Symbol;Acc:HGNC:25970]
+ORTHOMCL9782	Q6ZNE9	RUFY4_HUMAN	RUFY4	HUMAN	RUN and FYVE domain containing 4 [Source:HGNC Symbol;Acc:HGNC:24804]
+ORTHOMCL9817	Q6P161	RM54_HUMAN	RM54	HUMAN	mitochondrial ribosomal protein L54 [Source:HGNC Symbol;Acc:HGNC:16685]
+ORTHOMCL9832	A6NEN9	CX065_HUMAN	CX065	HUMAN	chromosome X open reading frame 65 [Source:HGNC Symbol;Acc:HGNC:33713]
+ORTHOMCL9932	O95935	TBX18_HUMAN	TBX18	HUMAN	T-box 18 [Source:HGNC Symbol;Acc:HGNC:11595]
+ORTHOMCL10035	Q5VUE5	CA053_HUMAN	CA053	HUMAN	chromosome 1 open reading frame 53 [Source:HGNC Symbol;Acc:HGNC:30003]
+ORTHOMCL10619	O75970	MPDZ_HUMAN	MPDZ	HUMAN	multiple PDZ domain crumbs cell polarity complex component [Source:HGNC Symbol;Acc:HGNC:7208]
+ORTHOMCL10640	O00602	FCN1_HUMAN	FCN1	HUMAN	ficolin 1 [Source:HGNC Symbol;Acc:HGNC:3623]
+ORTHOMCL10762	Q9Y2R5	RT17_HUMAN	RT17	HUMAN	mitochondrial ribosomal protein S17 [Source:HGNC Symbol;Acc:HGNC:14047]
+ORTHOMCL10770	O00124	UBXN8_HUMAN	UBXN8	HUMAN	UBX domain protein 8 [Source:HGNC Symbol;Acc:HGNC:30307]
+ORTHOMCL10793	Q9BRD0	BUD13_HUMAN	BUD13	HUMAN	BUD13 homolog [Source:HGNC Symbol;Acc:HGNC:28199]
+ORTHOMCL10922	Q5TCQ9	MAGI3_HUMAN	MAGI3	HUMAN	membrane associated guanylate kinase, WW and PDZ domain containing 3 [Source:HGNC Symbol;Acc:HGNC:29647]
+ORTHOMCL10931	A8K979	ERI2_HUMAN	ERI2	HUMAN	ERI1 exoribonuclease family member 2 [Source:HGNC Symbol;Acc:HGNC:30541]
+ORTHOMCL11101	B1AK53	ESPN_HUMAN	ESPN	HUMAN	espin [Source:HGNC Symbol;Acc:HGNC:13281]
+ORTHOMCL11506	Q9UKP5	ATS6_HUMAN	ATS6	HUMAN	ADAM metallopeptidase with thrombospondin type 1 motif 6 [Source:HGNC Symbol;Acc:HGNC:222]
+ORTHOMCL11595	Q9UBD5	ORC3_HUMAN	ORC3	HUMAN	origin recognition complex subunit 3 [Source:HGNC Symbol;Acc:HGNC:8489]
+ORTHOMCL11623	O95870	ABHGA_HUMAN	ABHGA	HUMAN	abhydrolase domain containing 16A [Source:HGNC Symbol;Acc:HGNC:13921]
+ORTHOMCL11746	O95185	UNC5C_HUMAN	UNC5C	HUMAN	unc-5 netrin receptor C [Source:HGNC Symbol;Acc:HGNC:12569]
+ORTHOMCL11757	Q5TCZ1	SPD2A_HUMAN	SPD2A	HUMAN	SH3 and PX domains 2A [Source:HGNC Symbol;Acc:HGNC:23664]
+ORTHOMCL11879	Q9UQB8	BAIP2_HUMAN	BAIP2	HUMAN	BAI1 associated protein 2 [Source:HGNC Symbol;Acc:HGNC:947]
+ORTHOMCL12009	Q7RTR2	NLRC3_HUMAN	NLRC3	HUMAN	NLR family CARD domain containing 3 [Source:HGNC Symbol;Acc:HGNC:29889]
+ORTHOMCL13168	A4D0V7	CPED1_HUMAN	CPED1	HUMAN	cadherin like and PC-esterase domain containing 1 [Source:HGNC Symbol;Acc:HGNC:26159]
+ORTHOMCL13628	Q15399	TLR1_HUMAN	TLR1	HUMAN	toll like receptor 1 [Source:HGNC Symbol;Acc:HGNC:11847]
+ORTHOMCL13757	Q68CZ1	FTM_HUMAN	FTM	HUMAN	RPGRIP1 like [Source:HGNC Symbol;Acc:HGNC:29168]
+ORTHOMCL13788	Q3YBR2	TBRG1_HUMAN	TBRG1	HUMAN	transforming growth factor beta regulator 1 [Source:HGNC Symbol;Acc:HGNC:29551]
+ORTHOMCL13899	Q13200	PSMD2_HUMAN	PSMD2	HUMAN	proteasome 26S subunit, non-ATPase 2 [Source:HGNC Symbol;Acc:HGNC:9559]
+ORTHOMCL14181	Q7Z407	CSMD3_HUMAN	CSMD3	HUMAN	CUB and Sushi multiple domains 3 [Source:HGNC Symbol;Acc:HGNC:19291]
+ORTHOMCL14258	P53814	SMTN_HUMAN	SMTN	HUMAN	smoothelin [Source:HGNC Symbol;Acc:HGNC:11126]
+ORTHOMCL14279	O75832	PSD10_HUMAN	PSD10	HUMAN	proteasome 26S subunit, non-ATPase 10 [Source:HGNC Symbol;Acc:HGNC:9555]
+ORTHOMCL14860	Q9H0J9	PAR12_HUMAN	PAR12	HUMAN	poly(ADP-ribose) polymerase family member 12 [Source:HGNC Symbol;Acc:HGNC:21919]
+ORTHOMCL15922	O60494	CUBN_HUMAN	CUBN	HUMAN	cubilin [Source:HGNC Symbol;Acc:HGNC:2548]
+ORTHOMCL15926	Q12767	TMM94_HUMAN	TMM94	HUMAN	transmembrane protein 94 [Source:HGNC Symbol;Acc:HGNC:28983]
+ORTHOMCL15984	Q4LDE5	SVEP1_HUMAN	SVEP1	HUMAN	sushi, von Willebrand factor type A, EGF and pentraxin domain containing 1 [Source:HGNC Symbol;Acc:HGNC:15985]
+ORTHOMCL16201	A1KZ92	PXDNL_HUMAN	PXDNL	HUMAN	peroxidasin like [Source:HGNC Symbol;Acc:HGNC:26359]
+ORTHOMCL16287	Q969U6	FBXW5_HUMAN	FBXW5	HUMAN	F-box and WD repeat domain containing 5 [Source:HGNC Symbol;Acc:HGNC:13613]
+ORTHOMCL16350	Q01831	XPC_HUMAN	XPC	HUMAN	XPC complex subunit, DNA damage recognition and repair factor [Source:HGNC Symbol;Acc:HGNC:12816]
+ORTHOMCL16750	P20339	RAB5A_HUMAN	RAB5A	HUMAN	RAB5A, member RAS oncogene family [Source:HGNC Symbol;Acc:HGNC:9783]
+ORTHOMCL17848	Q9BW72	HIG2A_HUMAN	HIG2A	HUMAN	HIG1 hypoxia inducible domain family member 2A [Source:HGNC Symbol;Acc:HGNC:28311]
+ORTHOMCL17920	Q8WZ42	TITIN_HUMAN	TITIN	HUMAN	titin [Source:HGNC Symbol;Acc:HGNC:12403]
+ORTHOMCL18290	P19838	NFKB1_HUMAN	NFKB1	HUMAN	nuclear factor kappa B subunit 1 [Source:HGNC Symbol;Acc:HGNC:7794]
+ORTHOMCL18435	Q14112	NID2_HUMAN	NID2	HUMAN	nidogen 2 [Source:HGNC Symbol;Acc:HGNC:13389]
+ORTHOMCL18551	O15050	TRNK1_HUMAN	TRNK1	HUMAN	tetratricopeptide repeat and ankyrin repeat containing 1 [Source:HGNC Symbol;Acc:HGNC:29011]
+ORTHOMCL1886	Q99715	COCA1_HUMAN	COCA1	HUMAN	collagen type XII alpha 1 chain [Source:HGNC Symbol;Acc:HGNC:2188]
+ORTHOMCL1894	P53611	PGTB2_HUMAN	PGTB2	HUMAN	Rab geranylgeranyltransferase beta subunit [Source:HGNC Symbol;Acc:HGNC:9796]
+ORTHOMCL19350	P35348	ADA1A_HUMAN	ADA1A	HUMAN	adrenoceptor alpha 1A [Source:HGNC Symbol;Acc:HGNC:277]
+ORTHOMCL2019	P13591	NCAM1_HUMAN	NCAM1	HUMAN	neural cell adhesion molecule 1 [Source:HGNC Symbol;Acc:HGNC:7656]
+ORTHOMCL2045	Q8WYR4	RSPH1_HUMAN	RSPH1	HUMAN	radial spoke head 1 homolog [Source:HGNC Symbol;Acc:HGNC:12371]
+ORTHOMCL2205	O14974	MYPT1_HUMAN	MYPT1	HUMAN	protein phosphatase 1 regulatory subunit 12A [Source:HGNC Symbol;Acc:HGNC:7618]
+ORTHOMCL2297	A6NJV1	CB070_HUMAN	CB070	HUMAN	chromosome 2 open reading frame 70 [Source:HGNC Symbol;Acc:HGNC:27938]
+ORTHOMCL2330	Q5TGI0	FAXC_HUMAN	FAXC	HUMAN	failed axon connections homolog [Source:HGNC Symbol;Acc:HGNC:20742]
+ORTHOMCL2379	P07858	CATB_HUMAN	CATB	HUMAN	cathepsin B [Source:HGNC Symbol;Acc:HGNC:2527]
+ORTHOMCL2432	Q96BI3	APH1A_HUMAN	APH1A	HUMAN	aph-1 homolog A, gamma-secretase subunit [Source:HGNC Symbol;Acc:HGNC:29509]
+ORTHOMCL2580	O75167	PHAR2_HUMAN	PHAR2	HUMAN	phosphatase and actin regulator 2 [Source:HGNC Symbol;Acc:HGNC:20956]
+ORTHOMCL2617	Q86XN7	PRSR1_HUMAN	PRSR1	HUMAN	proline and serine rich 1 [Source:HGNC Symbol;Acc:HGNC:20291]
+ORTHOMCL2684	Q96RW7	HMCN1_HUMAN	HMCN1	HUMAN	hemicentin 1 [Source:HGNC Symbol;Acc:HGNC:19194]
+ORTHOMCL2787	Q8WUK0	PTPM1_HUMAN	PTPM1	HUMAN	protein tyrosine phosphatase, mitochondrial 1 [Source:HGNC Symbol;Acc:HGNC:26965]
+ORTHOMCL2813	P53990	IST1_HUMAN	IST1	HUMAN	IST1, ESCRT-III associated factor [Source:HGNC Symbol;Acc:HGNC:28977]
+ORTHOMCL3122	P18850	ATF6A_HUMAN	ATF6A	HUMAN	activating transcription factor 6 [Source:HGNC Symbol;Acc:HGNC:791]
+ORTHOMCL3264	Q5T1C6	THEM4_HUMAN	THEM4	HUMAN	thioesterase superfamily member 4 [Source:HGNC Symbol;Acc:HGNC:17947]
+ORTHOMCL3275	P46937	YAP1_HUMAN	YAP1	HUMAN	Yes associated protein 1 [Source:HGNC Symbol;Acc:HGNC:16262]
+ORTHOMCL3291	Q14494	NF2L1_HUMAN	NF2L1	HUMAN	nuclear factor, erythroid 2 like 1 [Source:HGNC Symbol;Acc:HGNC:7781]
+ORTHOMCL3319	Q9BY77	PDIP3_HUMAN	PDIP3	HUMAN	DNA polymerase delta interacting protein 3 [Source:HGNC Symbol;Acc:HGNC:23782]
+ORTHOMCL3418	Q96NA8	TSNA1_HUMAN	TSNA1	HUMAN	t-SNARE domain containing 1 [Source:HGNC Symbol;Acc:HGNC:26437]
+ORTHOMCL3451	Q9UBB4	ATX10_HUMAN	ATX10	HUMAN	ataxin 10 [Source:HGNC Symbol;Acc:HGNC:10549]
+ORTHOMCL3625	Q9H8J5	MANS1_HUMAN	MANS1	HUMAN	MANSC domain containing 1 [Source:HGNC Symbol;Acc:HGNC:25505]
+ORTHOMCL3746	P35244	RFA3_HUMAN	RFA3	HUMAN	replication protein A3 [Source:HGNC Symbol;Acc:HGNC:10291]
+ORTHOMCL4033	A6NFN3	RFOX3_HUMAN	RFOX3	HUMAN	RNA binding fox-1 homolog 3 [Source:HGNC Symbol;Acc:HGNC:27097]
+ORTHOMCL4044	O00268	TAF4_HUMAN	TAF4	HUMAN	TATA-box binding protein associated factor 4 [Source:HGNC Symbol;Acc:HGNC:11537]
+ORTHOMCL4061	Q8IVU9	CBCO1_HUMAN	CBCO1	HUMAN	ciliary associated calcium binding coiled-coil 1 [Source:HGNC Symbol;Acc:HGNC:28678]
+ORTHOMCL4075	Q9Y426	C2CD2_HUMAN	C2CD2	HUMAN	C2 calcium dependent domain containing 2 [Source:HGNC Symbol;Acc:HGNC:1266]
+ORTHOMCL4142	A2A3K4	PTPC1_HUMAN	PTPC1	HUMAN	protein tyrosine phosphatase domain containing 1 [Source:HGNC Symbol;Acc:HGNC:30184]
+ORTHOMCL4186	P42575	CASP2_HUMAN	CASP2	HUMAN	caspase 2 [Source:HGNC Symbol;Acc:HGNC:1503]
+ORTHOMCL4297	Q86TI4	WDR86_HUMAN	WDR86	HUMAN	WD repeat domain 86 [Source:HGNC Symbol;Acc:HGNC:28020]
+ORTHOMCL4301	Q99674	CGRE1_HUMAN	CGRE1	HUMAN	cell growth regulator with EF-hand domain 1 [Source:HGNC Symbol;Acc:HGNC:16962]
+ORTHOMCL4366	P42568	AF9_HUMAN	AF9	HUMAN	MLLT3, super elongation complex subunit [Source:HGNC Symbol;Acc:HGNC:7136]
+ORTHOMCL4405	Q05D32	CTSL2_HUMAN	CTSL2	HUMAN	CTD small phosphatase like 2 [Source:HGNC Symbol;Acc:HGNC:26936]
+ORTHOMCL4407	Q9UFN0	NPS3A_HUMAN	NPS3A	HUMAN	nipsnap homolog 3A [Source:HGNC Symbol;Acc:HGNC:23619]
+ORTHOMCL4408	Q02078	MEF2A_HUMAN	MEF2A	HUMAN	myocyte enhancer factor 2A [Source:HGNC Symbol;Acc:HGNC:6993]
+ORTHOMCL4430	Q15025	TNIP1_HUMAN	TNIP1	HUMAN	TNFAIP3 interacting protein 1 [Source:HGNC Symbol;Acc:HGNC:16903]
+ORTHOMCL4625	Q330K2	NDUF6_HUMAN	NDUF6	HUMAN	NADH:ubiquinone oxidoreductase complex assembly factor 6 [Source:HGNC Symbol;Acc:HGNC:28625]
+ORTHOMCL4650	P78314	3BP2_HUMAN	3BP2	HUMAN	SH3 domain binding protein 2 [Source:HGNC Symbol;Acc:HGNC:10825]
+ORTHOMCL4665	Q14623	IHH_HUMAN	IHH	HUMAN	indian hedgehog [Source:HGNC Symbol;Acc:HGNC:5956]
+ORTHOMCL4775	Q8N983	RM43_HUMAN	RM43	HUMAN	mitochondrial ribosomal protein L43 [Source:HGNC Symbol;Acc:HGNC:14517]
+ORTHOMCL4870	Q9NXE8	CWC25_HUMAN	CWC25	HUMAN	CWC25 spliceosome associated protein homolog [Source:HGNC Symbol;Acc:HGNC:25989]
+ORTHOMCL5003	Q86UP6	CUZD1_HUMAN	CUZD1	HUMAN	CUB and zona pellucida like domains 1 [Source:HGNC Symbol;Acc:HGNC:17937]
+ORTHOMCL5036	Q86WB0	NIPA_HUMAN	NIPA	HUMAN	zinc finger C3HC-type containing 1 [Source:HGNC Symbol;Acc:HGNC:29913]
+ORTHOMCL5058	O00410	IPO5_HUMAN	IPO5	HUMAN	importin 5 [Source:HGNC Symbol;Acc:HGNC:6402]
+ORTHOMCL5074	Q8IU60	DCP2_HUMAN	DCP2	HUMAN	decapping mRNA 2 [Source:HGNC Symbol;Acc:HGNC:24452]
+ORTHOMCL5079	P40222	TXLNA_HUMAN	TXLNA	HUMAN	taxilin alpha [Source:HGNC Symbol;Acc:HGNC:30685]
+ORTHOMCL5116	Q9NQX5	NPDC1_HUMAN	NPDC1	HUMAN	neural proliferation, differentiation and control 1 [Source:HGNC Symbol;Acc:HGNC:7899]
+ORTHOMCL5218	P19883	FST_HUMAN	FST	HUMAN	follistatin [Source:HGNC Symbol;Acc:HGNC:3971]
+ORTHOMCL5554	Q6P996	PDXD1_HUMAN	PDXD1	HUMAN	pyridoxal dependent decarboxylase domain containing 1 [Source:HGNC Symbol;Acc:HGNC:28995]
+ORTHOMCL5732	O43490	PROM1_HUMAN	PROM1	HUMAN	prominin 1 [Source:HGNC Symbol;Acc:HGNC:9454]
+ORTHOMCL5825	O43897	TLL1_HUMAN	TLL1	HUMAN	tolloid like 1 [Source:HGNC Symbol;Acc:HGNC:11843]
+ORTHOMCL5837	Q9UI40	NCKX2_HUMAN	NCKX2	HUMAN	solute carrier family 24 member 2 [Source:HGNC Symbol;Acc:HGNC:10976]
+ORTHOMCL5940	O95684	FR1OP_HUMAN	FR1OP	HUMAN	FGFR1 oncogene partner [Source:HGNC Symbol;Acc:HGNC:17012]
+ORTHOMCL5967	Q99442	SEC62_HUMAN	SEC62	HUMAN	SEC62 homolog, preprotein translocation factor [Source:HGNC Symbol;Acc:HGNC:11846]
+ORTHOMCL6357	Q15434	RBMS2_HUMAN	RBMS2	HUMAN	RNA binding motif single stranded interacting protein 2 [Source:HGNC Symbol;Acc:HGNC:9909]
+ORTHOMCL6361	Q9NQH7	XPP3_HUMAN	XPP3	HUMAN	X-prolyl aminopeptidase 3 [Source:HGNC Symbol;Acc:HGNC:28052]
+ORTHOMCL6448	Q9UDT6	CLIP2_HUMAN	CLIP2	HUMAN	CAP-Gly domain containing linker protein 2 [Source:HGNC Symbol;Acc:HGNC:2586]
+ORTHOMCL6528	Q96B97	SH3K1_HUMAN	SH3K1	HUMAN	SH3 domain containing kinase binding protein 1 [Source:HGNC Symbol;Acc:HGNC:13867]
+ORTHOMCL6564	P48052	CBPA2_HUMAN	CBPA2	HUMAN	carboxypeptidase A2 [Source:HGNC Symbol;Acc:HGNC:2297]
+ORTHOMCL6653	Q8IXZ2	ZC3H3_HUMAN	ZC3H3	HUMAN	zinc finger CCCH-type containing 3 [Source:HGNC Symbol;Acc:HGNC:28972]
+ORTHOMCL6723	Q96C34	RUND1_HUMAN	RUND1	HUMAN	RUN domain containing 1 [Source:HGNC Symbol;Acc:HGNC:25418]
+ORTHOMCL6756	Q13093	PAFA_HUMAN	PAFA	HUMAN	phospholipase A2 group VII [Source:HGNC Symbol;Acc:HGNC:9040]
+ORTHOMCL6908	Q9NX07	TSAP1_HUMAN	TSAP1	HUMAN	tRNA selenocysteine 1 associated protein 1 [Source:HGNC Symbol;Acc:HGNC:30813]
+ORTHOMCL6986	Q96MU7	YTDC1_HUMAN	YTDC1	HUMAN	YTH domain containing 1 [Source:HGNC Symbol;Acc:HGNC:30626]
+ORTHOMCL7165	Q13639	5HT4R_HUMAN	5HT4R	HUMAN	5-hydroxytryptamine receptor 4 [Source:HGNC Symbol;Acc:HGNC:5299]
+ORTHOMCL7247	O15118	NPC1_HUMAN	NPC1	HUMAN	NPC intracellular cholesterol transporter 1 [Source:HGNC Symbol;Acc:HGNC:7897]
+ORTHOMCL7260	A1X283	SPD2B_HUMAN	SPD2B	HUMAN	SH3 and PX domains 2B [Source:HGNC Symbol;Acc:HGNC:29242]
+ORTHOMCL7275	P17900	SAP3_HUMAN	SAP3	HUMAN	GM2 ganglioside activator [Source:HGNC Symbol;Acc:HGNC:4367]
+ORTHOMCL7356	O75152	ZC11A_HUMAN	ZC11A	HUMAN	zinc finger CCCH-type containing 11A [Source:HGNC Symbol;Acc:HGNC:29093]
+ORTHOMCL7384	Q6ZUJ8	BCAP_HUMAN	BCAP	HUMAN	phosphoinositide-3-kinase adaptor protein 1 [Source:HGNC Symbol;Acc:HGNC:30034]
+ORTHOMCL7408	Q96RW7	HMCN1_HUMAN	HMCN1	HUMAN	hemicentin 1 [Source:HGNC Symbol;Acc:HGNC:19194]
+ORTHOMCL7410	Q09666	AHNK_HUMAN	AHNK	HUMAN	AHNAK nucleoprotein [Source:HGNC Symbol;Acc:HGNC:347]
+ORTHOMCL7470	Q6Q0C0	TRAF7_HUMAN	TRAF7	HUMAN	TNF receptor associated factor 7 [Source:HGNC Symbol;Acc:HGNC:20456]
+ORTHOMCL7507	Q9NR16	C163B_HUMAN	C163B	HUMAN	CD163 molecule like 1 [Source:HGNC Symbol;Acc:HGNC:30375]
+ORTHOMCL7524	O00461	GOLI4_HUMAN	GOLI4	HUMAN	golgi integral membrane protein 4 [Source:HGNC Symbol;Acc:HGNC:15448]
+ORTHOMCL7579	Q3KP44	ANR55_HUMAN	ANR55	HUMAN	ankyrin repeat domain 55 [Source:HGNC Symbol;Acc:HGNC:25681]
+ORTHOMCL7593	Q9NUD7	CT096_HUMAN	CT096	HUMAN	chromosome 20 open reading frame 96 [Source:HGNC Symbol;Acc:HGNC:16227]
+ORTHOMCL7620	P41002	CCNF_HUMAN	CCNF	HUMAN	cyclin F [Source:HGNC Symbol;Acc:HGNC:1591]
+ORTHOMCL7686	Q53FA7	QORX_HUMAN	QORX	HUMAN	tumor protein p53 inducible protein 3 [Source:HGNC Symbol;Acc:HGNC:19373]
+ORTHOMCL7802	Q8N806	UBR7_HUMAN	UBR7	HUMAN	ubiquitin protein ligase E3 component n-recognin 7 (putative) [Source:HGNC Symbol;Acc:HGNC:20344]
+ORTHOMCL7944	Q02318	CP27A_HUMAN	CP27A	HUMAN	cytochrome P450 family 27 subfamily A member 1 [Source:HGNC Symbol;Acc:HGNC:2605]
+ORTHOMCL8079	P29371	NK3R_HUMAN	NK3R	HUMAN	tachykinin receptor 3 [Source:HGNC Symbol;Acc:HGNC:11528]
+ORTHOMCL8085	Q96CN9	GCC1_HUMAN	GCC1	HUMAN	GRIP and coiled-coil domain containing 1 [Source:HGNC Symbol;Acc:HGNC:19095]
+ORTHOMCL8408	Q9NS73	MBIP1_HUMAN	MBIP1	HUMAN	MAP3K12 binding inhibitory protein 1 [Source:HGNC Symbol;Acc:HGNC:20427]
+ORTHOMCL8437	Q5XG87	PAPD7_HUMAN	PAPD7	HUMAN	poly(A) RNA polymerase D7, non-canonical [Source:HGNC Symbol;Acc:HGNC:16705]
+ORTHOMCL9244	O60841	IF2P_HUMAN	IF2P	HUMAN	eukaryotic translation initiation factor 5B [Source:HGNC Symbol;Acc:HGNC:30793]
+ORTHOMCL9551	Q8TC07	TBC15_HUMAN	TBC15	HUMAN	TBC1 domain family member 15 [Source:HGNC Symbol;Acc:HGNC:25694]
+ORTHOMCL9575	Q9BYG0	B3GN5_HUMAN	B3GN5	HUMAN	UDP-GlcNAc:betaGal beta-1,3-N-acetylglucosaminyltransferase 5 [Source:HGNC Symbol;Acc:HGNC:15684]
+ORTHOMCL9634	Q13507	TRPC3_HUMAN	TRPC3	HUMAN	transient receptor potential cation channel subfamily C member 3 [Source:HGNC Symbol;Acc:HGNC:12335]
+ORTHOMCL9692	Q92896	GSLG1_HUMAN	GSLG1	HUMAN	golgi glycoprotein 1 [Source:HGNC Symbol;Acc:HGNC:4316]
+ORTHOMCL9738	O43581	SYT7_HUMAN	SYT7	HUMAN	synaptotagmin 7 [Source:HGNC Symbol;Acc:HGNC:11514]
+ORTHOMCL9765	P51826	AFF3_HUMAN	AFF3	HUMAN	AF4/FMR2 family member 3 [Source:HGNC Symbol;Acc:HGNC:6473]
+ORTHOMCL10769	Q8TE57	ATS16_HUMAN	ATS16	HUMAN	ADAM metallopeptidase with thrombospondin type 1 motif 16 [Source:HGNC Symbol;Acc:HGNC:17108]
+ORTHOMCL11196	O14732	IMPA2_HUMAN	IMPA2	HUMAN	inositol monophosphatase 2 [Source:HGNC Symbol;Acc:HGNC:6051]
+ORTHOMCL3303	O00299	CLIC1_HUMAN	CLIC1	HUMAN	chloride intracellular channel 1 [Source:HGNC Symbol;Acc:HGNC:2062]
+ORTHOMCL10947	A5D9D4	MSTO1_BOVIN	MSTO1	BOVIN	misato 1, mitochondrial distribution and morphology regulator [Source:VGNC Symbol;Acc:VGNC:31710]
+ORTHOMCL12310	A7YWP4	HUTH_BOVIN	HUTH	BOVIN	histidine ammonia-lyase [Source:VGNC Symbol;Acc:VGNC:29744]
+ORTHOMCL13705	A6QLU6	AGRD1_BOVIN	AGRD1	BOVIN	Adhesion G-protein coupled receptor D1  [Source:UniProtKB/Swiss-Prot;Acc:A6QLU6]
+ORTHOMCL14219	Q3MHG0	COG4_BOVIN	COG4	BOVIN	component of oligomeric golgi complex 4 [Source:VGNC Symbol;Acc:VGNC:27549]
+ORTHOMCL15443	F1MJW3	SCNNG_BOVIN	SCNNG	BOVIN	sodium channel epithelial 1 gamma subunit [Source:VGNC Symbol;Acc:VGNC:34358]
+ORTHOMCL15503	Q2KIL4	COQ6_BOVIN	COQ6	BOVIN	coenzyme Q6, monooxygenase [Source:VGNC Symbol;Acc:VGNC:27614]
+ORTHOMCL15519	A7YY35	K2012_BOVIN	K2012	BOVIN	KIAA2012 [Source:VGNC Symbol;Acc:VGNC:30578]
+ORTHOMCL16183	A4IF63	TRIM2_BOVIN	TRIM2	BOVIN	tripartite motif containing 2 [Source:VGNC Symbol;Acc:VGNC:36318]
+ORTHOMCL17335	Q2HJF7	KCC2D_BOVIN	KCC2D	BOVIN	Calcium/calmodulin-dependent protein kinase type II subunit delta  [Source:UniProtKB/Swiss-Prot;Acc:Q2HJF7]
+ORTHOMCL17864	Q1LZA7	LIMD2_BOVIN	LIMD2	BOVIN	LIM domain containing 2 [Source:VGNC Symbol;Acc:VGNC:30889]
+ORTHOMCL4066	Q2HJ56	PWP1_BOVIN	PWP1	BOVIN	PWP1 homolog, endonuclein [Source:VGNC Symbol;Acc:VGNC:33580]
+ORTHOMCL4329	Q58D84	FSTL1_BOVIN	FSTL1	BOVIN	follistatin like 1 [Source:VGNC Symbol;Acc:VGNC:29135]
+ORTHOMCL4425	A5PJG7	CCHL_BOVIN	CCHL	BOVIN	holocytochrome c synthase [Source:VGNC Symbol;Acc:VGNC:29770]
+ORTHOMCL5536	Q3T0B6	C1QBP_BOVIN	C1QBP	BOVIN	complement C1q binding protein [Source:VGNC Symbol;Acc:VGNC:26618]
+ORTHOMCL5541	Q3SYV3	OXA1L_BOVIN	OXA1L	BOVIN	OXA1L, mitochondrial inner membrane protein [Source:VGNC Symbol;Acc:VGNC:32507]
+ORTHOMCL7208	Q58DS6	JMJD6_BOVIN	JMJD6	BOVIN	arginine demethylase and lysine hydroxylase [Source:VGNC Symbol;Acc:VGNC:30377]
+ORTHOMCL7691	Q3SZG9	CTU2_BOVIN	CTU2	BOVIN	cytosolic thiouridylase subunit 2 [Source:VGNC Symbol;Acc:VGNC:27824]
+ORTHOMCL7726	Q95117	SFRP3_BOVIN	SFRP3	BOVIN	frizzled-related protein [Source:VGNC Symbol;Acc:VGNC:29124]
+ORTHOMCL7834	Q5E9D6	HDHD3_BOVIN	HDHD3	BOVIN	haloacid dehalogenase like hydrolase domain containing 3 [Source:VGNC Symbol;Acc:VGNC:29789]
+ORTHOMCL8364	Q3ZBP0	CK074_BOVIN	CK074	BOVIN	Uncharacterized protein C11orf74 homolog  [Source:UniProtKB/Swiss-Prot;Acc:Q3ZBP0]
+ORTHOMCL8768	Q32LC9	ZN330_BOVIN	ZN330	BOVIN	Zinc finger protein 330  [Source:UniProtKB/Swiss-Prot;Acc:Q32LC9]
+ORTHOMCL8824	Q2T9V5	TRM6_BOVIN	TRM6	BOVIN	tRNA methyltransferase 6 [Source:VGNC Symbol;Acc:VGNC:36374]
+ORTHOMCL9321	Q1JPD3	D2HDH_BOVIN	D2HDH	BOVIN	D-2-hydroxyglutarate dehydrogenase [Source:VGNC Symbol;Acc:VGNC:27861]
+ORTHOMCL9703	Q0II91	DJC21_BOVIN	DJC21	BOVIN	DnaJ homolog subfamily C member 21  [Source:UniProtKB/Swiss-Prot;Acc:Q0II91]
+ORTHOMCL11481	Q4TVR5	DUSTY_BOVIN	DUSTY	BOVIN	dual serine/threonine and tyrosine protein kinase [Source:VGNC Symbol;Acc:VGNC:28227]
+ORTHOMCL12588	Q17QQ2	TPMT_BOVIN	TPMT	BOVIN	thiopurine S-methyltransferase [Source:VGNC Symbol;Acc:VGNC:36255]
+ORTHOMCL1452	Q9MYP6	DHB14_BOVIN	DHB14	BOVIN	hydroxysteroid 17-beta dehydrogenase 14 [Source:VGNC Symbol;Acc:VGNC:29972]
+ORTHOMCL17368	P83095	LACTB_BOVIN	LACTB	BOVIN	lactamase beta [Source:VGNC Symbol;Acc:VGNC:30764]
+ORTHOMCL17913	Q2HJF4	PBLD_BOVIN	PBLD	BOVIN	phenazine biosynthesis like protein domain containing [Source:VGNC Symbol;Acc:VGNC:32605]
+ORTHOMCL1826	Q5E996	NOP16_BOVIN	NOP16	BOVIN	NOP16 nucleolar protein [Source:VGNC Symbol;Acc:VGNC:32166]
+ORTHOMCL1876	A2VDZ9	VAPB_BOVIN	VAPB	BOVIN	VAMP associated protein B and C [Source:VGNC Symbol;Acc:VGNC:36764]
+ORTHOMCL19316	Q0VC81	AA3R_BOVIN	AA3R	BOVIN	Adenosine receptor A3  [Source:UniProtKB/Swiss-Prot;Acc:Q0VC81]
+ORTHOMCL3210	Q5EA98	MFAP1_BOVIN	MFAP1	BOVIN	microfibril associated protein 1 [Source:VGNC Symbol;Acc:VGNC:31421]
+ORTHOMCL3655	Q1JP75	DCXR_BOVIN	DCXR	BOVIN	L-xylulose reductase  [Source:UniProtKB/Swiss-Prot;Acc:Q1JP75]
+ORTHOMCL4814	A4FV08	GNPI1_BOVIN	GNPI1	BOVIN	glucosamine-6-phosphate deaminase 1 [Source:VGNC Symbol;Acc:VGNC:29476]
+ORTHOMCL5725	Q3ZBU9	UBXN4_BOVIN	UBXN4	BOVIN	UBX domain protein 4 [Source:VGNC Symbol;Acc:VGNC:36627]
+ORTHOMCL7313	Q0P595	SIR7_BOVIN	SIR7	BOVIN	sirtuin 7 [Source:VGNC Symbol;Acc:VGNC:34636]
+ORTHOMCL10415	E7F1H9	YTHD2_DANRE	YTHD2	DANRE	YTH N(6)-methyladenosine RNA binding protein 2 [Source:ZFIN;Acc:ZDB-GENE-040426-948]
+ORTHOMCL11738	F1R5H6	BRD4_DANRE	BRD4	DANRE	bromodomain containing 4 [Source:ZFIN;Acc:ZDB-GENE-030131-267]
+ORTHOMCL11949	Q0VA82	MFSD8_DANRE	MFSD8	DANRE	major facilitator superfamily domain containing 8 [Source:ZFIN;Acc:ZDB-GENE-060818-29]
+ORTHOMCL12709	Q08BA4	S38A9_DANRE	S38A9	DANRE	solute carrier family 38, member 9 [Source:ZFIN;Acc:ZDB-GENE-061013-597]
+ORTHOMCL13232	Q6NWI1	RSRC2_DANRE	RSRC2	DANRE	arginine/serine-rich coiled-coil 2 [Source:ZFIN;Acc:ZDB-GENE-040426-2457]
+ORTHOMCL13700	Q92051	CAHZ_DANRE	CAHZ	DANRE	carbonic anhydrase [Source:ZFIN;Acc:ZDB-GENE-980526-39]
+ORTHOMCL13858	Q5RGE5	DCR1C_DANRE	DCR1C	DANRE	DNA cross-link repair 1C, PSO2 homolog (S. cerevisiae) [Source:ZFIN;Acc:ZDB-GENE-041210-72]
+ORTHOMCL15282	E7F211	TTC17_DANRE	TTC17	DANRE	tetratricopeptide repeat domain 17 [Source:ZFIN;Acc:ZDB-GENE-100422-15]
+ORTHOMCL15614	B0UXH6	RGPS1_DANRE	RGPS1	DANRE	Ral GEF with PH domain and SH3 binding motif 1 [Source:ZFIN;Acc:ZDB-GENE-070720-16]
+ORTHOMCL16237	E7F9T0	MICA1_DANRE	MICA1	DANRE	microtubule associated monooxygenase, calponin and LIM domain containing 1 [Source:ZFIN;Acc:ZDB-GENE-081022-3]
+ORTHOMCL18923	O93430	GLRA1_DANRE	GLRA1	DANRE	glycine receptor, alpha 1 [Source:ZFIN;Acc:ZDB-GENE-991117-1]
+ORTHOMCL19514	A2BGM5	FOXN4_DANRE	FOXN4	DANRE	forkhead box N4 [Source:ZFIN;Acc:ZDB-GENE-990415-277]
+ORTHOMCL6268	Q6DHU1	CLP1L_DANRE	CLP1L	DANRE	CLPTM1-like [Source:ZFIN;Acc:ZDB-GENE-040718-75]
+ORTHOMCL6394	Q08BY0	NDUF7_DANRE	NDUF7	DANRE	NADH dehydrogenase (ubiquinone) complex I, assembly factor 7 [Source:ZFIN;Acc:ZDB-GENE-060929-628]
+ORTHOMCL6570	Q805E5	CHSTE_DANRE	CHSTE	DANRE	carbohydrate (N-acetylgalactosamine 4-0) sulfotransferase 14 [Source:ZFIN;Acc:ZDB-GENE-040401-3]
+ORTHOMCL7102	Q6NYK8	MARH5_DANRE	MARH5	DANRE	membrane-associated ring finger (C3HC4) 5, like [Source:ZFIN;Acc:ZDB-GENE-030131-4792]
+ORTHOMCL7424	A3KPW9	BAG6_DANRE	BAG6	DANRE	BCL2 associated athanogene 6, like [Source:ZFIN;Acc:ZDB-GENE-060307-2]
+ORTHOMCL7596	F1Q8W0	CATIN_DANRE	CATIN	DANRE	cactin [Source:ZFIN;Acc:ZDB-GENE-060503-322]
+ORTHOMCL7827	Q66IC8	TC1D1_DANRE	TC1D1	DANRE	Tctex1 domain containing 1 [Source:ZFIN;Acc:ZDB-GENE-040912-49]
+ORTHOMCL8155	Q1LY46	LETM1_DANRE	LETM1	DANRE	leucine zipper-EF-hand containing transmembrane protein 1 [Source:ZFIN;Acc:ZDB-GENE-050522-154]
+ORTHOMCL8474	Q5PRC1	LHPL6_DANRE	LHPL6	DANRE	LHFPL tetraspan subfamily member 6 [Source:ZFIN;Acc:ZDB-GENE-041212-82]
+ORTHOMCL1842	A1L1M4	P4R2B_DANRE	P4R2B	DANRE	protein phosphatase 4, regulatory subunit 2b [Source:ZFIN;Acc:ZDB-GENE-030131-3008]
+ORTHOMCL2170	Q561X9	BDH2_DANRE	BDH2	DANRE	3-hydroxybutyrate dehydrogenase, type 2 [Source:ZFIN;Acc:ZDB-GENE-050417-343]
+ORTHOMCL5958	Q6NVC5	MIRO1_DANRE	MIRO1	DANRE	ras homolog family member T1a [Source:ZFIN;Acc:ZDB-GENE-030131-5354]
+ORTHOMCL9180	Q08C93	ABD12_DANRE	ABD12	DANRE	abhydrolase domain containing 12 [Source:ZFIN;Acc:ZDB-GENE-060929-268]
+ORTHOMCL10169	P26652	TIMP3_CHICK	TIMP3	CHICK	Metalloproteinase inhibitor 3  [Source:UniProtKB/Swiss-Prot;Acc:P26652]
+ORTHOMCL13728	Q9PTS8	ACHA9_CHICK	ACHA9	CHICK	Neuronal acetylcholine receptor subunit alpha-9  [Source:UniProtKB/Swiss-Prot;Acc:Q9PTS8]
+ORTHOMCL14261	Q5ZKJ5	MF13A_CHICK	MF13A	CHICK	Transmembrane protein 180  [Source:UniProtKB/Swiss-Prot;Acc:Q5ZKJ5]
+ORTHOMCL21421	Q04861	NFKB1_CHICK	NFKB1	CHICK	Nuclear factor NF-kappa-B p105 subunit Nuclear factor NF-kappa-B p50 subunit [Source:UniProtKB/Swiss-Prot;Acc:Q04861]
+ORTHOMCL5470	Q90669	AVR2A_CHICK	AVR2A	CHICK	Activin receptor type-2A  [Source:UniProtKB/Swiss-Prot;Acc:Q90669]
+ORTHOMCL8714	Q8JGM4	QSOX1_CHICK	QSOX1	CHICK	Sulfhydryl oxidase 1  [Source:UniProtKB/Swiss-Prot;Acc:Q8JGM4]
+ORTHOMCL10864	Q5ZK62	ACAP2_CHICK	ACAP2	CHICK	Arf-GAP with coiled-coil, ANK repeat and PH domain-containing protein 2  [Source:UniProtKB/Swiss-Prot;Acc:Q5ZK62]
+ORTHOMCL13627	Q5ZJR9	TAF1B_CHICK	TAF1B	CHICK	TATA box-binding protein-associated factor RNA polymerase I subunit B  [Source:UniProtKB/Swiss-Prot;Acc:Q5ZJR9]
+ORTHOMCL2526	P19352	TPM2_CHICK	TPM2	CHICK	Tropomyosin beta chain  [Source:UniProtKB/Swiss-Prot;Acc:P19352]
+ORTHOMCL2700	Q5ZIR1	SHLB1_CHICK	SHLB1	CHICK	Endophilin-B1  [Source:UniProtKB/Swiss-Prot;Acc:Q5ZIR1]
+ORTHOMCL5781	Q5ZI20	S39AD_CHICK	S39AD	CHICK	Zinc transporter ZIP13  [Source:UniProtKB/Swiss-Prot;Acc:Q5ZI20]
+ORTHOMCL6750	P18519	TNR16_CHICK	TNR16	CHICK	Tumor necrosis factor receptor superfamily member 16  [Source:UniProtKB/Swiss-Prot;Acc:P18519]
+ORTHOMCL10534	Q9VZS6	NSMA_DROME	NSMA	DROME	
+ORTHOMCL12082	Q9NDJ2	DOM_DROME	DOM	DROME	domino [Source:FlyBase;Acc:FBgn0020306]
+ORTHOMCL13471	O46043	PARG_DROME	PARG	DROME	Poly(ADP-ribose) glycohydrolase [Source:FlyBase;Acc:FBgn0023216]
+ORTHOMCL17334	P30974	TLR1_DROME	TLR1	DROME	Tachykinin-like receptor at 86C [Source:FlyBase;Acc:FBgn0004841]
+ORTHOMCL18957	Q9V9J3	SRC42_DROME	SRC42	DROME	Src oncogene at 42A [Source:FlyBase;Acc:FBgn0264959]
+ORTHOMCL18995	P20007	PCKG_DROME	PCKG	DROME	Phosphoenolpyruvate carboxykinase [Source:FlyBase;Acc:FBgn0003067]
+ORTHOMCL20124	Q24180	DEAF1_DROME	DEAF1	DROME	Deformed epidermal autoregulatory factor-1 [Source:FlyBase;Acc:FBgn0013799]
+ORTHOMCL21592	P26686	SRR55_DROME	SRR55	DROME	
+ORTHOMCL2827	O61443	MK38B_DROME	MK38B	DROME	p38b MAP kinase [Source:FlyBase;Acc:FBgn0024846]
+ORTHOMCL4994	O44252	ROST_DROME	ROST	DROME	rolling stone [Source:FlyBase;Acc:FBgn0011705]
+ORTHOMCL5327	P02516	HSP23_DROME	HSP23	DROME	Heat shock protein 23 [Source:FlyBase;Acc:FBgn0001224]
+ORTHOMCL5771	Q9VAY7	FAM50_DROME	FAM50	DROME	
+ORTHOMCL6348	P08120	CO4A1_DROME	CO4A1	DROME	Collagen type IV alpha 1 [Source:FlyBase;Acc:FBgn0000299]
+ORTHOMCL7489	Q9VCP0	ELOA1_DROME	ELOA1	DROME	Elongin A [Source:FlyBase;Acc:FBgn0039066]
+ORTHOMCL7556	Q8MKK4	TRE12_DROME	TRE12	DROME	Trehalose transporter 1-2 [Source:FlyBase;Acc:FBgn0033644]
+ORTHOMCL12436	P07207	NOTCH_DROME	NOTCH	DROME	Notch [Source:FlyBase;Acc:FBgn0004647]
+ORTHOMCL16459	Q9VU84	DBNL_DROME	DBNL	DROME	Actin binding protein 1 [Source:FlyBase;Acc:FBgn0036372]
+ORTHOMCL6698	P08120	CO4A1_DROME	CO4A1	DROME	Collagen type IV alpha 1 [Source:FlyBase;Acc:FBgn0000299]
+ORTHOMCL6868	Q95SS8	TMM70_DROME	TMM70	DROME	
+ORTHOMCL7133	A1ZAY1	DLISH_DROME	DLISH	DROME	Dachs ligand with SH3s [Source:FlyBase;Acc:FBgn0034264]
+ORTHOMCL6954	O18994	GPX5_PIG	GPX5	PIG	Epididymal secretory glutathione peroxidase  [Source:UniProtKB/Swiss-Prot;Acc:O18994]
+ORTHOMCL10078	O08700	VPS45_RAT	VPS45	RAT	none
+ORTHOMCL10205	none	NA	NA	NA	none
+ORTHOMCL10228	P21265	PUR8_CHICK	PUR8	CHICK	none
+ORTHOMCL10336	Q32LC1	RPP38_BOVIN	RPP38	BOVIN	none
+ORTHOMCL10456	B0CM26	CFA69_PAPAN	CFA69	PAPAN	none
+ORTHOMCL10458	Q921L8	GLT11_MOUSE	GLT11	MOUSE	none
+ORTHOMCL10463	none	NA	NA	NA	none
+ORTHOMCL10486	O13146	EPHA3_DANRE	EPHA3	DANRE	none
+ORTHOMCL10499	none	NA	NA	NA	none
+ORTHOMCL10549	none	NA	NA	NA	none
+ORTHOMCL10560	Q8VC31	CCDC9_MOUSE	CCDC9	MOUSE	none
+ORTHOMCL10572	Q3KRF3	CA131_RAT	CA131	RAT	none
+ORTHOMCL10635	none	NA	NA	NA	none
+ORTHOMCL10666	none	NA	NA	NA	none
+ORTHOMCL10678	F1Q8J0	RBM40_DANRE	RBM40	DANRE	none
+ORTHOMCL10728	Q3TAA7	S11IP_MOUSE	S11IP	MOUSE	none
+ORTHOMCL10751	Q5STE3	FSTL4_MOUSE	FSTL4	MOUSE	none
+ORTHOMCL10803	P55115	NAS15_CAEEL	NAS15	CAEEL	none
+ORTHOMCL10813	none	NA	NA	NA	none
+ORTHOMCL10868	Q62371	DDR2_MOUSE	DDR2	MOUSE	none
+ORTHOMCL10919	none	NA	NA	NA	none
+ORTHOMCL10946	Q4R0J7	ARD1_UROFA	ARD1	UROFA	none
+ORTHOMCL10961	Q5SWD9	TSR1_MOUSE	TSR1	MOUSE	none
+ORTHOMCL10977	none	NA	NA	NA	none
+ORTHOMCL11070	P52825	CPT2_MOUSE	CPT2	MOUSE	none
+ORTHOMCL11297	Q61090	FZD7_MOUSE	FZD7	MOUSE	none
+ORTHOMCL11471	Q80T85	DCAF5_MOUSE	DCAF5	MOUSE	none
+ORTHOMCL11515	Q3U1V8	M3K9_MOUSE	M3K9	MOUSE	none
+ORTHOMCL11516	Q4KLG3	SVBP_RAT	SVBP	RAT	none
+ORTHOMCL11677	none	NA	NA	NA	none
+ORTHOMCL11729	Q8C2L6	T161B_MOUSE	T161B	MOUSE	none
+ORTHOMCL11732	P48763	SL9A2_RAT	SL9A2	RAT	none
+ORTHOMCL11741	Q5R5L7	ARRD3_PONAB	ARRD3	PONAB	none
+ORTHOMCL11750	none	NA	NA	NA	none
+ORTHOMCL11775	Q4UMH6	Y381_RICFE	Y381	RICFE	none
+ORTHOMCL11813	O15973	OPSD1_MIZYE	OPSD1	MIZYE	none
+ORTHOMCL11842	Q8CAQ8	MIC60_MOUSE	MIC60	MOUSE	none
+ORTHOMCL11915	P31266	SUH_MOUSE	SUH	MOUSE	none
+ORTHOMCL11919	P49791	NU153_RAT	NU153	RAT	none
+ORTHOMCL11986	none	NA	NA	NA	none
+ORTHOMCL12002	none	NA	NA	NA	none
+ORTHOMCL12006	H1AFJ5	SCNNA_NEOFS	SCNNA	NEOFS	none
+ORTHOMCL12007	Q5TM64	CF136_MACMU	CF136	MACMU	none
+ORTHOMCL12030	A0JPI9	LR74A_RAT	LR74A	RAT	none
+ORTHOMCL12086	Q28C74	LPPRC_XENTR	LPPRC	XENTR	none
+ORTHOMCL12124	B2RYR0	RN168_RAT	RN168	RAT	none
+ORTHOMCL12142	none	NA	NA	NA	none
+ORTHOMCL12200	none	NA	NA	NA	none
+ORTHOMCL12252	Q8BHR2	ENOX1_MOUSE	ENOX1	MOUSE	none
+ORTHOMCL12474	Q9FHN8	KN14E_ARATH	KN14E	ARATH	none
+ORTHOMCL12665	P9WKC1	Y1425_MYCTU	Y1425	MYCTU	none
+ORTHOMCL12675	A7SKJ3	DPH2_NEMVE	DPH2	NEMVE	none
+ORTHOMCL12694	Q5NDE3	PMGT2_TETNG	PMGT2	TETNG	none
+ORTHOMCL12714	Q8BIY1	GPTC3_MOUSE	GPTC3	MOUSE	none
+ORTHOMCL12791	A3E4D8	CALM_PROMN	CALM	PROMN	none
+ORTHOMCL12846	Q6PCS4	RHG29_DANRE	RHG29	DANRE	none
+ORTHOMCL13033	none	NA	NA	NA	none
+ORTHOMCL13176	none	NA	NA	NA	none
+ORTHOMCL13188	none	NA	NA	NA	none
+ORTHOMCL13218	none	NA	NA	NA	none
+ORTHOMCL13242	Q3MSQ8	DDX4_PELLE	DDX4	PELLE	none
+ORTHOMCL13377	A6NAF9	TRD7A_DANRE	TRD7A	DANRE	none
+ORTHOMCL13435	P24668	MPRD_MOUSE	MPRD	MOUSE	none
+ORTHOMCL13486	A3KCL7	OXDD_PIG	OXDD	PIG	none
+ORTHOMCL13530	none	NA	NA	NA	none
+ORTHOMCL13698	B3EWZ5	MLRP1_ACRMI	MLRP1	ACRMI	none
+ORTHOMCL13706	P79955	CTK2_XENLA	CTK2	XENLA	none
+ORTHOMCL13772	Q8Q0U0	Y045_METMA	Y045	METMA	none
+ORTHOMCL13826	Q9JHZ4	GRAP1_RAT	GRAP1	RAT	none
+ORTHOMCL13836	none	NA	NA	NA	none
+ORTHOMCL13878	Q54QR3	RB32A_DICDI	RB32A	DICDI	none
+ORTHOMCL14007	P32442	MEOX1_MOUSE	MEOX1	MOUSE	none
+ORTHOMCL14272	F4J1H7	RNZ4_ARATH	RNZ4	ARATH	none
+ORTHOMCL14340	none	NA	NA	NA	none
+ORTHOMCL14348	Q5XHG1	NSMA3_XENLA	NSMA3	XENLA	none
+ORTHOMCL14396	Q54TD7	DDX24_DICDI	DDX24	DICDI	none
+ORTHOMCL14459	E1C760	UVSSA_CHICK	UVSSA	CHICK	none
+ORTHOMCL14840	P97259	MGT5A_CRIGR	MGT5A	CRIGR	none
+ORTHOMCL14919	none	NA	NA	NA	none
+ORTHOMCL14943	D4A7U2	CARTF_RAT	CARTF	RAT	none
+ORTHOMCL14954	none	NA	NA	NA	none
+ORTHOMCL14972	none	NA	NA	NA	none
+ORTHOMCL14980	P83510	TNIK_MOUSE	TNIK	MOUSE	none
+ORTHOMCL15014	A2A8L5	PTPRF_MOUSE	PTPRF	MOUSE	none
+ORTHOMCL15043	Q08AW4	PKHM3_XENLA	PKHM3	XENLA	none
+ORTHOMCL15086	none	NA	NA	NA	none
+ORTHOMCL15181	none	NA	NA	NA	none
+ORTHOMCL15195	none	NA	NA	NA	none
+ORTHOMCL15303	Q4R747	LRC46_MACFA	LRC46	MACFA	none
+ORTHOMCL15343	Q93YS4	AB22G_ARATH	AB22G	ARATH	none
+ORTHOMCL15352	Q8HY06	CLC4M_GORGO	CLC4M	GORGO	none
+ORTHOMCL15378	Q0VA77	ENPP4_XENTR	ENPP4	XENTR	none
+ORTHOMCL15424	O88974	SETB1_MOUSE	SETB1	MOUSE	none
+ORTHOMCL15457	O13024	INCEA_XENLA	INCEA	XENLA	none
+ORTHOMCL15580	B3EWY9	MLP_ACRMI	MLP	ACRMI	none
+ORTHOMCL15615	Q5F4A1	G2E3_CHICK	G2E3	CHICK	none
+ORTHOMCL15644	none	NA	NA	NA	none
+ORTHOMCL15650	Q6NU40	CTF18_XENLA	CTF18	XENLA	none
+ORTHOMCL15777	Q3U0J8	TBD2B_MOUSE	TBD2B	MOUSE	none
+ORTHOMCL16139	none	NA	NA	NA	none
+ORTHOMCL16164	Q5UQQ7	Y856_MIMIV	Y856	MIMIV	none
+ORTHOMCL16181	Q05546	TENR_RAT	TENR	RAT	none
+ORTHOMCL16224	A0FKN6	VMPA_LOXIN	VMPA	LOXIN	none
+ORTHOMCL16246	A1A4L4	MINY4_BOVIN	MINY4	BOVIN	none
+ORTHOMCL16273	none	NA	NA	NA	none
+ORTHOMCL16295	none	NA	NA	NA	none
+ORTHOMCL16312	Q3TRR0	MAP9_MOUSE	MAP9	MOUSE	none
+ORTHOMCL16368	P0C5Y8	ALS2_RAT	ALS2	RAT	none
+ORTHOMCL16486	none	NA	NA	NA	none
+ORTHOMCL16536	none	NA	NA	NA	none
+ORTHOMCL16575	none	NA	NA	NA	none
+ORTHOMCL16946	B3EWZ3	CADN_ACRMI	CADN	ACRMI	none
+ORTHOMCL16983	O36018	BUD22_SCHPO	BUD22	SCHPO	none
+ORTHOMCL17095	none	NA	NA	NA	none
+ORTHOMCL17102	none	NA	NA	NA	none
+ORTHOMCL17142	Q3U3V8	XRRA1_MOUSE	XRRA1	MOUSE	none
+ORTHOMCL17162	B4GD14	LPHN_DROPE	LPHN	DROPE	none
+ORTHOMCL17170	Q4KKX4	NCOR1_XENTR	NCOR1	XENTR	none
+ORTHOMCL17179	none	NA	NA	NA	none
+ORTHOMCL17234	none	NA	NA	NA	none
+ORTHOMCL17271	none	NA	NA	NA	none
+ORTHOMCL17277	Q5ZIE8	MCAF1_CHICK	MCAF1	CHICK	none
+ORTHOMCL17302	Q9WUU9	GANP_MOUSE	GANP	MOUSE	none
+ORTHOMCL17414	Q54BU4	ABCB1_DICDI	ABCB1	DICDI	none
+ORTHOMCL17441	none	NA	NA	NA	none
+ORTHOMCL17450	Q196X6	VF232_IIV3	VF232	IIV3	none
+ORTHOMCL17662	Q3U3T8	WDR62_MOUSE	WDR62	MOUSE	none
+ORTHOMCL17684	F1M3L7	EPS8_RAT	EPS8	RAT	none
+ORTHOMCL17703	none	NA	NA	NA	none
+ORTHOMCL17839	P41592	OPSR_ANOCA	OPSR	ANOCA	none
+ORTHOMCL17861	Q5TJ56	FORF_DICDI	FORF	DICDI	none
+ORTHOMCL17874	none	NA	NA	NA	none
+ORTHOMCL17916	D3Z902	FBXW7_RAT	FBXW7	RAT	none
+ORTHOMCL17937	Q5YU15	Y3478_NOCFA	Y3478	NOCFA	none
+ORTHOMCL18314	none	NA	NA	NA	none
+ORTHOMCL18384	Q01514	GBP1_MOUSE	GBP1	MOUSE	none
+ORTHOMCL18433	none	NA	NA	NA	none
+ORTHOMCL18439	Q69ZU8	ANKR6_MOUSE	ANKR6	MOUSE	none
+ORTHOMCL18447	P41113	ACT3_PODCA	ACT3	PODCA	none
+ORTHOMCL18453	B8VIW9	FP_ACRMI	FP	ACRMI	none
+ORTHOMCL18493	C3XVT5	LIS1_BRAFL	LIS1	BRAFL	none
+ORTHOMCL18586	none	NA	NA	NA	none
+ORTHOMCL18703	Q7TT36	AGRA3_MOUSE	AGRA3	MOUSE	none
+ORTHOMCL18752	Q28D84	EZH2_XENTR	EZH2	XENTR	none
+ORTHOMCL18824	P10401	POLY_DROME	POLY	DROME	none
+ORTHOMCL18861	Q9SDW0	TGT3A_ARATH	TGT3A	ARATH	none
+ORTHOMCL1893	none	NA	NA	NA	none
+ORTHOMCL19014	none	NA	NA	NA	none
+ORTHOMCL19022	none	NA	NA	NA	none
+ORTHOMCL19267	none	NA	NA	NA	none
+ORTHOMCL19306	none	NA	NA	NA	none
+ORTHOMCL19381	none	NA	NA	NA	none
+ORTHOMCL19758	P0C7T6	ATX1L_MOUSE	ATX1L	MOUSE	none
+ORTHOMCL19796	none	NA	NA	NA	none
+ORTHOMCL19827	none	NA	NA	NA	none
+ORTHOMCL20024	none	NA	NA	NA	none
+ORTHOMCL20154	none	NA	NA	NA	none
+ORTHOMCL20281	none	NA	NA	NA	none
+ORTHOMCL20312	B3EWZ5	MLRP1_ACRMI	MLRP1	ACRMI	none
+ORTHOMCL20418	Q7TQK0	CCNT2_MOUSE	CCNT2	MOUSE	none
+ORTHOMCL20425	Q9WVQ0	PMFBP_MOUSE	PMFBP	MOUSE	none
+ORTHOMCL20448	Q9Z0R4	ITSN1_MOUSE	ITSN1	MOUSE	none
+ORTHOMCL20475	E7F568	COBL_DANRE	COBL	DANRE	none
+ORTHOMCL20509	Q9U943	APLP_LOCMI	APLP	LOCMI	none
+ORTHOMCL20834	Q95LZ5	TTC16_MACFA	TTC16	MACFA	none
+ORTHOMCL20842	P54644	KRAC_DICDI	KRAC	DICDI	none
+ORTHOMCL20943	Q6NU14	HNDLB_XENLA	HNDLB	XENLA	none
+ORTHOMCL21121	A7SFB5	CGAS_NEMVE	CGAS	NEMVE	none
+ORTHOMCL21314	A7SWH1	PESC_NEMVE	PESC	NEMVE	none
+ORTHOMCL21461	none	NA	NA	NA	none
+ORTHOMCL21472	Q91WC1	POTE1_MOUSE	POTE1	MOUSE	none
+ORTHOMCL21487	Q6PAL0	BEND3_MOUSE	BEND3	MOUSE	none
+ORTHOMCL21538	P80193	BODG_PSESK	BODG	PSESK	none
+ORTHOMCL21552	Q4R3G4	RNF17_MACFA	RNF17	MACFA	none
+ORTHOMCL21571	Q9DAJ5	DLRB2_MOUSE	DLRB2	MOUSE	none
+ORTHOMCL21606	Q3UMC0	SPAT5_MOUSE	SPAT5	MOUSE	none
+ORTHOMCL21635	Q3UIR3	DTX3L_MOUSE	DTX3L	MOUSE	none
+ORTHOMCL21663	Q5R6L3	DNLI4_PONAB	DNLI4	PONAB	none
+ORTHOMCL21720	Q1LZA0	PIGB_BOVIN	PIGB	BOVIN	none
+ORTHOMCL22098	none	NA	NA	NA	none
+ORTHOMCL22167	Q75NR7	RECQ4_MOUSE	RECQ4	MOUSE	none
+ORTHOMCL22265	Q3U2J5	CMKMT_MOUSE	CMKMT	MOUSE	none
+ORTHOMCL22310	Q91YK0	LRC49_MOUSE	LRC49	MOUSE	none
+ORTHOMCL22341	O64943	POLC2_JUNOX	POLC2	JUNOX	none
+ORTHOMCL2259	O18896	SOX9_PIG	SOX9	PIG	none
+ORTHOMCL3111	P55567	Y4MH_SINFN	Y4MH	SINFN	none
+ORTHOMCL3138	Q54PR9	CF60_DICDI	CF60	DICDI	none
+ORTHOMCL3147	none	NA	NA	NA	none
+ORTHOMCL3343	A7RR34	FLTOP_NEMVE	FLTOP	NEMVE	none
+ORTHOMCL3502	Q6AYH2	IN80E_RAT	IN80E	RAT	none
+ORTHOMCL3594	none	NA	NA	NA	none
+ORTHOMCL3836	O16127	TPM_ECHGR	TPM	ECHGR	none
+ORTHOMCL3882	none	NA	NA	NA	none
+ORTHOMCL4010	Q68US5	EVA1C_PANTR	EVA1C	PANTR	none
+ORTHOMCL4043	D3Z3C6	ZFAN4_MOUSE	ZFAN4	MOUSE	none
+ORTHOMCL4156	Q6PFK1	ZN598_DANRE	ZN598	DANRE	none
+ORTHOMCL4166	Q08BI9	MCU_DANRE	MCU	DANRE	none
+ORTHOMCL4388	none	NA	NA	NA	none
+ORTHOMCL4394	none	NA	NA	NA	none
+ORTHOMCL4454	Q25532	VATG_MANSE	VATG	MANSE	none
+ORTHOMCL4474	P83852	CBPD_LOPSP	CBPD	LOPSP	none
+ORTHOMCL4863	Q4R583	PLD3_MACFA	PLD3	MACFA	none
+ORTHOMCL5084	none	NA	NA	NA	none
+ORTHOMCL5131	none	NA	NA	NA	none
+ORTHOMCL5471	Q5RD73	DUS3_PONAB	DUS3	PONAB	none
+ORTHOMCL5626	A7RSH7	EIF3J_NEMVE	EIF3J	NEMVE	none
+ORTHOMCL5747	none	NA	NA	NA	none
+ORTHOMCL5884	none	NA	NA	NA	none
+ORTHOMCL5943	Q05116	MP2K1_XENLA	MP2K1	XENLA	none
+ORTHOMCL5944	O57478	HEMH_XENLA	HEMH	XENLA	none
+ORTHOMCL6011	Q9WVM7	AIMP2_CRIGR	AIMP2	CRIGR	none
+ORTHOMCL6110	A7T395	SPAST_NEMVE	SPAST	NEMVE	none
+ORTHOMCL6152	P55862	MCM5A_XENLA	MCM5A	XENLA	none
+ORTHOMCL6208	P02576	ACTA_PHYPO	ACTA	PHYPO	none
+ORTHOMCL6255	none	NA	NA	NA	none
+ORTHOMCL6291	P60924	DELE_RAT	DELE	RAT	none
+ORTHOMCL6383	Q9D8Z1	ASCC1_MOUSE	ASCC1	MOUSE	none
+ORTHOMCL6387	P21613	KINH_DORPE	KINH	DORPE	none
+ORTHOMCL6399	Q10075	PCS_SCHPO	PCS	SCHPO	none
+ORTHOMCL6428	P81439	EQST_ACTEQ	EQST	ACTEQ	none
+ORTHOMCL6491	A7T167	GDAP2_NEMVE	GDAP2	NEMVE	none
+ORTHOMCL6509	Q6P4S6	SIK3_MOUSE	SIK3	MOUSE	none
+ORTHOMCL6554	none	NA	NA	NA	none
+ORTHOMCL6558	none	NA	NA	NA	none
+ORTHOMCL6674	none	NA	NA	NA	none
+ORTHOMCL6717	B1H1W9	KTU_XENLA	KTU	XENLA	none
+ORTHOMCL6741	Q5VX52	SPAT1_HUMAN	SPAT1	HUMAN	none
+ORTHOMCL6752	P34528	YM67_CAEEL	YM67	CAEEL	none
+ORTHOMCL7082	A1L2Y1	FSIP1_XENLA	FSIP1	XENLA	none
+ORTHOMCL7089	Q6EV56	OFUT2_PANTR	OFUT2	PANTR	none
+ORTHOMCL7147	Q08BC4	STPG2_DANRE	STPG2	DANRE	none
+ORTHOMCL7209	Q8BTI9	PK3CB_MOUSE	PK3CB	MOUSE	none
+ORTHOMCL7212	none	NA	NA	NA	none
+ORTHOMCL7227	Q5FVF4	TM7S3_RAT	TM7S3	RAT	none
+ORTHOMCL7254	Q5R839	S41A1_PONAB	S41A1	PONAB	none
+ORTHOMCL7314	Q5RFA0	NELFD_PONAB	NELFD	PONAB	none
+ORTHOMCL7330	Q9Y7Y3	YGR4_SCHPO	YGR4	SCHPO	none
+ORTHOMCL7355	none	NA	NA	NA	none
+ORTHOMCL7362	Q5EY87	GRHL1_XENLA	GRHL1	XENLA	none
+ORTHOMCL7433	P28701	RXRG_CHICK	RXRG	CHICK	none
+ORTHOMCL7444	none	NA	NA	NA	none
+ORTHOMCL7500	O04469	ECI1_ARATH	ECI1	ARATH	none
+ORTHOMCL7521	Q71MB6	SO4C1_RAT	SO4C1	RAT	none
+ORTHOMCL7522	B5DF27	LOXL2_RAT	LOXL2	RAT	none
+ORTHOMCL7551	P00518	PHKG1_RABIT	PHKG1	RABIT	none
+ORTHOMCL7697	Q5PQN4	MDM1_RAT	MDM1	RAT	none
+ORTHOMCL7741	Q2N6R1	RL28_ERYLH	RL28	ERYLH	none
+ORTHOMCL7855	B1AZ99	OTUD3_MOUSE	OTUD3	MOUSE	none
+ORTHOMCL7912	Q0V8M0	KRI1_BOVIN	KRI1	BOVIN	none
+ORTHOMCL8022	none	NA	NA	NA	none
+ORTHOMCL8061	Q6IE24	UBP54_RAT	UBP54	RAT	none
+ORTHOMCL8076	Q6J1I7	RN166_RAT	RN166	RAT	none
+ORTHOMCL8097	Q8VCC9	SPON1_MOUSE	SPON1	MOUSE	none
+ORTHOMCL8201	Q8C2A2	SEN54_MOUSE	SEN54	MOUSE	none
+ORTHOMCL8288	G5E8K5	ANK3_MOUSE	ANK3	MOUSE	none
+ORTHOMCL8337	Q01887	RYK_MOUSE	RYK	MOUSE	none
+ORTHOMCL8370	O32229	YVAG_BACSU	YVAG	BACSU	none
+ORTHOMCL8407	none	NA	NA	NA	none
+ORTHOMCL8418	none	NA	NA	NA	none
+ORTHOMCL8433	P0C7T6	ATX1L_MOUSE	ATX1L	MOUSE	none
+ORTHOMCL8458	none	NA	NA	NA	none
+ORTHOMCL8503	P02466	CO1A2_RAT	CO1A2	RAT	none
+ORTHOMCL8551	Q09836	ATP10_SCHPO	ATP10	SCHPO	none
+ORTHOMCL8664	A7S6A1	U518_NEMVE	U518	NEMVE	none
+ORTHOMCL8695	D4GU72	AGL12_HALVD	AGL12	HALVD	none
+ORTHOMCL8783	F1NPQ2	MINP1_CHICK	MINP1	CHICK	none
+ORTHOMCL8795	Q98943	CASP2_CHICK	CASP2	CHICK	none
+ORTHOMCL9029	Q28BR5	PREP_XENTR	PREP	XENTR	none
+ORTHOMCL9032	P84770	IRS1B_XENLA	IRS1B	XENLA	none
+ORTHOMCL9046	P86854	PLCL_MYTGA	PLCL	MYTGA	none
+ORTHOMCL9112	Q6DFR2	CBLB_XENTR	CBLB	XENTR	none
+ORTHOMCL9133	Q5R6Q7	SNX16_PONAB	SNX16	PONAB	none
+ORTHOMCL9138	none	NA	NA	NA	none
+ORTHOMCL9167	Q5M868	GBA2_RAT	GBA2	RAT	none
+ORTHOMCL9177	Q5XHA8	PYG1A_XENLA	PYG1A	XENLA	none
+ORTHOMCL9209	Q6P9L6	KIF15_MOUSE	KIF15	MOUSE	none
+ORTHOMCL9223	B8UU78	ELP_ACRMI	ELP	ACRMI	none
+ORTHOMCL9238	O02776	PARG_BOVIN	PARG	BOVIN	none
+ORTHOMCL9296	Q9DC33	HM20A_MOUSE	HM20A	MOUSE	none
+ORTHOMCL9307	Q90X38	GPKOW_DANRE	GPKOW	DANRE	none
+ORTHOMCL9422	P10079	FBP1_STRPU	FBP1	STRPU	none
+ORTHOMCL9428	none	NA	NA	NA	none
+ORTHOMCL9445	A6QQL0	S15A4_BOVIN	S15A4	BOVIN	none
+ORTHOMCL9522	none	NA	NA	NA	none
+ORTHOMCL9545	none	NA	NA	NA	none
+ORTHOMCL9606	P59024	FKB14_MOUSE	FKB14	MOUSE	none
+ORTHOMCL9614	Q505F5	LRC47_MOUSE	LRC47	MOUSE	none
+ORTHOMCL9657	O70595	ABCB6_RAT	ABCB6	RAT	none
+ORTHOMCL9824	Q14AK4	ZDH11_MOUSE	ZDH11	MOUSE	none
+ORTHOMCL9923	none	NA	NA	NA	none
+ORTHOMCL10047	P51400	RED1_RAT	RED1	RAT	none
+ORTHOMCL1016	Q28619	NHRF1_RABIT	NHRF1	RABIT	none
+ORTHOMCL10203	none	NA	NA	NA	none
+ORTHOMCL10405	Q20176	NAS39_CAEEL	NAS39	CAEEL	none
+ORTHOMCL10542	P16086	SPTN1_RAT	SPTN1	RAT	none
+ORTHOMCL1054	A7SGZ5	EIF3K_NEMVE	EIF3K	NEMVE	none
+ORTHOMCL10659	Q3EAQ5	PTR36_ARATH	PTR36	ARATH	none
+ORTHOMCL10730	none	NA	NA	NA	none
+ORTHOMCL10755	none	NA	NA	NA	none
+ORTHOMCL10870	none	NA	NA	NA	none
+ORTHOMCL10972	O88307	SORL_MOUSE	SORL	MOUSE	none
+ORTHOMCL11163	none	NA	NA	NA	none
+ORTHOMCL11254	P0CF65	CRBN_CHICK	CRBN	CHICK	none
+ORTHOMCL11384	Q6ZQ88	KDM1A_MOUSE	KDM1A	MOUSE	none
+ORTHOMCL1154	Q27245	YH24_CAEEL	YH24	CAEEL	none
+ORTHOMCL11599	Q6AXY7	PR38B_RAT	PR38B	RAT	none
+ORTHOMCL11814	D3ZZL9	GCC2_RAT	GCC2	RAT	none
+ORTHOMCL12157	Q2TBI7	IQCC_BOVIN	IQCC	BOVIN	none
+ORTHOMCL12220	none	NA	NA	NA	none
+ORTHOMCL12385	Q7SIC1	FUCL_ANGAN	FUCL	ANGAN	none
+ORTHOMCL12620	none	NA	NA	NA	none
+ORTHOMCL12630	Q8R3N6	THOC1_MOUSE	THOC1	MOUSE	none
+ORTHOMCL12817	P25119	TNR1B_MOUSE	TNR1B	MOUSE	none
+ORTHOMCL13886	O55230	RA51D_MOUSE	RA51D	MOUSE	none
+ORTHOMCL13902	A2RRV3	PATL1_DANRE	PATL1	DANRE	none
+ORTHOMCL14287	P22770	ACHA7_CHICK	ACHA7	CHICK	none
+ORTHOMCL1474	none	NA	NA	NA	none
+ORTHOMCL15401	Q5F3K0	TTC27_CHICK	TTC27	CHICK	none
+ORTHOMCL15684	P07898	PGCA_CHICK	PGCA	CHICK	none
+ORTHOMCL1570	O23184	CML19_ARATH	CML19	ARATH	none
+ORTHOMCL1579	none	NA	NA	NA	none
+ORTHOMCL16033	P53111	ARI1_YEAST	ARI1	YEAST	none
+ORTHOMCL16127	Q93YS4	AB22G_ARATH	AB22G	ARATH	none
+ORTHOMCL16169	Q1ZXJ0	CLCD_DICDI	CLCD	DICDI	none
+ORTHOMCL17974	Q8BJ64	CHDH_MOUSE	CHDH	MOUSE	none
+ORTHOMCL18511	A3DF24	DNAJ_CLOTH	DNAJ	CLOTH	none
+ORTHOMCL18518	P29147	BDH_RAT	BDH	RAT	none
+ORTHOMCL2099	Q6NYE7	TM192_DANRE	TM192	DANRE	none
+ORTHOMCL2110	Q5RAJ6	DJB11_PONAB	DJB11	PONAB	none
+ORTHOMCL2192	Q149G0	CB068_MOUSE	CB068	MOUSE	none
+ORTHOMCL2607	none	NA	NA	NA	none
+ORTHOMCL2629	none	NA	NA	NA	none
+ORTHOMCL2779	Q9CYZ8	SSBP2_MOUSE	SSBP2	MOUSE	none
+ORTHOMCL2904	Q9DAA6	EXOS1_MOUSE	EXOS1	MOUSE	none
+ORTHOMCL3005	none	NA	NA	NA	none
+ORTHOMCL3095	Q6IRB2	HES1A_XENLA	HES1A	XENLA	none
+ORTHOMCL3234	O08651	SERA_RAT	SERA	RAT	none
+ORTHOMCL3361	G8HTB6	ZPP_ACRMI	ZPP	ACRMI	none
+ORTHOMCL3500	A4YI89	HPCD_METS5	HPCD	METS5	none
+ORTHOMCL3556	Q5ZID0	NMRL1_CHICK	NMRL1	CHICK	none
+ORTHOMCL3751	none	NA	NA	NA	none
+ORTHOMCL3817	Q90839	DKK3_CHICK	DKK3	CHICK	none
+ORTHOMCL3842	none	NA	NA	NA	none
+ORTHOMCL3877	A0A1B0GTI8	TM272_HUMAN	TM272	HUMAN	none
+ORTHOMCL3887	A2VDD2	TC1DB_XENLA	TC1DB	XENLA	none
+ORTHOMCL4011	Q8C551	R51A1_MOUSE	R51A1	MOUSE	none
+ORTHOMCL4019	Q5E9Z7	RPC4_BOVIN	RPC4	BOVIN	none
+ORTHOMCL4349	F8J2D3	PLB_DRYCN	PLB	DRYCN	none
+ORTHOMCL4479	I7C6E8	C7A52_PANGI	C7A52	PANGI	none
+ORTHOMCL4539	Q5F457	WBP4_CHICK	WBP4	CHICK	none
+ORTHOMCL4561	Q5R7X9	RAD1_PONAB	RAD1	PONAB	none
+ORTHOMCL4638	Q8VEH8	ERLEC_MOUSE	ERLEC	MOUSE	none
+ORTHOMCL4898	none	NA	NA	NA	none
+ORTHOMCL4903	Q55G75	Y7786_DICDI	Y7786	DICDI	none
+ORTHOMCL5006	Q67FQ3	ARHB_XENLA	ARHB	XENLA	none
+ORTHOMCL5280	O97192	TPM_HELAS	TPM	HELAS	none
+ORTHOMCL5328	none	NA	NA	NA	none
+ORTHOMCL5358	Q6AYP4	ZC21C_RAT	ZC21C	RAT	none
+ORTHOMCL5400	Q5ZLF0	F10A1_CHICK	F10A1	CHICK	none
+ORTHOMCL5537	none	NA	NA	NA	none
+ORTHOMCL5661	A2RRT3	FB31A_XENLA	FB31A	XENLA	none
+ORTHOMCL5807	Q9JL55	GDE1_RAT	GDE1	RAT	none
+ORTHOMCL5886	none	NA	NA	NA	none
+ORTHOMCL5904	A2BDB7	S7A6O_XENLA	S7A6O	XENLA	none
+ORTHOMCL5908	O07834	DAPB1_PSEMX	DAPB1	PSEMX	none
+ORTHOMCL5909	none	NA	NA	NA	none
+ORTHOMCL6252	E2RYF8	TPX2_PATPE	TPX2	PATPE	none
+ORTHOMCL6296	A0JMW6	T214A_XENLA	T214A	XENLA	none
+ORTHOMCL6577	none	NA	NA	NA	none
+ORTHOMCL6658	none	NA	NA	NA	none
+ORTHOMCL6751	O69199	CYAB_AERHY	CYAB	AERHY	none
+ORTHOMCL6799	D2GXS7	TRIM2_AILME	TRIM2	AILME	none
+ORTHOMCL6863	none	NA	NA	NA	none
+ORTHOMCL6919	none	NA	NA	NA	none
+ORTHOMCL7210	B2RYF1	PPR37_RAT	PPR37	RAT	none
+ORTHOMCL7281	O54967	ACK1_MOUSE	ACK1	MOUSE	none
+ORTHOMCL7294	none	NA	NA	NA	none
+ORTHOMCL7332	none	NA	NA	NA	none
+ORTHOMCL7380	Q2YMB3	NHAA_BRUA2	NHAA	BRUA2	none
+ORTHOMCL7557	A6QQL0	S15A4_BOVIN	S15A4	BOVIN	none
+ORTHOMCL7631	D3ZGB1	NFAT5_RAT	NFAT5	RAT	none
+ORTHOMCL8098	none	NA	NA	NA	none
+ORTHOMCL8101	none	NA	NA	NA	none
+ORTHOMCL8107	Q2HJ10	ZNT2_MOUSE	ZNT2	MOUSE	none
+ORTHOMCL8172	none	NA	NA	NA	none
+ORTHOMCL8228	P35409	GLHR_ANTEL	GLHR	ANTEL	none
+ORTHOMCL8286	none	NA	NA	NA	none
+ORTHOMCL8692	Q7TN31	AGGF1_MOUSE	AGGF1	MOUSE	none
+ORTHOMCL870	Q9H4K1	RIBC2_HUMAN	RIBC2	HUMAN	none
+ORTHOMCL884	none	NA	NA	NA	none
+ORTHOMCL8988	P91753	MP62_LYTPI	MP62	LYTPI	none
+ORTHOMCL9271	none	NA	NA	NA	none
+ORTHOMCL9346	P31637	SC5A3_CANLF	SC5A3	CANLF	none
+ORTHOMCL9623	none	NA	NA	NA	none
+ORTHOMCL9844	P37693	HETM_NOSS1	HETM	NOSS1	none
+ORTHOMCL18456	Q08CX1	RASEF_XENTR	RASEF	XENTR	none
+ORTHOMCL2513	Q58A42	DD3_DICDI	DD3	DICDI	none
+ORTHOMCL4909	O35114	SCRB2_MOUSE	SCRB2	MOUSE	none
+ORTHOMCL6227	none	NA	NA	NA	none

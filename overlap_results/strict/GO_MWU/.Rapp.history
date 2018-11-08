@@ -1,0 +1,800 @@
+#LOAD LIBS AND SET GLOBAL VARS#
+library(tidyverse)#
+library(ggplot2)#
+library(cowplot)#
+setwd("~/gitreps/convergent_evo_coral")#
+source('scripts_for_analysis/coral_reproduction_functions.R')#
+xangle=10#
+##LOAD THE DATASET TO PLOT:#
+ll=load('overlap_results/moderate/allResults.Rdata') #moderate cutoff set#
+#Revise clade names in pairings #
+conv_filt <- conv_filt %>%#
+	mutate(pairing = sub('Anti', 'Sis.', cp)) %>%#
+	mutate(pairing = sub('Anti', 'Sis.', pairing))#
+#-----------------------------------------------------------------------------------------------##
+####1. breakdown of substitition type for verticals by gene#
+#
+order = conv_filt %>% #
+	group_by(pairing) %>%#
+	summarize(N=n()) %>%#
+	arrange(desc(N))#
+order = factor(order$pairing, levels=order$pairing)#
+#
+vOnly <- conv_filt %>% #
+	mutate(pairing=factor(pairing, levels=order)) %>%#
+	rename(`Change type` = type) %>%#
+	filter(conv_pair=='VV') %>%#
+	ggplot() +#
+		geom_bar(aes(x=pairing, fill=`Change type`)) +#
+		labs(x='Lineage Pair', y='Overlapping substititions') +#
+		coord_flip() +#
+		theme(axis.text.x= element_text(angle=xangle))#
+###1S breakdown for all#
+all<-conv_filt %>% #
+	mutate(pairing=factor(pairing, levels=order)) %>%#
+	rename(`Change type` = type) %>%#
+	ggplot() +#
+		geom_bar(aes(x=pairing, fill=`Change type`)) +#
+		labs(x='Lineage Pair', y='Overlapping substititions') +#
+		coord_flip() +#
+		theme(axis.text.x= element_text(angle= xangle))#
+#
+plot(all)#
+#
+#-----------------------------------------------------------------------------------------------##
+### S2 BS passing genes + GO (VV and HH)#
+#
+#set up names #
+phylo.ordered.names = c('All vertical', 'All horizontal sisters', 'Montipora', "Montipora's sister", 'Galaxia', "Galaxia's sister", 'Porites', "Porites's sister", 'Pocilloporid', "Pocilloporid's sister")#
+bsf<-bs_filt %>% #
+	mutate(`Significant` = #
+		(bs_phenotype=='Vertical' & bs_tpass) | #
+		(bs_phenotype=='Horizontal' & bs_apass) ) %>%#
+	mutate(clade=as.character(clade)) %>%#
+	mutate(clade = if_else(clade=='AllTarget', 'All vertical', clade)) %>%#
+	mutate(clade = if_else(clade=='AntiAllTarget', 'All horizontal sisters', clade)) %>%#
+	mutate(clade = if_else(grepl('Anti', clade), paste(clade, 'sister', sep="'s "), clade)) %>%#
+	mutate(clade = sub('Anti', '', clade)) %>%#
+	mutate(clade = factor(clade, levels= rev(phylo.ordered.names)))#
+#
+#plot counts for the verticals#
+bsf1 <-	bsf %>%#
+	filter(bs_phenotype=='Vertical') %>%#
+	ggplot() + #
+	geom_bar(aes(x=clade, fill=`Significant`)) +#
+	labs(x='Lineage', y='Gene count', subtitle='Vertical') +#
+	coord_flip() +#
+	theme(axis.text.x= element_text(angle=10),#
+		legend.position="none")#
+#
+#plot counts for horizontals#
+bsf2 <-	bsf %>%#
+	filter(bs_phenotype=='Horizontal') %>%#
+	ggplot() + #
+	geom_bar(aes(x=clade, fill=`Significant`)) +#
+	labs(x='Lineage', y='Gene count', subtitle='Horizontal') +#
+	coord_flip() +#
+	theme(axis.text.x= element_text(angle=10),#
+		legend.position="none")#
+#
+#gather all counts for each phenotype#
+#
+tot_genes <- bsf %>%#
+	group_by(bs_phenotype) %>%#
+	summarize(tot_genes =length(unique(ortholog)))#
+#
+tot_any_sig <- bsf %>%#
+	filter(bs_pass) %>%#
+	group_by(bs_phenotype) %>%#
+	summarize(tot_bs_genes =length(unique(ortholog)))#
+#
+bsf3 <- inner_join(tot_genes, tot_any_sig, by = 'bs_phenotype') %>%#
+	mutate(not_bs=tot_genes-tot_bs_genes) %>%#
+	gather(key='pos', value='count', tot_bs_genes, not_bs) %>%#
+	mutate(`Positive selection`=if_else(pos=='not_bs', FALSE, TRUE)) %>%#
+	mutate(pheno = if_else(bs_phenotype=='Vertical', 'Vert.', 'Horiz.')) %>%#
+	ggplot() +#
+		geom_bar(aes(x=pheno, y=count, fill=`Positive selection`), stat='identity') +#
+		labs(x='Phenotype', y='Genes')#
+#plot in grid#
+# plot_grid(bsf1, bsf2, bsf3, labels=c('A', 'B', 'C'), nrow=1)#
+#
+#-----------------------------------------------------------------------------------------------
+#gather percentages of convergence passing subs#
+pctdf <-conv_filt %>% #
+	mutate(conv_pass = #
+		if_else(conv_pass,#
+			'convergence',#
+			'no convergence'#
+			)) %>%#
+	mutate(conv_pass = factor(conv_pass, levels=c('convergence', 'no convergence'))) %>%#
+	rename(`Change type`= conv_pass) %>%#
+	group_by(pairing, conv_pair, `Change type`) %>%#
+	summarize(N=n()) %>% #
+	mutate(pct_conv = N/sum(N)*100) %>%#
+	filter(`Change type`=='convergence') %>%#
+	# rename(`Phenotype Pair` = conv_pair) %>%#
+	arrange(conv_pair, pct_conv)#
+#
+#get colors#
+boxplot<-ggplot(pctdf, aes(x=conv_pair, y=pct_conv, fill=conv_pair))#
+colset<-unique(ggplot_build(boxplot)$data[[1]]['fill'])#
+axCols = c(rep(colset[3, 'fill'], nVV), rep(colset[2, 'fill'], nVH), rep(colset[1, 'fill'], nHH))
+nVV
+#plot counts by clade pairing#
+countConv <- conv_filt %>%#
+	rename(`Filter-passing`=conv_pass) %>%#
+	mutate(pairFact = factor(pairing, levels=ordered)) %>%#
+	ggplot() +#
+		geom_bar(aes(x= pairFact, fill=`Filter-passing`)) + #
+		labs(x='Lineage pair', y='Overlapping Substitutions') +#
+		coord_flip() +#
+		theme(#
+			axis.text.x= element_text(angle=10),#
+			axis.text.y = element_text(colour = axCols, face='bold'),#
+			legend.position=c(0.6,0.8))
+#plot percentage by clade pairing#
+pctConv <- pctdf %>%#
+	mutate(pairFact=factor(pairing, levels=ordered)) %>%#
+	rename(`Phenotype Pair` = conv_pair) %>%#
+	ggplot() +#
+		geom_bar(aes(x= pairFact, y= pct_conv, fill=`Phenotype Pair`), stat='identity') +#
+		labs(x='', y='Percent convergence passing') +#
+		coord_flip() +#
+		theme(#
+			legend.position='none',#
+			axis.text.y=element_blank())
+#plot proportions for convergence filter passing#
+countConv2<-conv_filt %>% #
+	group_by(conv_pair, conv_pass) %>%#
+	summarize(N=n()) %>%#
+	mutate(`Percent Convergence`=N/sum(N)*100) %>%#
+	filter(conv_pass) %>% #
+	rename(`Phenotype Pair` = conv_pair) %>%#
+	ggplot() +#
+		geom_bar(aes(x=`Phenotype Pair`, y=`Percent Convergence`, fill=`Phenotype Pair`), stat='identity') +#
+		labs(y='Convergence (% overlapping changes)', x='Phenotype pair') +#
+		theme(legend.position='none')
+#plot mean percentage by phenotype pairing#
+pctConv2 <- pctdf %>% #
+	rename(`Phenotype Pair` = conv_pair) %>%#
+	rename(`Percent with convergence` = pct_conv) %>%#
+	ggplot() +#
+	geom_boxplot(aes(x=`Phenotype Pair`, y=`Percent with convergence`, fill=`Phenotype Pair`)) +#
+	theme()#
+#
+#BUILD PLOT#
+legPos='right'#
+plot_grid(countConv, pctConv, pctConv2, nrow=1, rel_widths = c(1.5, 1, 1), align = "hv", axis = "tb", labels=LETTERS[1:3])
+conv_filt
+ordered
+pctdf
+ordered = unique(pctdf$pairing)
+pctConv2
+rm(list=ls())
+#LOAD LIBS AND SET GLOBAL VARS#
+library(tidyverse)#
+library(ggplot2)#
+library(cowplot)#
+setwd("~/gitreps/convergent_evo_coral")#
+source('scripts_for_analysis/coral_reproduction_functions.R')#
+xangle=10#
+##LOAD THE DATASET TO PLOT:#
+ll=load('overlap_results/moderate/allResults.Rdata') #moderate cutoff set#
+#Revise clade names in pairings #
+conv_filt <- conv_filt %>%#
+	mutate(pairing = sub('Anti', 'Sis.', cp)) %>%#
+	mutate(pairing = sub('Anti', 'Sis.', pairing))#
+#-----------------------------------------------------------------------------------------------##
+####1. breakdown of substitition type for verticals by gene#
+#
+order = conv_filt %>% #
+	group_by(pairing) %>%#
+	summarize(N=n()) %>%#
+	arrange(desc(N))#
+order = factor(order$pairing, levels=order$pairing)#
+#
+vOnly <- conv_filt %>% #
+	mutate(pairing=factor(pairing, levels=order)) %>%#
+	rename(`Change type` = type) %>%#
+	filter(conv_pair=='VV') %>%#
+	ggplot() +#
+		geom_bar(aes(x=pairing, fill=`Change type`)) +#
+		labs(x='Lineage Pair', y='Overlapping substititions') +#
+		coord_flip() +#
+		theme(axis.text.x= element_text(angle=xangle))#
+###1S breakdown for all#
+all<-conv_filt %>% #
+	mutate(pairing=factor(pairing, levels=order)) %>%#
+	rename(`Change type` = type) %>%#
+	ggplot() +#
+		geom_bar(aes(x=pairing, fill=`Change type`)) +#
+		labs(x='Lineage Pair', y='Overlapping substititions') +#
+		coord_flip() +#
+		theme(axis.text.x= element_text(angle= xangle))#
+#
+plot(all)#
+#
+#-----------------------------------------------------------------------------------------------##
+### S2 BS passing genes + GO (VV and HH)#
+#
+#set up names #
+phylo.ordered.names = c('All vertical', 'All horizontal sisters', 'Montipora', "Montipora's sister", 'Galaxia', "Galaxia's sister", 'Porites', "Porites's sister", 'Pocilloporid', "Pocilloporid's sister")#
+bsf<-bs_filt %>% #
+	mutate(`Significant` = #
+		(bs_phenotype=='Vertical' & bs_tpass) | #
+		(bs_phenotype=='Horizontal' & bs_apass) ) %>%#
+	mutate(clade=as.character(clade)) %>%#
+	mutate(clade = if_else(clade=='AllTarget', 'All vertical', clade)) %>%#
+	mutate(clade = if_else(clade=='AntiAllTarget', 'All horizontal sisters', clade)) %>%#
+	mutate(clade = if_else(grepl('Anti', clade), paste(clade, 'sister', sep="'s "), clade)) %>%#
+	mutate(clade = sub('Anti', '', clade)) %>%#
+	mutate(clade = factor(clade, levels= rev(phylo.ordered.names)))#
+#
+#plot counts for the verticals#
+bsf1 <-	bsf %>%#
+	filter(bs_phenotype=='Vertical') %>%#
+	ggplot() + #
+	geom_bar(aes(x=clade, fill=`Significant`)) +#
+	labs(x='Lineage', y='Gene count', subtitle='Vertical') +#
+	coord_flip() +#
+	theme(axis.text.x= element_text(angle=10),#
+		legend.position="none")#
+#
+#plot counts for horizontals#
+bsf2 <-	bsf %>%#
+	filter(bs_phenotype=='Horizontal') %>%#
+	ggplot() + #
+	geom_bar(aes(x=clade, fill=`Significant`)) +#
+	labs(x='Lineage', y='Gene count', subtitle='Horizontal') +#
+	coord_flip() +#
+	theme(axis.text.x= element_text(angle=10),#
+		legend.position="none")#
+#
+#gather all counts for each phenotype#
+#
+tot_genes <- bsf %>%#
+	group_by(bs_phenotype) %>%#
+	summarize(tot_genes =length(unique(ortholog)))#
+#
+tot_any_sig <- bsf %>%#
+	filter(bs_pass) %>%#
+	group_by(bs_phenotype) %>%#
+	summarize(tot_bs_genes =length(unique(ortholog)))#
+#
+bsf3 <- inner_join(tot_genes, tot_any_sig, by = 'bs_phenotype') %>%#
+	mutate(not_bs=tot_genes-tot_bs_genes) %>%#
+	gather(key='pos', value='count', tot_bs_genes, not_bs) %>%#
+	mutate(`Positive selection`=if_else(pos=='not_bs', FALSE, TRUE)) %>%#
+	mutate(pheno = if_else(bs_phenotype=='Vertical', 'Vert.', 'Horiz.')) %>%#
+	ggplot() +#
+		geom_bar(aes(x=pheno, y=count, fill=`Positive selection`), stat='identity') +#
+		labs(x='Phenotype', y='Genes')#
+#plot in grid
+#gather percentages of convergence passing subs#
+pctdf <-conv_filt %>% #
+	mutate(conv_pass = #
+		if_else(conv_pass,#
+			'convergence',#
+			'no convergence'#
+			)) %>%#
+	mutate(conv_pass = factor(conv_pass, levels=c('convergence', 'no convergence'))) %>%#
+	rename(`Change type`= conv_pass) %>%#
+	group_by(pairing, conv_pair, `Change type`) %>%#
+	summarize(N=n()) %>% #
+	mutate(pct_conv = N/sum(N)*100) %>%#
+	filter(`Change type`=='convergence') %>%#
+	# rename(`Phenotype Pair` = conv_pair) %>%#
+	arrange(conv_pair, pct_conv)#
+#
+#get order and colors#
+ordered = unique(pctdf$pairing)
+pctConv2
+#get order and colors#
+ordered = unique(pctdf$pairing) #
+#set colors#
+nVV = length(unique(conv_filt$cp[conv_filt$conv_pair=='VV']))#
+nVH = length(unique(conv_filt$cp[conv_filt$conv_pair=='VH']))#
+nHH = length(unique(conv_filt$cp[conv_filt$conv_pair=='VH']))#
+boxplot<-ggplot(pctdf, aes(x=conv_pair, y=pct_conv, fill=conv_pair))#
+colset<-unique(ggplot_build(boxplot)$data[[1]]['fill'])#
+axCols = c(rep(colset[3, 'fill'], nVV), rep(colset[2, 'fill'], nVH), rep(colset[1, 'fill'], nHH))
+#plot counts by clade pairing#
+countConv <- conv_filt %>%#
+	rename(`Filter-passing`=conv_pass) %>%#
+	mutate(pairFact = factor(pairing, levels=ordered)) %>%#
+	ggplot() +#
+		geom_bar(aes(x= pairFact, fill=`Filter-passing`)) + #
+		labs(x='Lineage pair', y='Overlapping Substitutions') +#
+		coord_flip() +#
+		theme(#
+			axis.text.x= element_text(angle=10),#
+			axis.text.y = element_text(colour = axCols, face='bold'),#
+			legend.position=c(0.6,0.8))
+countConv
+#plot percentage by clade pairing#
+pctConv <- pctdf %>%#
+	mutate(pairFact=factor(pairing, levels=ordered)) %>%#
+	rename(`Phenotype Pair` = conv_pair) %>%#
+	ggplot() +#
+		geom_bar(aes(x= pairFact, y= pct_conv, fill=`Phenotype Pair`), stat='identity') +#
+		labs(x='', y='Percent convergence passing') +#
+		coord_flip() +#
+		theme(#
+			legend.position='none',#
+			axis.text.y=element_blank())
+#get order and colors#
+ordered = rev(unique(pctdf$pairing))#
+#set colors#
+nVV = length(unique(conv_filt$cp[conv_filt$conv_pair=='VV']))#
+nVH = length(unique(conv_filt$cp[conv_filt$conv_pair=='VH']))#
+nHH = length(unique(conv_filt$cp[conv_filt$conv_pair=='VH']))#
+boxplot<-ggplot(pctdf, aes(x=conv_pair, y=pct_conv, fill=conv_pair))#
+colset<-unique(ggplot_build(boxplot)$data[[1]]['fill'])#
+axCols = c(rep(colset[3, 'fill'], nVV), rep(colset[2, 'fill'], nVH), rep(colset[1, 'fill'], nHH))#
+#plot counts by clade pairing#
+countConv <- conv_filt %>%#
+	rename(`Filter-passing`=conv_pass) %>%#
+	mutate(pairFact = factor(pairing, levels=ordered)) %>%#
+	ggplot() +#
+		geom_bar(aes(x= pairFact, fill=`Filter-passing`)) + #
+		labs(x='Lineage pair', y='Overlapping Substitutions') +#
+		coord_flip() +#
+		theme(#
+			axis.text.x= element_text(angle=10),#
+			axis.text.y = element_text(colour = axCols, face='bold'),#
+			legend.position=c(0.6,0.8))
+countConv
+#plot percentage by clade pairing#
+pctConv <- pctdf %>%#
+	mutate(pairFact=factor(pairing, levels=ordered)) %>%#
+	rename(`Phenotype Pair` = conv_pair) %>%#
+	ggplot() +#
+		geom_bar(aes(x= pairFact, y= pct_conv, fill=`Phenotype Pair`), stat='identity') +#
+		labs(x='', y='Percent convergence passing') +#
+		coord_flip() +#
+		theme(#
+			legend.position='none',#
+			axis.text.y=element_blank())
+#plot proportions for convergence filter passing#
+countConv2<-conv_filt %>% #
+	group_by(conv_pair, conv_pass) %>%#
+	summarize(N=n()) %>%#
+	mutate(`Percent Convergence`=N/sum(N)*100) %>%#
+	filter(conv_pass) %>% #
+	rename(`Phenotype Pair` = conv_pair) %>%#
+	ggplot() +#
+		geom_bar(aes(x=`Phenotype Pair`, y=`Percent Convergence`, fill=`Phenotype Pair`), stat='identity') +#
+		labs(y='Convergence (% overlapping changes)', x='Phenotype pair') +#
+		theme(legend.position='none')#
+#plot mean percentage by phenotype pairing#
+pctConv2 <- pctdf %>% #
+	rename(`Phenotype Pair` = conv_pair) %>%#
+	rename(`Percent with convergence` = pct_conv) %>%#
+	ggplot() +#
+	geom_boxplot(aes(x=`Phenotype Pair`, y=`Percent with convergence`, fill=`Phenotype Pair`)) +#
+	theme()#
+#
+#BUILD PLOT#
+legPos='right'#
+plot_grid(countConv, pctConv, pctConv2, nrow=1, rel_widths = c(1.5, 1, 1), align = "hv", axis = "tb", labels=LETTERS[1:3])
+#STATS FOR THESE PLOTS#
+#
+#for cumulative counts (barplot)#
+compareList = list('VH', 'HH')#
+#
+doFisher = function(x){#
+	ft_in <- conv_filt %>%#
+		filter(conv_pair %in% c(x, 'VV')) %>%#
+		mutate(conv_pair = factor(conv_pair, levels=c('VV', x))) %>%#
+		mutate(convergent = factor(conv_pass, levels=c(TRUE, FALSE))) %>%#
+		select(c('conv_pair', 'convergent'))#
+	fisher.test(ft_in$conv_pair, ft_in$convergent)#
+}
+fish_res = lapply(compareList, doFisher)
+names(fish_res) = c('VV_vs_VH', 'VV_vs_HH')
+fish_res[['VV_vs_VH']]
+fish_res[['VV_vs_HH']]
+#for mean by clade pair (boxplot)#
+#anova#
+fit <- aov(pct_conv ~ conv_pair, data=pctdf)#
+summary(fit)
+#t.tests#
+t.test(pct_conv ~ conv_pair, data=pctdf[pctdf$conv_pair %in% c('VV', 'VH'),])#
+t.test(pct_conv ~ conv_pair, data=pctdf[pctdf$conv_pair %in% c('VV', 'HH'),])
+#NUBMERS OF CONVERGENCE EVENTS PER GENE#
+head(conv_filt)#
+noDup = conv_filt[!duplicated(conv_filt$site),]#
+noDup = noDup[noDup$conv_pass & noDup$conv_pair=='VV',]#
+cSitePerGene <- noDup %>% count(ortholog) %>% as_tibble#
+mean(cSitePerGene$n)#
+median(cSitePerGene$n)#
+cSitePerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Number of convergent sites', y='Count')
+cSitePerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Number of convergent sites', y='Count')
+head(conv_filt)
+head(bs_filt)
+allGenes = unique(bs_filt$ortholog)
+head(bs_filt)
+allGenes = unique(bs_filt$ortholog[bs_filt$bs_phenotype=='Vertical'])
+length(allGenes)
+noOverlapGenes = allGenes[!allGenes %in% noDup$ortholog]
+length(noOverlapGenes)
+head(noDup)
+cSitePerGene
+noOverlapGenes = allGenes[!allGenes %in% cSitePerGene$ortholog]
+length(noOverlapGenes)
+cSitePerGene
+noSitePerGene = tibble(ortholog=noOverlapGenes, n=0)
+noSitePerGene
+#histogram for number of convergence events per gene for all genes#
+rbind(cSitePerGene, noSitePerGene) %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Number of convergent sites', y='Count')
+allPerGene = rbind(cSitePerGene, noSitePerGene)#
+allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Number of convergent sites', y='Count')
+mean(allPerGene$n)
+median(allPerGene$n)
+#histogram for number of convergence events per gene for all genes#
+allPerGene = rbind(cSitePerGene, noSitePerGene)#
+mean(allPerGene$n)#
+median(allPerGene$n)#
+allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n), binwidth=30) +#
+		labs(x='Number of convergent sites', y='Count')
+allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n), binwidth=30) +#
+		labs(x='Number of convergent sites', y='Count')
+allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Number of convergent sites', y='Count')
+vOnly
+hall<-allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Number of convergent sites', y='Count')
+plot_grid(vOnly, hall)
+plot_grid(vOnly, hall, rel_widths=c(2,1))
+hall<-allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Convergent sites per gene', y='Count')#
+#
+plot_grid(vOnly, hall, rel_widths=c(2,1))
+plot_grid(vOnly, hall, rel_widths=c(3,1))
+plot_grid(vOnly, hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend_position=c(.5,.5)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(.5,.5)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.8, 0.5)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.75, 0.8)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.8)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.8)), hall, rel_widths=c(2,1.25))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.8)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.8))+plot.margin = unit(c(1,1,1,1), "cm"), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.75))+plot.margin = unit(c(1,1,1,1), "cm"), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.75)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.76)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.45, 0.76)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.45, 0.77)), hall, rel_widths=c(2,1))
+#histogram for number of convergence events per gene for all genes#
+allPerGene = rbind(cSitePerGene, noSitePerGene)#
+mean(allPerGene$n)#
+median(allPerGene$n)#
+hall<-allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Convergence sites gene', y='Count')#
+#
+plot_grid(vOnly+theme(legend.position=c(0.45, 0.77)), hall, rel_widths=c(2,1))
+#histogram for number of convergence events per gene for all genes#
+allPerGene = rbind(cSitePerGene, noSitePerGene)#
+mean(allPerGene$n)#
+median(allPerGene$n)#
+hall<-allPerGene %>%#
+	ggplot() +#
+		geom_histogram(aes(x=n)) +#
+		labs(x='Convergence per gene', y='Count')#
+#
+plot_grid(vOnly+theme(legend.position=c(0.45, 0.77)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.77)), hall, rel_widths=c(2,1))
+plot_grid(vOnly+theme(legend.position=c(0.4, 0.77)), hall, rel_widths=c(2,1), labels=LETTERS[1:2])
+mean(allPerGene$n)
+median(allPerGene$n)
+setwd("~/gitreps/convergent_evo_coral/overlap_results/strict/GO_MWU")
+# goAnnotations="singleCopyAnnotations.tsv_GO.tsv"   #old version made from idmapping_selected.tab (don't use this)#
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" #new better version made from goa_uniprot_all.gaf#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+# goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+#SET UP SETS OF VARS FOR LOOPED RUNS#
+ABS.VALUE=0.99#
+#
+inputs = c(#
+	'GOMWU_input1_branchSitesVertical.csv',#
+	'GOMWU_input2_covergenceVV.csv',#
+	'GOMWU_input3_bs_convergence_overlapVV.csv',#
+	'GOMWU_input1_branchSitesHorizontal.csv',#
+	'GOMWU_input2_covergenceHH.csv',#
+	'GOMWU_input3_bs_convergence_overlapHH.csv',#
+	'GOMWU_input4_flagged_convergence_overlapVV.csv',#
+	'GOMWU_input4_flagged_convergence_overlapHH.csv'#
+	)#
+goDivisions = c('CC', 'MF', 'BP')
+#Loop through inputs and GO divisions running GO_MWU for all#
+for (input in inputs){#
+	for (goDivision in goDivisions){#
+		print('----------------')#
+		print(paste(paste('RUNNING FOR ', input), goDivision))#
+		print('----------------')#
+#
+		#Run GO MWU#
+		gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+			perlPath="perl", #
+			largest=0.1,  #
+			smallest=200,   #
+			clusterCutHeight=0.25, #
+			Alternative="g"#
+		)#
+		#Save top 20#
+		resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+		res=read.table(resName, header = T)#
+		res=res[order(res$pval),]#
+		tabOut = paste('..', sub(".csv", "_top20.tsv", resName), sep="/")#
+		tabOut#
+		write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")#
+	}#
+}
+input='GOMWU_input1_branchSitesVertical.csv'
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")#
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too man
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+input='GOMWU_input2_covergenceVV.csv'
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="CC"     # either MF, or BP, or CC#
+source("gomwu.functions.R")
+# Plotting results#
+quartz()#
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+goDivision="MF"     # either MF, or BP, or CC
+input
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are to
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+goDivision="BP"     # either MF, or BP, or CC
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+input
+input='GOMWU_input2_covergenceHH.csv'
+goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.#
+goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml#
+goDivision="BP"     # either MF, or BP, or CC#
+source("gomwu.functions.R")
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+goDivision="MF"     # either MF, or BP, or CC
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+goDivision="CC"     # either MF, or BP, or CC
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+input='GOMWU_input2_covergenceVV.csv'
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too many categories displayed, try make it more stringent with level1=0.05,level2=0.01,level3=0.001.  #
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+goDivision="MF"     # either MF, or BP, or CC
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too m
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+goDivision="BP"     # either MF, or BP, or CC
+gomwuPlot(input,goAnnotations,goDivision,#
+	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").#
+	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.#
+	level2=0.05, # FDR cutoff to print in regular (not italic) font.#
+	level3=0.01, # FDR cutoff to print in large bold font.#
+	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect#
+	treeHeight=0.5, # height of the hierarchical clustering tree#
+#	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed#
+)#
+# manually rescale the plot so the tree matches the text #
+# if there are too
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+input
+goDivision
+print('----------------')#
+		print(paste(paste('RUNNING FOR ', input), goDivision))#
+		print('----------------')#
+#
+		#Run GO MWU#
+		gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+			perlPath="perl", #
+			largest=0.1,  #
+			smallest=400,   #
+			clusterCutHeight=0.25, #
+			Alternative="g"#
+		)
+#LOOK AT RESULTS TABLE#
+resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+res=read.table(resName, header = T)#
+res=res[order(res$pval),]#
+head(res, n=20)
+print('----------------')#
+		print(paste(paste('RUNNING FOR ', input), goDivision))#
+		print('----------------')#
+#
+		#Run GO MWU#
+		gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+			perlPath="perl", #
+			largest=0.1,  #
+			smallest=10,   #
+			clusterCutHeight=0.25, #
+			Alternative="g"#
+		)
+#Save top 20#
+		resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+		res=read.table(resName, header = T)#
+		res=res[order(res$pval),]#
+		tabOut = paste('..', sub(".csv", "_top20.tsv", resName), sep="/")#
+		tabOut#
+		write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")
+head(res, n=20)
+#Run GO MWU#
+		gomwuStats(input, goDatabase, goAnnotations, goDivision,#
+			perlPath="perl", #
+			largest=0.1,  #
+			smallest=200,   #
+			clusterCutHeight=0.25, #
+			Alternative="g"#
+		)#
+		#Save top 20#
+		resName = paste(paste('MWU', goDivision, sep = "_"), input, sep = "_")#
+		res=read.table(resName, header = T)#
+		res=res[order(res$pval),]#
+		tabOut = paste('..', sub(".csv", "_top20.tsv", resName), sep="/")#
+		tabOut#
+		write.table(head(res, n=20), file=tabOut, quote=F, sep="\t")

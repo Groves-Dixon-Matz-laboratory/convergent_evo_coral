@@ -224,6 +224,16 @@ cross_check_flags_clade2 = function(x){
 	return(site %in% siteSet)
 }
 
+
+#check if a site passes all conditions 
+cross_check_convflags = function(x){
+	cpair=x['cp']
+	gene = x['ortholog']
+	geneSet = flagConvGeneList[[cpair]]
+	return(gene %in% geneSet)
+}
+
+
 #check if a site passes all conditions 
 cross_check_all = function(x){
 	cpair=x['cp']
@@ -231,7 +241,6 @@ cross_check_all = function(x){
 	geneSet = allEvList[[cpair]]
 	return(gene %in% geneSet)
 }
-
 
 
 get_protein_names = function(df, prot.col){
