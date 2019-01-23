@@ -20,3 +20,5 @@ poly(rC) binding protein 2 (ORTHOMCL8545)
 *_ALT.cnt             -- control file for alternative model for branch-site test
 *_NULL.codeml         -- output file for branch-site null model
 *_ALT.codeml          -- output for branch-site alternative model
+*_CDS.fasta           -- fasta file of codings sequences from Transdecoder
+*_PRO.fasta           -- fasta of protein sequences from Transdecoder (input for MAFFT)
