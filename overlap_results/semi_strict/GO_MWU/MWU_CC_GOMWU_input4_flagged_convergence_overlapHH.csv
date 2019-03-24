@@ -1,0 +1,64 @@
+"delta.rank" "pval" "level" "nseqs" "term" "name" "p.adj"
+0 1 2 587 "GO:0000139;GO:0044431" "Golgi apparatus part" 1
+0 1 3 259 "GO:0000151" "ubiquitin ligase complex" 1
+0 1 2 243 "GO:0000785" "chromatin" 1
+0 0.122662347224267 1 833 "GO:0005576" "extracellular region" 1
+0 0.0748048888234428 2 508 "GO:0005615" "extracellular space" 1
+0 1 2 598 "GO:0005622" "intracellular" 1
+0 1 2 215 "GO:0005667" "transcription factor complex" 1
+0 1 4 353 "GO:0005694" "chromosome" 1
+0 1 3 630 "GO:0005730" "nucleolus" 1
+0 1 3 316 "GO:0005743;GO:0019866" "organelle inner membrane" 1
+0 1 2 233 "GO:0005765" "lysosomal membrane" 1
+0 1 3 661 "GO:0005768" "endosome" 1
+0 1 2 253 "GO:0005769" "early endosome" 1
+0 0.0602267707259608 3 409 "GO:0005773;GO:0005764;GO:0000323" "vacuole" 1
+0 1 3 346 "GO:0005774;GO:0044437" "vacuolar part" 1
+0 1 4 596 "GO:0005789" "endoplasmic reticulum membrane" 1
+0 1 3 390 "GO:0005813" "centrosome" 1
+0 1 2 568 "GO:0005815" "microtubule organizing center" 1
+0 1 2 287 "GO:0005874" "microtubule" 1
+0 1 2 595 "GO:0005887" "integral component of plasma membrane" 1
+0 1 2 311 "GO:0005911" "cell-cell junction" 1
+0 1 3 275 "GO:0005912;GO:0070161" "anchoring junction" 1
+0 1 2 403 "GO:0005929" "cilium" 1
+0 1 2 208 "GO:0005938" "cell cortex" 1
+0 1 2 305 "GO:0009986" "cell surface" 1
+0 1 4 367 "GO:0010008;GO:0044440" "endosomal part" 1
+0 1 2 236 "GO:0014069" "postsynaptic density" 1
+0 1 3 518 "GO:0016023" "cytoplasmic membrane-bounded vesicle" 1
+0 1 4 272 "GO:0016324" "apical plasma membrane" 1
+0 1 2 532 "GO:0016604" "nuclear body" 1
+0 1 5 288 "GO:0016607" "nuclear speck" 1
+0 1 1 835 "GO:0030054" "cell junction" 1
+0 1 2 226 "GO:0030135" "coated vesicle" 1
+0 1 4 374 "GO:0030424" "axon" 1
+0 1 3 387 "GO:0030425" "dendrite" 1
+0 1 2 523 "GO:0030529" "ribonucleoprotein complex" 1
+0 1 3 563 "GO:0030659;GO:0012506;GO:0044433" "cytoplasmic vesicle part" 1
+0 1 2 287 "GO:0031253" "cell projection membrane" 1
+0 1 2 210 "GO:0031301" "integral component of organelle membrane" 1
+0 1 2 841 "GO:0031410" "cytoplasmic vesicle" 1
+0 1 2 237 "GO:0031965" "nuclear membrane" 1
+0 1 2 417 "GO:0031966" "mitochondrial membrane" 1
+0 1 2 232 "GO:0033267" "axon part" 1
+0 1 2 798 "GO:0043005" "neuron projection" 1
+0 1 2 404 "GO:0044297;GO:0043025" "cell body" 1
+0 1 2 547 "GO:0044427" "chromosomal part" 1
+0 1 2 610 "GO:0044429" "mitochondrial part" 1
+0 1 2 805 "GO:0044432" "endoplasmic reticulum part" 1
+0 1 2 337 "GO:0044441" "ciliary part" 1
+0 1 2 819 "GO:0044451" "nucleoplasm part" 1
+0 1 2 289 "GO:0044454" "nuclear chromosome part" 1
+0 1 1 513 "GO:0044456" "synapse part" 1
+0 1 2 903 "GO:0044463" "cell projection part" 1
+0 1 2 215 "GO:0045121" "membrane raft" 1
+0 1 1 530 "GO:0045202" "synapse" 1
+0 1 2 201 "GO:0045211" "postsynaptic membrane" 1
+0 1 2 504 "GO:0048471" "perinuclear region of cytoplasm" 1
+0 1 2 539 "GO:0070013;GO:0043233;GO:0031974" "membrane-enclosed lumen" 1
+0 1 2 625 "GO:0070062;GO:0065010;GO:0043230" "extracellular membrane-bounded organelle" 1
+0 1 2 277 "GO:0097060" "synaptic membrane" 1
+0 1 2 408 "GO:0098590" "plasma membrane region" 1
+0 1 2 738 "GO:1902494" "catalytic complex" 1
+0 1 3 279 "GO:1990234" "transferase complex" 1

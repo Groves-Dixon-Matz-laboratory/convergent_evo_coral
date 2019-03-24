@@ -1,0 +1,21 @@
+delta.rank	pval	level	nseqs	term	name	p.adj
+21	0	0.0450141600834704	2	302	GO:0005911	cell-cell junction	1
+35	0	0.0569384409002832	3	382	GO:0030425	dendrite	1
+45	0	0.059472350573856	2	399	GO:0044297;GO:0043025	cell body	1
+12	0	0.0971828886570278	3	652	GO:0005768	endosome	1
+44	0	0.117454166045611	2	788	GO:0043005	neuron projection	1
+32	0	0.122074824862126	1	819	GO:0030054	cell junction	1
+1	0	1	4	578	GO:0000139;GO:0044431	Golgi apparatus part	1
+2	0	1	2	257	GO:0000151	ubiquitin ligase complex	1
+3	0	1	2	240	GO:0000785	chromatin	1
+4	0	1	1	818	GO:0005576	extracellular region	1
+5	0	1	2	503	GO:0005615	extracellular space	1
+6	0	1	2	594	GO:0005622	intracellular	1
+7	0	1	3	213	GO:0005667	transcription factor complex	1
+8	0	1	2	346	GO:0005694	chromosome	1
+9	0	1	4	623	GO:0005730	nucleolus	1
+10	0	1	2	314	GO:0005743;GO:0019866	organelle inner membrane	1
+11	0	1	2	231	GO:0005765	lysosomal membrane	1
+13	0	1	2	250	GO:0005769	early endosome	1
+14	0	1	4	403	GO:0005773;GO:0005764;GO:0000323	vacuole	1
+15	0	1	4	341	GO:0005774;GO:0044437	vacuolar part	1

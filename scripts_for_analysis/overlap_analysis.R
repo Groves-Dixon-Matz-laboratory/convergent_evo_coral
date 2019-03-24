@@ -961,7 +961,8 @@ pct<-conv_filt %>%
 	filter(conv_pass) %>%
 	mutate(`Positive site` = (c1FlagSite + c2FlagSite)>0 ) %>%
 	group_by(cp, conv_pair, `Positive site`) %>%
-	summarize(Ngene=length(unique(ortholog))) %>% mutate(pctBoth = Ngene / sum(Ngene)*100) %>%
+	summarize(Ngene=length(unique(ortholog))) %>% 
+  mutate(pctBoth = Ngene / sum(Ngene)*100) %>%
 	filter(`Positive site`==TRUE) %>%
 	rename(`Phenotype pair`= conv_pair) %>%
 	arrange(desc(`Phenotype pair`), pctBoth)
@@ -1174,7 +1175,7 @@ allGeneListPhenotype = list('Vertical' = all_target_genes, 'Horizontal' = all_an
 
 gids = read.table("ortholog_tables/singleCopyAnnotationsWithDescriptions.tsv", sep='\t', quote="", header = T)
 
-
+i=1
 for (i in seq(1, length(select_pair_set))){
 	select_pair = select_pair_set[i]
 	select_phenotype = select_phenotype_set[i]

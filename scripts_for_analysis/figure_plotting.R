@@ -146,10 +146,10 @@ axCols = c(rep(colset[3, 'fill'], nVV), rep(colset[2, 'fill'], nVH), rep(colset[
 
 #plot counts by clade pairing
 countConv <- conv_filt %>%
-	rename(`Filter-passing`=conv_pass) %>%
+	rename(`Convergence`=conv_pass) %>%
 	mutate(pairFact = factor(pairing, levels=ordered)) %>%
 	ggplot() +
-		geom_bar(aes(x= pairFact, fill=`Filter-passing`)) + 
+		geom_bar(aes(x= pairFact, fill=`Convergence`)) + 
 		labs(x='Lineage pair', y='Overlapping Substitutions') +
 		coord_flip() +
 		theme(
@@ -164,7 +164,7 @@ pctConv <- pctdf %>%
 	rename(`Phenotype Pair` = conv_pair) %>%
 	ggplot() +
 		geom_bar(aes(x= pairFact, y= pct_conv, fill=`Phenotype Pair`), stat='identity') +
-		labs(x='', y='Percent convergence passing') +
+		labs(x='', y='Molecular convergence (%)') +
 		coord_flip() +
 		theme(
 			legend.position='none',

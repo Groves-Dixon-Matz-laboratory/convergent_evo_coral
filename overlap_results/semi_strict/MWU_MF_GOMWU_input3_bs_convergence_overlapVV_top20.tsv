@@ -1,0 +1,21 @@
+delta.rank	pval	level	nseqs	term	name	p.adj
+49	0	0.0370903277378097	2	232	GO:0060589	nucleoside-triphosphatase regulator activity	0.778044231281641
+32	0	0.0455635491606711	2	285	GO:0017016;GO:0031267;GO:0051020	GTPase binding	0.778044231281641
+18	0	0.051638689048761	2	323	GO:0008047	enzyme activator activity	0.778044231281641
+26	0	0.0896882494004806	2	561	GO:0016301;GO:0004672;GO:0016773	kinase activity	0.778044231281641
+43	0	0.0927258193445235	4	580	GO:0042803	protein homodimerization activity	0.778044231281641
+37	0	0.0933653077537969	1	584	GO:0030234	enzyme regulator activity	0.778044231281641
+28	0	0.10951239008793	3	685	GO:0016772	transferase activity, transferring phosphorus-containing groups	0.782231357770929
+47	0	0.133333333333333	2	834	GO:0046983	protein dimerization activity	0.833333333333331
+1	0	1	4	356	GO:0000977;GO:0000976;GO:0001012	transcription regulatory region sequence-specific DNA binding	1
+2	0	1	7	237	GO:0000978;GO:0000987;GO:0001159	core promoter proximal region DNA binding	1
+3	0	1	3	528	GO:0000981;GO:0003700;GO:0001071	sequence-specific DNA binding transcription factor activity	1
+4	0	1	2	334	GO:0000989;GO:0000988;GO:0003712	protein binding transcription factor activity	1
+5	0	1	2	392	GO:0003682	chromatin binding	1
+6	0	1	4	273	GO:0003779	actin binding	1
+7	0	1	2	225	GO:0004175	endopeptidase activity	1
+8	0	1	6	322	GO:0004674	protein serine/threonine kinase activity	1
+9	0	1	6	345	GO:0004842;GO:0019787;GO:0016881;GO:0016879	ligase activity, forming carbon-nitrogen bonds	1
+10	0	1	2	402	GO:0004888	transmembrane signaling receptor activity	1
+11	0	1	2	219	GO:0004930	G-protein coupled receptor activity	1
+12	0	1	3	734	GO:0005102	receptor binding	1

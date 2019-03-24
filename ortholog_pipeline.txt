@@ -930,7 +930,7 @@ geneset.txt
 cd codon_sequences/
 
 #make a directory for the selection
-SELECTION="semi_strict_flagged_and_convergence_passing"
+SELECTION="tableS4"
 mkdir $SELECTION
 cp geneset.txt $SELECTION
 mkdir ${SELECTION}/all_vertical
@@ -958,6 +958,9 @@ echo "cp ../branch_sites_vertical/gachrelia/${g}_* ./${SELECTION}/galaxia" >> co
 echo "cp ../branch_sites_vertical/porites/${g}_* ./${SELECTION}/porites" >> copySelectGenes
 echo "cp ../branch_sites_vertical/pocillopora/${g}_* ./${SELECTION}/pocilloporid" >> copySelectGenes
 echo "cp ${g}.codon.tree ${SELECTION}" >> copySelectGenes
+echo "cp ../cds_sequences/${g}.fasta ${SELECTION}/${g}_CDS.fasta" >> copySelectGenes
+echo "cp ../protein_sequences/${g}.fasta ${SELECTION}/${g}_PRO.fasta" >> copySelectGenes
+echo "cp ../protein_sequences/${g}_codon.fasta ${SELECTION}/${g}_codon.fasta" >> copySelectGenes
 done<geneset.txt
 
 sh copySelectGenes

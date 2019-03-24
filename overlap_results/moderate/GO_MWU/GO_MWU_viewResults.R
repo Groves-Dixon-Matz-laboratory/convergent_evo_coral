@@ -22,7 +22,7 @@ input='GOMWU_input4_flagged_convergence_overlapHH.csv'
 
 goAnnotations="singleCopyAnnotations_GO_gomwu.tsv" # two-column, tab-delimited, one line per gene, multiple GO terms separated by semicolon. If you have multiple lines per gene, use nrify_GOtable.pl prior to running this script.
 goDatabase="go.obo" # download from http://www.geneontology.org/GO.downloads.ontology.shtml
-goDivision="MF"     # either MF, or BP, or CC
+goDivision="BP"     # either MF, or BP, or CC
 source("gomwu.functions.R")
 
 
@@ -30,9 +30,9 @@ source("gomwu.functions.R")
 quartz()
 gomwuPlot(input,goAnnotations,goDivision,
 	absValue=0.99,  # genes with the measure value exceeding this will be counted as "good genes". Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").
-	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.
-	level2=0.05, # FDR cutoff to print in regular (not italic) font.
-	level3=0.01, # FDR cutoff to print in large bold font.
+	level1=0.05, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.
+	level2=0.01, # FDR cutoff to print in regular (not italic) font.
+	level3=0.001, # FDR cutoff to print in large bold font.
 	txtsize=1.2,    # decrease to fit more on one page, or increase (after rescaling the plot so the tree fits the text) for better "word cloud" effect
 	treeHeight=0.5, # height of the hierarchical clustering tree
 #	colors=c("dodgerblue2","firebrick1","skyblue","lightcoral") # these are default colors, un-remar and change if needed

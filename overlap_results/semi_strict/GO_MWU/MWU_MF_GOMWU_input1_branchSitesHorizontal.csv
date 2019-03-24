@@ -1,0 +1,54 @@
+"delta.rank" "pval" "level" "nseqs" "term" "name" "p.adj"
+0 0.967011655392722 2 358 "GO:0000977;GO:0000976;GO:0001012" "transcription regulatory region sequence-specific DNA binding" 1
+0 0.894170918289237 4 238 "GO:0000978;GO:0000987;GO:0001159" "core promoter proximal region DNA binding" 1
+0 0.962330877755335 3 531 "GO:0000981;GO:0003700;GO:0001071" "sequence-specific DNA binding transcription factor activity" 1
+0 0.959873410882043 2 338 "GO:0000989;GO:0000988;GO:0003712" "protein binding transcription factor activity" 1
+0 0.718052193751058 2 397 "GO:0003682" "chromatin binding" 1
+0 0.0411162231116473 3 277 "GO:0003779" "actin binding" 0.242128869435256
+0 0.15420277349927 3 226 "GO:0004175" "endopeptidase activity" 0.493118023030415
+0 0.177127323241035 2 324 "GO:0004674" "protein serine/threonine kinase activity" 0.521541562876381
+0 0.965353852709745 2 353 "GO:0004842;GO:0019787;GO:0016881;GO:0016879" "ligase activity, forming carbon-nitrogen bonds" 1
+0 6.46054225460178e-05 3 408 "GO:0004888" "transmembrane signaling receptor activity" 0.0014016640052426
+0 0.0528243652267552 2 222 "GO:0004930" "G-protein coupled receptor activity" 0.268109324096562
+0 0.0100431578062395 1 201 "GO:0005085" "guanyl-nucleotide exchange factor activity" 0.126888407149565
+0 0.0372154781049293 2 747 "GO:0005102" "receptor binding" 0.242128869435256
+0 0.0119706044480722 1 410 "GO:0005198" "structural molecule activity" 0.126888407149565
+0 0.877767112441435 2 223 "GO:0005216;GO:0022838;GO:0015267;GO:0022803" "passive transmembrane transporter activity" 1
+0 7.93394719948643e-05 2 541 "GO:0005509" "calcium ion binding" 0.0014016640052426
+0 1 3 221 "GO:0005525;GO:0032561;GO:0019001" "guanyl ribonucleotide binding" 1
+0 0.95354299674558 2 323 "GO:0005543" "phospholipid binding" 1
+0 0.355909774702613 2 327 "GO:0008047" "enzyme activator activity" 0.820139915619065
+0 0.0905539278673199 2 680 "GO:0008092" "cytoskeletal protein binding" 0.342811298354854
+0 0.85392050963018 3 361 "GO:0008134" "transcription factor binding" 1
+0 0.753316116149453 2 546 "GO:0008270" "zinc ion binding" 1
+0 0.943066595689353 2 481 "GO:0008289" "lipid binding" 1
+0 0.939581665035917 3 296 "GO:0008324;GO:0046873;GO:0022890" "cation transmembrane transporter activity" 1
+0 0.94021794370667 2 475 "GO:0015075;GO:0022891;GO:0022857" "transmembrane transporter activity" 1
+0 0.904805150372616 3 249 "GO:0015631" "tubulin binding" 1
+0 0.072746483374121 4 566 "GO:0016301;GO:0004672;GO:0016773" "kinase activity" 0.321296968235701
+0 0.711667554845772 2 516 "GO:0016491" "oxidoreductase activity" 1
+0 0.0217289687535963 2 691 "GO:0016772" "transferase activity, transferring phosphorus-containing groups" 0.164519334848658
+0 0.0556453314162675 3 455 "GO:0016788" "hydrolase activity, acting on ester bonds" 0.268109324096562
+0 0.981191898877578 2 415 "GO:0016874" "ligase activity" 1
+0 0.227076208483352 5 265 "GO:0016887" "ATPase activity" 0.633423107874613
+0 0.282003961171179 3 292 "GO:0017016;GO:0031267;GO:0051020" "GTPase binding" 0.711724282955833
+0 0.695221503347353 4 505 "GO:0017111;GO:0016462;GO:0016818;GO:0016817" "pyrophosphatase activity" 1
+0 0.631888635078885 2 466 "GO:0019901;GO:0019900" "kinase binding" 1
+0 0.516835449344851 2 513 "GO:0019904" "protein domain specific binding" 1
+0 0.638729774426646 2 586 "GO:0022892;GO:0005215" "transporter activity" 1
+0 0.649437703387638 1 593 "GO:0030234" "enzyme regulator activity" 1
+0 0.894170918289237 3 238 "GO:0030695;GO:0060589" "nucleoside-triphosphatase regulator activity" 1
+0 0.636765105520881 2 232 "GO:0031625;GO:0044389" "small conjugating protein ligase binding" 1
+0 0.158169931915416 2 577 "GO:0032403" "protein complex binding" 0.493118023030415
+0 0.871762464173462 3 218 "GO:0035091" "phosphatidylinositol binding" 1
+0 5.62472158853612e-05 2 590 "GO:0038023;GO:0004871;GO:0004872;GO:0060089" "receptor activity" 0.0014016640052426
+0 0.310553837323355 2 212 "GO:0042578" "phosphoric ester hydrolase activity" 0.748152426278992
+0 0.017624163624462 3 591 "GO:0042803" "protein homodimerization activity" 0.155680112016081
+0 0.99518529199884 3 551 "GO:0043565" "sequence-specific DNA binding" 1
+0 0.986037081927777 3 445 "GO:0044212;GO:0000975;GO:0001067" "regulatory region nucleic acid binding" 1
+0 0.917074508464296 5 730 "GO:0046914" "transition metal ion binding" 1
+0 0.534281570493995 3 303 "GO:0046982" "protein heterodimerization activity" 1
+0 0.0817704687000986 2 846 "GO:0046983" "protein dimerization activity" 0.333371910854248
+0 1 2 202 "GO:0048037" "cofactor binding" 1
+0 0.109380035599771 2 276 "GO:0050839" "cell adhesion molecule binding" 0.386476125785857
+0 0.269766031673525 2 379 "GO:0070011;GO:0008233" "peptidase activity" 0.711724282955833
