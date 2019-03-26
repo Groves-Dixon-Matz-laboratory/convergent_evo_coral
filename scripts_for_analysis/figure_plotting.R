@@ -55,12 +55,24 @@ noSitePerGene = tibble(ortholog=noOverlapGenes, n=0)
 mean(cSitePerGene$n)
 median(cSitePerGene$n)
 
-#build histogram for number of convergence events per gene with any overlapping subs
+
+#build histogram for number of convergence events per gene for genes with at least one convergence event
 #(Fig 2B)
-f2b=cSitePerGene %>%
+convGeneHist=cSitePerGene %>%
   ggplot() +
   geom_histogram(aes(x=n)) +
   labs(x='Convergent sites per gene', y='Count')
+
+
+#build same histogram for all genes (Figure 2B)
+allPerGene = rbind(cSitePerGene, noSitePerGene)
+f2b<-allPerGene %>%
+  ggplot() +
+  geom_histogram(aes(x=n)) +
+  labs(x='Convergence per gene', y='Count')
+
+mean(allPerGene$n)
+median(allPerGene$n)
 
 
 plot_grid(f2a, f2b)
@@ -347,10 +359,6 @@ plot_grid(pcCompare1, pcCompare2,  pcCompare3, nrow=1, rel_widths = c(1.5, 1, 1)
 
 # Figure S4 compare frequency of convergence and flagged substitutions --------
 
-conv_filt %>% 
-  data.frame() %>% 
-  head()
-
 pc_cf <- conv_filt %>%
 	mutate(both = conv_pass & (c1FlagSite | c2FlagSite) ) %>%
 	group_by(pairing, conv_pair, both) %>%
@@ -404,8 +412,16 @@ cfCompare3<-pc_cf %>%
 		labs(x='Transmission mode pairing', y='Conv. & Pos. site (%)')	+
     guides(fill=guide_legend(title="Transmission\nmode\npairing"))
 
-
+quartz()
 plot_grid(cfCompare1, cfCompare2, cfCompare3, rel_widths =c(1.6, 1, 1), align = "hv", axis = "tb", labels=c(LETTERS[1:2]), nrow=1)
 
 
 
+#double-check the VV convergent and flagged genes
+flaggedConvGenes = conv_filt %>%
+  mutate(both = conv_pass & (c1FlagSite | c2FlagSite) ) %>% 
+  filter(both,
+         conv_pair=='VV') %>% 
+  pull(ortholog) %>% 
+  unique() %>% 
+  length()
