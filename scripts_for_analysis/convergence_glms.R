@@ -32,174 +32,73 @@ conv_vh = conv_filt %>%
   mutate(conv_pair=factor(conv_pair, levels=c('VH', 'VV')))
 
 
-# basic model -------------------------------------------------------------
-basic_model = glm(genConvergent~conv_pair, family='binomial', data=conv_filt)
-summary(basic_model)
+#---------- GLMS
+#first stack the pairs to get single lineage per line
+sub1 = conv_filt %>% 
+  select(ortholog, site, b1Clade, conv_pair, genConvergent) %>% 
+  rename('clade'=b1Clade)
+sub2 = conv_filt %>% 
+  select(ortholog, site, b2Clade, conv_pair, genConvergent) %>% 
+  rename('clade'=b2Clade)
+sldat = rbind(sub1, sub2)
+#simple model with gene as random effect
+library(lme4)
+sldat$conv_pair = factor(sldat$conv_pair, levels=c('HH', 'VH', 'VV'))
+null_basic_model = glmer(genConvergent~(1|ortholog), family='binomial', data=sldat)
+alt_basic_model = glmer(genConvergent~conv_pair + (1|ortholog), family='binomial', data=sldat)
+summary(null_basic_model)
+summary(alt_basic_model)
+anova(null_basic_model, alt_basic_model)
 
 
+#models for frequency of convergence events
+base_mod = glm(genConvergent~1,
+               family='binomial',
+               data=sldat)
 
-# basic vv and vh only ----------------------------------------------------
-basic_vh_model = glm(genConvergent~conv_pair, family='binomial', data=conv_vh)
-summary(basic_vh_model)
+gene_only = glmer(genConvergent~
+                    (1|ortholog),
+                  family='binomial',
+                  data=sldat)
 
+lin_only = glmer(genConvergent~
+                   (1|clade),
+                 family='binomial',
+                 data=sldat)
 
-# random effect of gene ---------------------------------------------------
-null_rgene_model = glmer(genConvergent~(1|ortholog), family='binomial', data=conv_filt)
-alt_rgene_model = glmer(genConvergent~conv_pair + (1|ortholog), family='binomial', data=conv_filt)
-summary(null_rgene_model)
-summary(alt_rgene_model)
-anova(null_rgene_model, alt_rgene_model, test="Chisq")
+lin_gene = glmer(genConvergent~
+                   (1|ortholog) +
+                   (1|clade),
+                 family='binomial',
+                 data=sldat)
 
-# random effect of gene VV and VH only---------------------------------------------------
-null_rgene_vh_model = glmer(genConvergent~(1|ortholog), family='binomial', data=conv_vh)
-alt_rgene_vh_model = glmer(genConvergent~conv_pair + (1|ortholog), family='binomial', data=conv_vh)
-summary(null_rgene_vh_model)
-summary(alt_rgene_vh_model)
-anova(null_rgene_vh_model, alt_rgene_vh_model)
+all_three = glmer(genConvergent~
+                    conv_pair +
+                    (1|ortholog) +
+                    (1|clade),
+                  family='binomial',
+                  data=sldat)
 
+interaction = glmer(genConvergent~
+                      conv_pair +
+                      (1|ortholog) +
+                      (1+conv_pair|clade),
+                    family='binomial',
+                    data=sldat)
 
+#model summaries
+summary(gene_only)
+summary(lin_only)
+summary(lin_gene)
+summary(all_three)
+summary(interaction)
 
-# random effect for pairing -----------------------------------------------
+#compare
+anova(lin_only, lin_gene)
+anova(gene_only, lin_gene)
+anova(gene_only, all_three)
+anova(lin_gene, all_three)
+anova(all_three, interaction)
 
-null_rpair_model = glmer(genConvergent~ (1|pairing), family='binomial', data=conv_filt)
-alt_rpair_model = glmer(genConvergent~conv_pair + (1|pairing), family='binomial', data=conv_filt)
-summary(null_rpair_model)
-summary(alt_rpair_model)
-anova(null_rpair_model, alt_rpair_model)
-
-
-
-# format for lineage effects ----------------------------------------------
-#get all lineages
-lins = unique(append(conv_filt$b1Clade, conv_filt$b2Clade))
-
-#set up new df with binaries for each lineage
-ldat = conv_filt %>% 
-  select(-b1post, -b2post, -type, -b1Anc, -b2Anc, -gcp, -cp, -b1New, -b2New)
-for (l in lins){
-  print(paste(l, '..', sep='.'))
-  ldat[[l]] = (ldat$b1Clade==l) | (ldat$b2Clade==l)
-}
-
-#create a vh only equivalent
-vhldat = ldat %>% 
-  filter(conv_pair !='HH') %>% 
-  mutate(conv_pair=factor(conv_pair, levels=c('VH', 'VV')))
-
-
-#check correlations for dummy assignments
-jldat = ldat[,15:ncol(ldat)]
-cor(jldat)
-
-
-# fixed effect for lineages------------------------------------------
-null_fixedLin_model = glm(genConvergent ~ 
-            AntiPocilloporid +
-            Pocilloporid +
-            Galaxia +
-            Montipora +
-            AntiMontipora +
-            AntiGalaxia +
-            AntiPorites +
-            Porites,
-          family='binomial', data=ldat)
-
-alt_fixedLin_model = glm(genConvergent ~ conv_pair +
-            AntiPocilloporid +
-            Pocilloporid +
-            Galaxia +
-            Montipora +
-            AntiMontipora +
-            AntiGalaxia +
-            AntiPorites +
-            Porites,
-          family='binomial', data=ldat)
-summary(null_fixedLin_model)
-alias(null_fixedLin_model)
-summary(alt_fixedLin_model)
-anova(null_fixedLin_model, alt_fixedLin_model, test="Chisq")
-
-
-# repeat with singularities removed ---------------------------------------
-null_fixedLin_model = glm(genConvergent ~ 
-                            Pocilloporid +
-                            Galaxia +
-                            Montipora +
-                            Porites,
-                          family='binomial', data=ldat)
-
-alt_fixedLin_model = glm(genConvergent ~ conv_pair +
-                           Pocilloporid +
-                           Galaxia +
-                           Montipora +
-                           Porites,
-                         family='binomial', data=ldat)
-summary(null_fixedLin_model)
-alias(null_fixedLin_model)
-summary(alt_fixedLin_model)
-anova(null_fixedLin_model, alt_fixedLin_model, test="Chisq")
-
-
-
-# fixed interaction effect for lineages------------------------------------------
-fixedIntLin_model = glm(genConvergent ~ conv_pair +
-                          conv_pair*Pocilloporid +
-                          conv_pair*AntiPocilloporid +
-                          conv_pair*Galaxia +
-                          conv_pair*AntiGalaxia +
-                          conv_pair*Montipora +
-                          conv_pair*AntiMontipora +
-                          conv_pair*Porites +
-                          conv_pair*AntiPorites,
-                         family='binomial', data=vhldat)
-summary(fixedIntLin_model)
-alias(fixedIntLin_model)
-
-# repeat fixed interaction effect for lineages remove singluarities------------------------------------------
-fixedIntLin_model = glm(genConvergent ~ conv_pair +
-                          conv_pair*Pocilloporid +
-                          conv_pair*Galaxia +
-                          conv_pair*Montipora,
-                        family='binomial', data=vhldat)
-summary(fixedIntLin_model)
-
-
-# interactive random effect for lineage -----------------------------------------------
-randIntLin_model = glmer(genConvergent ~ conv_pair +
-               (1+conv_pair|AntiPocilloporid) +
-               (1+conv_pair|Pocilloporid) +
-               (1+conv_pair|Galaxia) +
-               (1+conv_pair|Montipora) +
-               (1+conv_pair|AntiMontipora) +
-               (1+conv_pair|AntiGalaxia) +
-               (1+conv_pair|AntiPorites) +
-               (1+conv_pair|Porites),
-             family='binomial', data=ldat)
-summary(randIntLin_model)
-
-
-# interactive random effect for lineage vh only -----------------------------------------------
-randIntLin_vh_model = glmer(genConvergent ~ conv_pair +
-                           (1+conv_pair|AntiPocilloporid) +
-                           (1+conv_pair|Pocilloporid) +
-                           (1+conv_pair|Galaxia) +
-                           (1+conv_pair|Montipora) +
-                           (1+conv_pair|AntiMontipora) +
-                           (1+conv_pair|AntiGalaxia) +
-                           (1+conv_pair|AntiPorites) +
-                           (1+conv_pair|Porites),
-                         family='binomial', data=vhldat)
-summary(randIntLin_vh_model)
-
-# interaction model -------------------------------------------------------
-intMod = glm(genConvergent ~ conv_pair +
-            conv_pair:AntiPocilloporid +
-            conv_pair:Pocilloporid +
-            conv_pair:Galaxia +
-            conv_pair:Montipora +
-            conv_pair:AntiMontipora +
-            conv_pair:AntiGalaxia +
-            conv_pair:AntiPorites +
-            conv_pair:Porites,
-          family='binomial', data=ldat)
-summary(intMod)
+ll=load('~/Desktop/mods.Rdata')
+save(lin_only, gene_only, lin_gene, all_three, interaction, file='~/Desktop/mods.Rdata')

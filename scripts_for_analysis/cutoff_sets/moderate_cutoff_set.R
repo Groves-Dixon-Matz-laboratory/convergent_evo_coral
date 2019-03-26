@@ -18,9 +18,9 @@ bs.min.lineage = 1             #number of target lineages that must be significa
 
 #Convergence filters
 ancestral.file = "ancestral_reconstruction/ancestral_recon_full_clades_lineages.Rdata" #which ancestral dataset to use. Generate these with prepareConvergenceInput.R
-anc.sub.types = c('parallel', 'convergent')  #the type of overlapping substitutions that count as convergent
+anc.sub.types = c('parallel', 'convergent') #the type of overlapping substitutions that count as convergent
 anc.post.cutoff = 0.8                       #the posterior probability cutoff to use to consider ancestral calls
-min.convergent.changes = 2                   #the number of lineages that must show a convergence event at a site for it to be kept. Note these don't all have to be the SAME convergent change. For example two clades could show P>V at a position, and two others could show P>I. This would return 4 lineages showing convergence.
+min.convergent.changes = 2                  #the number of lineages that must show a convergence event at a site for it to be kept. Note these don't all have to be the SAME convergent change. For example two clades could show P>V at a position, and two others could show P>I. This would return 4 lineages showing convergence.
 
 
 #branch-sites flagged sites filters

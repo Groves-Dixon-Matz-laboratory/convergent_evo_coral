@@ -225,6 +225,9 @@ cross_check_flags_clade2 = function(x){
 }
 
 
+
+
+
 #check if a site passes all conditions 
 cross_check_convflags = function(x){
 	cpair=x['cp']
@@ -232,6 +235,10 @@ cross_check_convflags = function(x){
 	geneSet = flagConvGeneList[[cpair]]
 	return(gene %in% geneSet)
 }
+
+
+
+
 
 
 #check if a site passes all conditions 
@@ -286,8 +293,6 @@ test_cooccurance = function(sig.matrix, col1, col2){
 
 
 
-
-
 bs_sig_overlap = function(df, ptype){
 	abrvs = c('g', 'm', 'p', 'q', 'v') #galaxia, montipora, porites, pocilloporids, all vertical
 	pcols = paste(abrvs, bs.ptype, sep="_")
@@ -300,10 +305,5 @@ bs_sig_overlap = function(df, ptype){
 	print(paste(bso, "total genes fit these branch sites criteria"))
 	return(bs.genes)
 }
-
-
-
-
-
 
 
