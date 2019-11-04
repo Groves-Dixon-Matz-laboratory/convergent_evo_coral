@@ -2,11 +2,12 @@
 
 
 ############ INSTALLATIONS ############
-#TRANSDECODER
+#FastOrtho
+git clone https://github.com/olsonanl/FastOrtho.git
+cd FastOrtho/src
+make
 
 
-#DEPENDENCIES FOR ORTHOFINDER
-#mcl already install for fastOrtho
 
 #FastMe
 download from here: https://gite.lirmm.fr/atgc/FastME/
@@ -162,7 +163,7 @@ launcher_creator.py -n tdec2 -j tdec2 -q normal -N 1 -w 24 -a $allo -e $email -t
 
 #FIRST ASSEMBLE THE PROTEIN SEQUENCES
 ln -s /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas .
-ln /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas | wc -l
+ls /work/02260/grovesd/lonestar/anthozoan_transcriptomes/transdecoders_coding_fas/peptide/*.fas | wc -l
 	#28 PRO files
 
 #the blasting takes a long time, so need to do it in pieces for paralellization
