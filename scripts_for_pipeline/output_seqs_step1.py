@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-##vcf_window_wrapper.py
-##written 2/7/18 
+##output_seqs_step1.py
+##last updated 12-12-19
+    ##revised read_seqs so it can handle relative paths to fasta files
 ##Groves Dixon
 
 #import modules
@@ -11,6 +12,8 @@ from sys import exit
 from Bio import SeqIO
 import datetime
 import os
+import ntpath
+
 
 
 
@@ -25,8 +28,9 @@ def read_seqs(faList):
     print("\nReading in fasta files...")
     seqDict = {}
     for fa in faList:
+        faFile=ntpath.basename(fa)
         print("{}...".format(fa))
-        spp = fa.split('_')[0]
+        spp = faFile.split('_')[0]
         speciesList.append(spp)
         seqDict[spp] = {}
         fasSeqs = SeqIO.parse(open(fa), 'fasta')
@@ -37,7 +41,7 @@ def read_seqs(faList):
             seqDict[spp][seq.id] = seq
     return(speciesList, seqDict)
 
-def read_fastOrtho():
+def read_fastOrtho(orthoFile):
     '''Read through the fastortho .end output and output the sequences for each orthogroup
     '''
     totalGroups = 0
@@ -135,7 +139,7 @@ if __name__ == '__main__':
 
     protSpeciesList, protDict = read_seqs(protFaList)
     # nucSpeciesList, nucDict = read_seqs(nucFaList)
-    read_fastOrtho()
+    read_fastOrtho(orthoFile)
 
 
     

@@ -11,7 +11,7 @@ from sys import exit
 from Bio import SeqIO
 import datetime
 import os
-
+import ntpath
 
 ##############################
 ###### DEFINE FUNCTIONS ######
@@ -40,8 +40,9 @@ def read_seqs(faList):
     seqDict = {}
     sppDict = {}
     for fa in faList:
+        faFile=ntpath.basename(fa)
         print("{}...".format(fa))
-        spp = fa.split('_')[0]
+        spp = faFile.split('_')[0]
         fasSeqs = SeqIO.parse(open(fa), 'fasta')
         #iterate through the seqs
         for seq in fasSeqs:
